@@ -20,7 +20,9 @@ const Canvas = () => {
   const copyRef = React.useRef(null);
 
   function handleCanvasClick(e) {
-    const newLocation = { x: e.clientX, y: e.clientY };
+    const canvas = canvasRef.current;
+    const rect = canvas.getBoundingClientRect();
+    const newLocation = { x: e.clientX - rect.left, y: e.clientY - rect.top };
     setLocations([...locations, newLocation]);
   }
 
@@ -52,6 +54,7 @@ const Canvas = () => {
       <div>
         {/* <button onClick={handleCanvasClick}>Add Rectangle</button> */}
         <button onClick={saveBase64}>Save</button>
+        <button onClick={handleClear}>Clear</button>
 
         {jpeg && (
           <Base64TextContainer>

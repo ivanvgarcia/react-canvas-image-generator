@@ -26,13 +26,18 @@ const usePersistentState = init => {
   return [value, setValue];
 };
 
-export const usePersistentCanvas = () => {
-  const [locations, setLocations] = usePersistentState([]);
+const usePersistentData = canvas => {
   const [data, setData] = useState({
+    base64: '',
     pokemonImg: ''
   });
 
-  console.log(data);
+  return [data, setData];
+};
+
+export const usePersistentCanvas = () => {
+  const [locations, setLocations] = usePersistentState([]);
+  const [data, setData] = usePersistentData();
 
   const canvasRef = React.useRef(null);
 
@@ -49,18 +54,19 @@ export const usePersistentCanvas = () => {
     locations.forEach(location => {
       let boundCoords = getMousePos(canvas, location);
       console.log(boundCoords);
-      draw(ctx, boundCoords);
+      draw(ctx, location);
     });
 
     let pokemon = new Image();
     pokemon.src = data.pokemonImg;
-    pokemon.crossOrigin = 'anonymous';
-
-    ctx.drawImage(
-      pokemon,
-      canvas.width / 2 - pokemon.width / 2,
-      canvas.height / 2 - pokemon.height / 2
-    );
+    pokemon.onload = function() {
+      //Draw the image onto the canvas.
+      ctx.drawImage(
+        pokemon,
+        canvas.width / 2 - pokemon.width / 2,
+        canvas.height / 2 - pokemon.height / 2
+      );
+    };
 
     let mouse = {
       x: null,
