@@ -55,7 +55,7 @@ const Canvas = () => {
 
         {jpeg && (
           <Base64TextContainer>
-            <Base64Text ref={copyRef} value={jpeg.substring(0, 100)} readOnly />
+            <Base64Text ref={copyRef} value={jpeg} readOnly />
           </Base64TextContainer>
         )}
 
