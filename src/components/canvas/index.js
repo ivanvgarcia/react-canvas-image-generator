@@ -8,7 +8,8 @@ import {
   Image,
   SampleImage,
   Buttons,
-  Button
+  Button,
+  Title
 } from 'components/canvas/styles';
 
 const Canvas = () => {
@@ -51,7 +52,7 @@ const Canvas = () => {
 
   return (
     <Main>
-      <h1>Avatar Creator</h1>
+      <Title>Pikachu Creator</Title>
 
       <CanvasContainer>
         <canvas
