@@ -45,20 +45,21 @@ export const Image = styled.img`
 `;
 
 export const SampleImage = styled.img`
-  position: fixed;
-  top: 40px;
+  position: absolute;
+  top: 0px;
   right: 40px
-  width: 100px;
+  width: 640px;
+  height: 1136
 `;
 
 export const Buttons = styled.div`
   position: absolute;
-  top: 400px;
-  left: 70px;
+  top: 10px;
+  left: 10px;
 `;
 
 export const Button = styled.button`
-  padding: 20px 30px;
+  padding: 10px 20px;
   background: dodgerblue;
   border: none;
   border-radius: 20px;

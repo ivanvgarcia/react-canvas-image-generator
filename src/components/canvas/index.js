@@ -64,14 +64,13 @@ const Canvas = () => {
         <ToolsContainer>
           <EditTools canvas={canvasRef} />
         </ToolsContainer>
+        <Buttons>
+          <Button onClick={saveBase64}>Save</Button>
+          <Button onClick={handleClear}>Clear</Button>
+        </Buttons>
       </CanvasContainer>
 
       <div>
-        {/* <Buttons>
-          <Button onClick={saveBase64}>Save</Button>
-          <Button onClick={handleClear}>Clear</Button>
-        </Buttons> */}
-
         {jpeg && (
           <Base64TextContainer>
             <Base64Text ref={copyRef} value={jpeg} readOnly />
