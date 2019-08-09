@@ -13,10 +13,15 @@ const createImage = function(path) {
   return image;
 };
 
+function drawImages(ctx, images) {
+  for (let i = 0; i < images.length; i++) ctx.drawImage(images[i], 0, 0);
+}
+
 class Avatar {
   constructor(canvas, ctx) {
     this.canvas = canvas;
     this.ctx = ctx;
+    this.imagesToRender = [];
   }
 
   renderRandomAvatar() {
@@ -37,19 +42,25 @@ class Avatar {
     foot.back = createImage(`images/clothes/${FOOTWEAR[2]}_b.png`);
     foot.front = createImage(`images/clothes/${FOOTWEAR[2]}_f.png`);
 
+    this.imagesToRender.push(
+      hair.back,
+      body,
+      face,
+      accessory,
+      hair.front,
+      top.back,
+      top.front,
+      top.inner,
+      bottom.back,
+      bottom.front,
+      foot.back,
+      foot.front
+    );
+
+    drawImages(this.ctx, this.imagesToRender);
+
     body.onload = () => {
-      this.ctx.drawImage(hair.back, 0, 0);
-      this.ctx.drawImage(body, 0, 0);
-      this.ctx.drawImage(hair.front, 0, 0);
-      this.ctx.drawImage(accessory, 0, 0);
-      this.ctx.drawImage(face, 0, 0);
-      this.ctx.drawImage(bottom.back, 0, 0);
-      this.ctx.drawImage(bottom.front, 0, 0);
-      this.ctx.drawImage(top.back, 0, 0);
-      this.ctx.drawImage(top.front, 0, 0);
-      this.ctx.drawImage(top.inner, 0, 0);
-      this.ctx.drawImage(foot.back, 0, 0);
-      this.ctx.drawImage(foot.front, 0, 0);
+      drawImages(this.ctx, this.imagesToRender);
     };
   }
 
