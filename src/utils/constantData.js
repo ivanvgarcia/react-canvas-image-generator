@@ -217,7 +217,7 @@ export const ACCESSORIES = [
   102010220
 ];
 
-export const EYES = [
+export const FACES = [
   103010001,
   103010002,
   103010003,

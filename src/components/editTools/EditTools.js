@@ -7,7 +7,7 @@ import {
   HAIR,
   SETTINGS,
   ACCESSORIES,
-  EYES,
+  FACES,
   TOPS,
   BOTTOMS,
   FOOTWEAR
@@ -52,8 +52,8 @@ const EditTools = ({ canvas }) => {
         paths = getThumbnails(ACCESSORIES);
         return paths.map((path, idx) => thumbnail(ACCESSORIES, idx, path));
       case '10301':
-        paths = getThumbnails(EYES);
-        return paths.map((path, idx) => thumbnail(EYES, idx, path));
+        paths = getThumbnails(FACES);
+        return paths.map((path, idx) => thumbnail(FACES, idx, path));
       case '10401':
         paths = getThumbnails(TOPS);
         return paths.map((path, idx) => thumbnail(TOPS, idx, path));

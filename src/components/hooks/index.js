@@ -1,5 +1,6 @@
 import React from 'react';
 import Scene from 'utils/canvas/Scene';
+import Avatar from 'utils/canvas/Avatar';
 import usePersistentData from 'components/hooks/usePersistentData';
 import usePersistentState from 'components/hooks/userPersistentState';
 
@@ -14,6 +15,7 @@ export const usePersistentCanvas = () => {
     const ctx = canvas.getContext('2d');
 
     const scene = new Scene(canvas, ctx);
+    const avatar = new Avatar(canvas, ctx);
 
     scene.render(ctx);
 

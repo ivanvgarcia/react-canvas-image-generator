@@ -1,4 +1,11 @@
-import { HAIR, EYES, TOPS, BOTTOMS, FOOTWEAR } from 'utils/constantData';
+import {
+  HAIR,
+  FACES,
+  TOPS,
+  BOTTOMS,
+  FOOTWEAR,
+  ACCESSORIES
+} from 'utils/constantData';
 
 const createImage = function(path) {
   var image = new Image();
@@ -10,42 +17,43 @@ class Avatar {
   constructor(canvas, ctx) {
     this.canvas = canvas;
     this.ctx = ctx;
-    this.position = [];
-    this.clothesInfoMap = {
-      '10101': null, // Hair
-      '10201': null, // Hat
-      '10301': null, // Face
-      '10401': null, // Top
-      '10501': null, // Bottom
-      '10901': null // Shoe
-    };
   }
 
-  renderHair() {
+  renderRandomAvatar() {
     let hair = {};
-
-    hair.front = createImage(`images/clothes/${HAIR[0]}_f.png`);
+    let top = {};
+    let foot = {};
+    let bottom = {};
     hair.back = createImage(`images/clothes/${HAIR[0]}_b.png`);
+    let body = createImage('images/body/body_4_1.png');
+    let face = createImage(`images/clothes/${FACES[0]}_f.png`);
+    let accessory = createImage(`images/clothes/${ACCESSORIES[0]}_f.png`);
+    hair.front = createImage(`images/clothes/${HAIR[0]}_f.png`);
+    top.back = createImage(`images/clothes/${TOPS[0]}_b.png`);
+    top.front = createImage(`images/clothes/${TOPS[0]}_f.png`);
+    top.inner = createImage(`images/clothes/${TOPS[0]}_i.png`);
+    bottom.back = createImage(`images/clothes/${BOTTOMS[0]}_b.png`);
+    bottom.front = createImage(`images/clothes/${BOTTOMS[0]}_f.png`);
+    foot.back = createImage(`images/clothes/${FOOTWEAR[2]}_b.png`);
+    foot.front = createImage(`images/clothes/${FOOTWEAR[2]}_f.png`);
 
-    this.ctx.drawImage(hair.front, 0, 0);
-  }
-
-  renderBody() {
-    let body = createImage('images/body/body_1_1.png');
     body.onload = () => {
+      this.ctx.drawImage(hair.back, 0, 0);
       this.ctx.drawImage(body, 0, 0);
-    };
-
-    body.onload = () => {
-      this.ctx.drawImage(body, 0, 0);
-      this.renderHair();
+      this.ctx.drawImage(hair.front, 0, 0);
+      this.ctx.drawImage(accessory, 0, 0);
+      this.ctx.drawImage(face, 0, 0);
+      this.ctx.drawImage(bottom.back, 0, 0);
+      this.ctx.drawImage(bottom.front, 0, 0);
+      this.ctx.drawImage(top.back, 0, 0);
+      this.ctx.drawImage(top.front, 0, 0);
+      this.ctx.drawImage(top.inner, 0, 0);
+      this.ctx.drawImage(foot.back, 0, 0);
+      this.ctx.drawImage(foot.front, 0, 0);
     };
   }
 
-  render() {
-    this.renderBody();
-    this.renderHair();
-  }
+  render() {}
 }
 
 export default Avatar;
