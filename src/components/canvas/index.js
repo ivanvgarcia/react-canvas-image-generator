@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { usePersistentCanvas } from 'components/hooks/customHooks';
+import { usePersistentCanvas } from 'components/hooks';
 import {
   Main,
   CanvasContainer,
@@ -9,12 +9,13 @@ import {
   SampleImage,
   Buttons,
   Button,
-  Title
+  Title,
+  ToolsContainer
 } from 'components/canvas/styles';
+import EditTools from 'components/editTools/EditTools';
 
 const Canvas = () => {
   const [jpeg, setJpeg] = useState('');
-
   const [
     locations,
     setLocations,
@@ -22,6 +23,7 @@ const Canvas = () => {
     setData,
     canvasRef
   ] = usePersistentCanvas();
+  console.log(canvasRef);
   const copyRef = React.useRef(null);
 
   function handleCanvasClick(e) {
@@ -52,28 +54,23 @@ const Canvas = () => {
 
   return (
     <Main>
-      <Title>Pikachu Creator</Title>
-
       <CanvasContainer>
         <canvas
           ref={canvasRef}
-          width={500}
-          height={500}
+          width={640}
+          height={1136}
           onClick={handleCanvasClick}
         />
+        <ToolsContainer>
+          <EditTools canvas={canvasRef} />
+        </ToolsContainer>
       </CanvasContainer>
-      <Image
-        src="pikachu.jpeg"
-        alt="pokemon"
-        onClick={e => setData({ ...data, pokemonImg: e.target.src })}
-      />
 
       <div>
-        <Buttons>
-          {/* <button onClick={handleCanvasClick}>Add Rectangle</button> */}
+        {/* <Buttons>
           <Button onClick={saveBase64}>Save</Button>
           <Button onClick={handleClear}>Clear</Button>
-        </Buttons>
+        </Buttons> */}
 
         {jpeg && (
           <Base64TextContainer>

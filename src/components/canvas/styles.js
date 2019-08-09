@@ -1,17 +1,20 @@
 import styled from 'styled-components';
 
 export const Main = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border-radius: 5px;
-  overflow: hidden;
+  height: 100%;
 `;
 
 export const CanvasContainer = styled.div`
-  border-radius: 15px;
+  position: relative;
+`;
+
+export const ToolsContainer = styled.div`
+  position: absolute;
   overflow: hidden;
+  background: rgba(0, 0, 0, 0.5);
+  bottom: 0;
+  left: 0;
+  width: 640px;
 `;
 
 export const Base64TextContainer = styled.div``;
@@ -33,10 +36,10 @@ export const Base64Text = styled.textarea`
 `;
 
 export const Image = styled.img`
-  width: 100px;
+  width: 100%;
   transition: transform 0.2s linear;
   :hover {
-    transform: scale(1.1);
+    transform: scale(1.01);
     cursor: pointer;
   }
 `;
@@ -50,8 +53,8 @@ export const SampleImage = styled.img`
 
 export const Buttons = styled.div`
   position: absolute;
-  top: 270px;
-  left: 150px;
+  top: 400px;
+  left: 70px;
 `;
 
 export const Button = styled.button`
