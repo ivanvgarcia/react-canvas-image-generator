@@ -23,8 +23,11 @@ class Avatar {
 
   render(data) {
     let clothes = Object.assign({}, data);
+    clothes.body = `images/body/body_${data.upperPose}_${data.lowerPose}.png`;
     delete clothes.base64;
     delete clothes.pokemonImg;
+    delete clothes.upperPose;
+    delete clothes.lowerPose;
 
     drawImages(this.ctx, clothes);
   }

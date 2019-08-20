@@ -4,6 +4,8 @@ export default canvas => {
   const [data, setData] = useState({
     base64: '',
     pokemonImg: '',
+    upperPose: '4',
+    lowerPose: '1',
     accessoryB: 'images/clothes/102010001_b.png',
     hairB: 'images/clothes/101010001_b.png',
     topB: 'images/clothes/104010001_b.png',

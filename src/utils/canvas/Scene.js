@@ -15,8 +15,6 @@ class Scene {
   }
 
   renderBackground() {
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
     let bg = createImage('images/ui/bg.png');
 
     bg.onload = () => {

@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Icon, Thumbnail } from './EditToolsStyles';
 import { getThumbnails, getToolIcons } from 'utils/canvasToolIcons';
-import { CLOTHES_LINEUP, SETTINGS } from 'utils/constantData';
+import {
+  CLOTHES_LINEUP,
+  SETTINGS,
+  UPPER_POSE_MAP,
+  LOWER_POSE_MAP
+} from 'utils/constantData';
 import Scene from 'utils/canvas/Scene';
 
 import Slider from 'react-slick';
@@ -69,6 +74,7 @@ const EditTools = ({ canvasRef }) => {
       case 'top':
         setData({
           ...data,
+          upperPose: UPPER_POSE_MAP[id],
           topF: `images/clothes/${id}_f.png`,
           topB: `images/clothes/${id}_b.png`,
           topI: `images/clothes/${id}_i.png`
@@ -84,6 +90,7 @@ const EditTools = ({ canvasRef }) => {
       case 'footwear':
         setData({
           ...data,
+          lowerPose: LOWER_POSE_MAP[id],
           footwearF: `images/clothes/${id}_f.png`,
           footwearB: `images/clothes/${id}_b.png`
         });
@@ -91,6 +98,23 @@ const EditTools = ({ canvasRef }) => {
       default:
     }
   };
+
+  // const changePose = () => {
+  //   var newUpperPose = null;
+  //   if (categoryId === '10401') {
+  //   }
+
+  //   // Shoeの場合は下半身ポーズが変わる
+  //   var newLowerPose = null;
+  //   if (categoryId === '10901') {
+  //     newLowerPose = LOWER_POSE_MAP[clothesId];
+  //   }
+
+  //   this.changePose(
+  //     newUpperPose != null ? newUpperPose : this.upperPose_,
+  //     newLowerPose != null ? newLowerPose : this.lowerPose_
+  //   );
+  // };
 
   const renderThumbnails = () => {
     let paths;
