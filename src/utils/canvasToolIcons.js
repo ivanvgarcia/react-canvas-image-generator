@@ -22,6 +22,7 @@ export const getToolIcons = (data, activeIcon) => {
 };
 
 export const getThumbnails = data => {
+  console.log(data);
   let imagePaths = [];
   data.map(id => {
     imagePaths.push(`images/thumbnail/${id}.png`);

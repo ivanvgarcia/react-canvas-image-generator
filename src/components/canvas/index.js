@@ -5,45 +5,29 @@ import {
   CanvasContainer,
   Base64Text,
   Base64TextContainer,
-  Image,
   SampleImage,
   Buttons,
   Button,
-  Title,
   ToolsContainer
 } from 'components/canvas/styles';
 import EditTools from 'components/editTools/EditTools';
 
 const Canvas = () => {
   const [jpeg, setJpeg] = useState('');
-  const [
-    locations,
-    setLocations,
-    data,
-    setData,
-    canvasRef
-  ] = usePersistentCanvas();
-  console.log(canvasRef);
+  const [data, setData, canvasRef] = usePersistentCanvas();
+
   const copyRef = React.useRef(null);
 
-  function handleCanvasClick(e) {
-    const canvas = canvasRef.current;
-    const rect = canvas.getBoundingClientRect();
-    const newLocation = { x: e.clientX - rect.left, y: e.clientY - rect.top };
-    setLocations([...locations, newLocation]);
-  }
-
-  function handleClear() {
-    setLocations([]);
+  const handleClear = () => {
     setJpeg('');
     setData({ ...data, pokemonImg: '' });
-  }
+  };
 
-  function saveBase64() {
+  const saveBase64 = () => {
     const canvas = canvasRef.current;
     const jpegUrl = canvas.toDataURL('image/jpeg');
     setJpeg(jpegUrl);
-  }
+  };
 
   useEffect(() => {
     if (jpeg) {
@@ -55,14 +39,9 @@ const Canvas = () => {
   return (
     <Main>
       <CanvasContainer>
-        <canvas
-          ref={canvasRef}
-          width={640}
-          height={1136}
-          onClick={handleCanvasClick}
-        />
+        <canvas ref={canvasRef} width={640} height={1136} />
         <ToolsContainer>
-          <EditTools canvas={canvasRef} />
+          <EditTools canvasRef={canvasRef} />
         </ToolsContainer>
         <Buttons>
           <Button onClick={saveBase64}>Save</Button>

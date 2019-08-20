@@ -7,18 +7,21 @@ const createImage = function(path) {
 };
 
 class Scene {
-  constructor(canvas, ctx) {
+  constructor(canvas, ctx, data) {
     this.avatar = new Avatar(canvas, ctx);
     this.canvas = canvas;
     this.ctx = ctx;
+    this.data = data;
   }
 
   renderBackground() {
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
     let bg = createImage('images/ui/bg.png');
 
     bg.onload = () => {
       this.ctx.drawImage(bg, 0, 0);
-      this.avatar.renderRandomAvatar(bg);
+      this.avatar.render(this.data);
     };
   }
 
