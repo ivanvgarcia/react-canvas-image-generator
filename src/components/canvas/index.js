@@ -25,7 +25,7 @@ const Canvas = () => {
 
   const saveBase64 = () => {
     const canvas = canvasRef.current;
-    const jpegUrl = canvas.toDataURL('image/jpeg');
+    const jpegUrl = canvas.toDataURL('image/png');
     setJpeg(jpegUrl);
   };
 
@@ -33,6 +33,10 @@ const Canvas = () => {
     if (jpeg) {
       copyRef.current.select();
       document.execCommand('copy');
+      const image = new Image();
+      image.src = jpeg;
+      var w = window.open('');
+      w.document.write(image.outerHTML);
     }
   }, [jpeg]);
 
