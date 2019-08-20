@@ -9,7 +9,7 @@ import {
   Buttons,
   Button,
   ToolsContainer
-} from 'components/canvas/styles';
+} from 'components/canvas/CanvasStyles';
 import EditTools from 'components/editTools/EditTools';
 
 const Canvas = () => {

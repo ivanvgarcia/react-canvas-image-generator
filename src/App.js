@@ -1,5 +1,5 @@
 import React from 'react';
-import Canvas from './components/canvas';
+import Canvas from 'components/canvas/Canvas';
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
