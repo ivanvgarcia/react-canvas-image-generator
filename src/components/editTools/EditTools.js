@@ -18,6 +18,13 @@ const EditTools = ({ canvasRef }) => {
   const [activeIcon, setActiveIcon] = useState('10101');
   const [data, setData] = usePersistentData({});
 
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+    const scene = new Scene(canvas, ctx, data);
+    scene.render();
+  }, [canvasRef, data]);
+
   const renderIcons = () => {
     const CATEGORY_IDS = Object.keys(CLOTHES_LINEUP);
 
@@ -32,13 +39,6 @@ const EditTools = ({ canvasRef }) => {
       />
     ));
   };
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
-    const scene = new Scene(canvas, ctx, data);
-    scene.render();
-  }, [canvasRef, data]);
 
   const thumbnail = (avatarData, type, idx, path) => (
     <Thumbnail
@@ -98,23 +98,6 @@ const EditTools = ({ canvasRef }) => {
       default:
     }
   };
-
-  // const changePose = () => {
-  //   var newUpperPose = null;
-  //   if (categoryId === '10401') {
-  //   }
-
-  //   // Shoeの場合は下半身ポーズが変わる
-  //   var newLowerPose = null;
-  //   if (categoryId === '10901') {
-  //     newLowerPose = LOWER_POSE_MAP[clothesId];
-  //   }
-
-  //   this.changePose(
-  //     newUpperPose != null ? newUpperPose : this.upperPose_,
-  //     newLowerPose != null ? newLowerPose : this.lowerPose_
-  //   );
-  // };
 
   const renderThumbnails = () => {
     let paths;
