@@ -15,7 +15,7 @@ export const ToolsContainer = styled.div`
   background: rgba(0, 0, 0, 0.5);
   bottom: 0;
   left: 0;
-  width: 640px;
+  width: 480px;
 `;
 
 export const Base64TextContainer = styled.div``;
@@ -46,10 +46,7 @@ export const Image = styled.img`
 `;
 
 export const SampleImage = styled.img`
-  position: absolute;
-  top: 0px;
-  right: 40px
-  width: 20%;
+  width: 100%;
 `;
 
 export const Buttons = styled.div`
@@ -90,4 +87,29 @@ export const Title = styled.h1`
   font-family: Helvetica;
   font-size: 3rem;
   text-shadow: 1px 2px 2px dodgerblue, 2px 3px 3px #000, 3px 4px 6px blue;
+`;
+
+export const TweetContainer = styled.div`
+  justify-self: flex-end;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+`;
+
+export const TwitterContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px #ccc;
+  max-width: 240px;
+`;
+
+export const TextArea = styled.textarea`
+  width: 100%;
+  border: none;
+  resize: none;
+  font-size: 1rem;
 `;

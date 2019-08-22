@@ -8,21 +8,25 @@ import {
   SampleImage,
   Buttons,
   Button,
-  ToolsContainer
+  ToolsContainer,
+  TweetContainer,
+  TwitterContent,
+  TextArea
 } from 'components/canvas/CanvasStyles';
 import EditTools from 'components/editTools/EditTools';
 import avatarApi from 'config/baseUrl';
+import { TwitterShareButton } from 'react-twitter-embed';
 
 const Canvas = () => {
   const [jpeg, setJpeg] = useState('');
   const [imageUrl, setImageUrl] = useState('');
   const [data, setData, canvasRef] = usePersistentCanvas();
+  const [tweet, setTweet] = useState('');
 
   // const copyRef = React.useRef(null);
 
-  const handleClear = () => {
-    setJpeg('');
-    setData({ ...data, pokemonImg: '' });
+  const handleChange = e => {
+    setTweet(e.target.value);
   };
 
   const saveBase64 = () => {
@@ -35,7 +39,6 @@ const Canvas = () => {
     const body = { base64: jpeg };
     try {
       const result = await avatarApi.post('/upload/', body);
-      console.log(result);
       setImageUrl(result.data.url);
     } catch (error) {
       console.log(error);
@@ -57,44 +60,41 @@ const Canvas = () => {
   return (
     <Main>
       <CanvasContainer>
-        <canvas ref={canvasRef} width={640} height={1136} />
+        <canvas ref={canvasRef} width={480} height={window.innerHeight} />
         <ToolsContainer>
           <EditTools canvasRef={canvasRef} />
         </ToolsContainer>
         <Buttons>
           <Button onClick={saveBase64}>Save</Button>
-          <Button onClick={handleClear}>Clear</Button>
+          {/* <Button onClick={handleClear}>Clear</Button> */}
         </Buttons>
       </CanvasContainer>
 
-      <div>
+      <TweetContainer>
         {/* {jpeg && (
           <Base64TextContainer>
             <Base64Text ref={copyRef} value={jpeg} readOnly />
           </Base64TextContainer>
+
         )} */}
 
         {jpeg && (
-          <>
-            <h5>Your data has been saved to your clipboard</h5>
+          <TwitterContent>
             <SampleImage src={jpeg} alt="base" />
-            <a
-              href={`https://twitter.com/intent/tweet?text=${imageUrl}`}
-              className="twitter-share-button"
-              data-size="large"
-              data-lang="ja"
-              data-show-count="true"
-            >
-              Tweet
-            </a>
-            <script
-              async
-              src="https://platform.twitter.com/widgets.js"
-              charSet="utf-8"
+            <TextArea
+              placeholder={'Your tweet here....'}
+              onChange={handleChange}
             />
-          </>
+            <TwitterShareButton
+              url={imageUrl}
+              options={{
+                text: `${tweet || 'hey'}`,
+                via: 'From Software'
+              }}
+            />
+          </TwitterContent>
         )}
-      </div>
+      </TweetContainer>
     </Main>
   );
 };
