@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const Main = styled.div`
   height: 100%;
+  display: flex;
 `;
 
 export const CanvasContainer = styled.div`
@@ -48,8 +49,7 @@ export const SampleImage = styled.img`
   position: absolute;
   top: 0px;
   right: 40px
-  width: 640px;
-  height: 1136
+  width: 20%;
 `;
 
 export const Buttons = styled.div`

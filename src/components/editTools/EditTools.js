@@ -42,7 +42,7 @@ const EditTools = ({ canvasRef }) => {
 
   const thumbnail = (avatarData, type, idx, path) => (
     <Thumbnail
-      key={data[idx]}
+      key={avatarData}
       src={path}
       alt="hair"
       onClick={() => changeClothes(avatarData[idx], type)}
