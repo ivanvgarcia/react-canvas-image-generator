@@ -6,7 +6,6 @@ import { TwitterShareButton } from 'react-twitter-embed';
 
 import {
   Main,
-  CanvasContainer,
   // Base64Text,
   // Base64TextContainer,
   SampleImage,
