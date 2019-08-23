@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { usePersistentCanvas } from 'components/hooks';
+import EditTools from 'components/editTools/EditTools';
+import avatarApi from 'config/baseUrl';
+import { TwitterShareButton } from 'react-twitter-embed';
+
 import {
   Main,
   CanvasContainer,
@@ -11,22 +15,26 @@ import {
   ToolsContainer,
   TweetContainer,
   TwitterContent,
-  TextArea
+  TextArea,
+  PlaceHolder
 } from 'components/canvas/CanvasStyles';
-import EditTools from 'components/editTools/EditTools';
-import avatarApi from 'config/baseUrl';
-import { TwitterShareButton } from 'react-twitter-embed';
+import { Form, CenterContent } from 'components/commonStyles';
 
 const Canvas = () => {
   const [jpeg, setJpeg] = useState('');
   const [imageUrl, setImageUrl] = useState('');
   const [data, setData, canvasRef] = usePersistentCanvas();
-  const [tweet, setTweet] = useState('');
+  const [tweetData, setTweetData] = useState({});
 
   // const copyRef = React.useRef(null);
 
   const handleChange = e => {
-    setTweet(e.target.value);
+    setTweetData({ ...tweetData, tweet: e.target.value });
+  };
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    setTweetData({ ...tweetData, isSubmitted: true });
   };
 
   const saveBase64 = () => {
@@ -71,6 +79,8 @@ const Canvas = () => {
       </CanvasContainer>
 
       <TweetContainer>
+        <h1>Avatar Generator</h1>
+
         {/* {jpeg && (
           <Base64TextContainer>
             <Base64Text ref={copyRef} value={jpeg} readOnly />
@@ -78,22 +88,40 @@ const Canvas = () => {
 
         )} */}
 
-        {jpeg && (
-          <TwitterContent>
+        <TwitterContent>
+          {jpeg ? (
             <SampleImage src={jpeg} alt="base" />
-            <TextArea
-              placeholder={'Your tweet here....'}
-              onChange={handleChange}
-            />
+          ) : (
+            <PlaceHolder>Your image will appear here.</PlaceHolder>
+          )}
+          {tweetData.isSubmitted && imageUrl.length ? (
             <TwitterShareButton
               url={imageUrl}
               options={{
-                text: `${tweet || 'hey'}`,
-                via: 'From Software'
+                text: `${tweetData.tweet || 'hey'}`,
+                via: 'From Software',
+                size: 'large'
               }}
             />
-          </TwitterContent>
-        )}
+          ) : (
+            <Form onSubmit={handleSubmit}>
+              <TextArea
+                placeholder={'Write a tweet....'}
+                onChange={handleChange}
+              />
+              <CenterContent>
+                <Button
+                  fontSize=".8rem"
+                  boxShadow="0 8px 2px blue"
+                  hoverBoxShadow="0 10px 2px blue"
+                  translateY="translateY(-2px)"
+                >
+                  Submit
+                </Button>
+              </CenterContent>
+            </Form>
+          )}
+        </TwitterContent>
       </TweetContainer>
     </Main>
   );

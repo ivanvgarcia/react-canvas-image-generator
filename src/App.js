@@ -10,6 +10,7 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     border-sizing: border-box;
+    font-family: "Helvetica"
   }
   .slick-slider .slick-prev {
     z-index: 999 ;
@@ -18,6 +19,9 @@ const GlobalStyle = createGlobalStyle`
   .slick-slider .slick-next {
     z-index: 999 ;
     right: 5px ;
+  }
+  h1 {
+    color: white;
   }
 `;
 
