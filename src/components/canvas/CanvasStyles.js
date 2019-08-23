@@ -13,7 +13,7 @@ export const ToolsContainer = styled.div`
   position: absolute;
   overflow: hidden;
   background: rgba(0, 0, 0, 0.5);
-  bottom: 0;
+  bottom: 0px;
   left: 0;
   width: 480px;
 `;

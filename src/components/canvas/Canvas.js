@@ -35,7 +35,16 @@ const Canvas = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    setTweetData({ ...tweetData, isSubmitted: true });
+
+    if (tweetData && tweetData.tweet) {
+      return setTweetData({ ...tweetData, isSubmitted: true });
+    }
+
+    setTweetData({
+      tweet:
+        'I created this cool anime Avatar. Make your own by going to www.avatar.com',
+      isSubmitted: true
+    });
   };
 
   const saveBase64 = () => {
@@ -68,16 +77,14 @@ const Canvas = () => {
 
   return (
     <Main>
-      <CanvasContainer>
-        <canvas ref={canvasRef} width={480} height={window.innerHeight} />
-        <ToolsContainer>
-          <EditTools canvasRef={canvasRef} />
-        </ToolsContainer>
-        <Buttons>
-          <Button onClick={saveBase64}>Save</Button>
-          {/* <Button onClick={handleClear}>Clear</Button> */}
-        </Buttons>
-      </CanvasContainer>
+      <canvas ref={canvasRef} width={480} height={window.innerHeight} />
+      <ToolsContainer>
+        <EditTools canvasRef={canvasRef} />
+      </ToolsContainer>
+      <Buttons>
+        <Button onClick={saveBase64}>Save</Button>
+        {/* <Button onClick={handleClear}>Clear</Button> */}
+      </Buttons>
 
       <TweetContainer>
         <h1>Avatar Generator</h1>

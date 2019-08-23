@@ -10,7 +10,8 @@ export const usePersistentCanvas = () => {
   React.useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
-    ctx.scale(0.75, 0.75);
+    console.log(1170.2 / window.innerHeight);
+    ctx.scale(0.75, 0.67);
     const scene = new Scene(canvas, ctx, data);
 
     scene.render();

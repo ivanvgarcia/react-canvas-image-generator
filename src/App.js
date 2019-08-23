@@ -4,13 +4,19 @@ import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
   html, body {
-    height: 100%
+
   }
   body {
     margin: 0;
     padding: 0;
     border-sizing: border-box;
     font-family: "Helvetica"
+  }
+  #root{
+    height: 100%;
+  }
+  .App {
+    height: 100%;
   }
   .slick-slider .slick-prev {
     z-index: 999 ;
