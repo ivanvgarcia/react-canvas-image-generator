@@ -3,6 +3,7 @@ import { usePersistentCanvas } from 'components/hooks';
 import EditTools from 'components/editTools/EditTools';
 import avatarApi from 'config/baseUrl';
 import { TwitterShareButton } from 'react-twitter-embed';
+import Loader from 'components/loader/Loader';
 
 import {
   Main,
@@ -25,6 +26,7 @@ const Canvas = () => {
   // eslint-disable-next-line no-unused-vars
   const [data, setData, canvasRef] = usePersistentCanvas();
   const [tweetData, setTweetData] = useState({});
+  const [loading, setLoading] = useState(false);
 
   // const copyRef = React.useRef(null);
 
@@ -36,7 +38,9 @@ const Canvas = () => {
     e.preventDefault();
 
     if (tweetData && tweetData.tweet) {
-      return setTweetData({ ...tweetData, isSubmitted: true });
+      setTweetData({ ...tweetData, isSubmitted: true });
+      setLoading(true);
+      return;
     }
 
     setTweetData({
@@ -44,6 +48,7 @@ const Canvas = () => {
         'I created this cool anime Avatar. Make your own by going to www.avatar.com',
       isSubmitted: true
     });
+    setLoading(true);
   };
 
   const saveBase64 = () => {
@@ -87,7 +92,6 @@ const Canvas = () => {
 
       <TweetContainer>
         <h1>Avatar Generator</h1>
-
         {/* {jpeg && (
           <Base64TextContainer>
             <Base64Text ref={copyRef} value={jpeg} readOnly />
@@ -101,6 +105,9 @@ const Canvas = () => {
           ) : (
             <PlaceHolder>Your image will appear here.</PlaceHolder>
           )}
+
+          {loading && <Loader />}
+
           {tweetData.isSubmitted && imageUrl.length ? (
             <TwitterShareButton
               url={imageUrl}
