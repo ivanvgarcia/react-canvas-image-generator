@@ -23,6 +23,7 @@ import { Form, CenterContent } from 'components/commonStyles';
 const Canvas = () => {
   const [jpeg, setJpeg] = useState('');
   const [imageUrl, setImageUrl] = useState('');
+  // eslint-disable-next-line no-unused-vars
   const [data, setData, canvasRef] = usePersistentCanvas();
   const [tweetData, setTweetData] = useState({});
 

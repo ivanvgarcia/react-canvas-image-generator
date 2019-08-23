@@ -1,12 +1,11 @@
 {
   "Paths": {
-    "Quantity": 5,
+    "Quantity": 4,
     "Items": [
       "/static",
       "/asset-manifest.json",
       "/index.html",
-      "/manifest.json",
-      "/precache-manifest.b5cf1d4b178a522868fa8242be5b19c3.js"
+      "/manifest.json"
     ]
   },
   "CallerReference": "clear-caches"
