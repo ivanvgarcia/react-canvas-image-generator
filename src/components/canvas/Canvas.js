@@ -12,6 +12,7 @@ import {
   SampleImage,
   Buttons,
   Button,
+  CanvasContainer,
   ToolsContainer,
   TweetContainer,
   TwitterContent,
@@ -81,14 +82,16 @@ const Canvas = () => {
 
   return (
     <Main>
-      <canvas ref={canvasRef} width={480} height={window.innerHeight} />
-      <ToolsContainer>
-        <EditTools canvasRef={canvasRef} />
-      </ToolsContainer>
-      <Buttons>
-        <Button onClick={saveBase64}>Save</Button>
-        {/* <Button onClick={handleClear}>Clear</Button> */}
-      </Buttons>
+      <CanvasContainer>
+        <canvas ref={canvasRef} width={480} height={window.innerHeight} />
+        <ToolsContainer>
+          <EditTools canvasRef={canvasRef} />
+        </ToolsContainer>
+        <Buttons>
+          <Button onClick={saveBase64}>Save</Button>
+          {/* <Button onClick={handleClear}>Clear</Button> */}
+        </Buttons>
+      </CanvasContainer>
 
       <TweetContainer>
         <h1>Avatar Generator</h1>

@@ -15,7 +15,7 @@ export const ToolsContainer = styled.div`
   background: rgba(0, 0, 0, 0.5);
   bottom: 0px;
   left: 0;
-  width: 480px;
+  width: 100%;
 `;
 
 export const Base64TextContainer = styled.div``;
