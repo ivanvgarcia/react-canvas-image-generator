@@ -4,6 +4,7 @@ import EditTools from 'components/editTools/EditTools';
 import avatarApi from 'config/baseUrl';
 import { TwitterShareButton } from 'react-twitter-embed';
 import Loader from 'components/loader/Loader';
+import { Helmet } from 'react-helmet';
 
 import {
   Main,
@@ -83,6 +84,11 @@ const Canvas = () => {
   return (
     <Main>
       <CanvasContainer>
+        <Helmet>
+          <meta charSet="utf-8" />
+          <title>Avatar Generator</title>
+          <meta name="description" content="Create your own avatar using HTML Canvas and tweet it!" />
+        </Helmet>
         <canvas ref={canvasRef} width={480} height={window.innerHeight} />
         <ToolsContainer>
           <EditTools canvasRef={canvasRef} />
