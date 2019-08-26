@@ -1,6 +1,9 @@
 import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import styled, { createGlobalStyle } from 'styled-components';
+import Landing from 'components/landing/Landing';
 import Canvas from 'components/canvas/Canvas';
-import { createGlobalStyle } from 'styled-components';
+import Navigation from 'components/navigation/Navigation';
 
 const GlobalStyle = createGlobalStyle`
   html, body {
@@ -31,12 +34,20 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
+const Container = styled.div``;
+
 function App() {
   return (
-    <div className="App">
+    <Router className="App">
       <GlobalStyle />
-      <Canvas />
-    </div>
+      <Container>
+        <Navigation />
+        <Switch>
+          <Route exact path="/" component={Landing} />
+          <Route exact path="/avatar-generator" component={Canvas} />
+        </Switch>
+      </Container>
+    </Router>
   );
 }
 
