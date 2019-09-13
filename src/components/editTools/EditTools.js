@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Icon, Thumbnail } from './EditToolsStyles';
 import { getThumbnails, getToolIcons } from 'utils/canvasToolIcons';
 import {
@@ -14,16 +14,13 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import usePersistentData from 'components/hooks/usePersistentData';
 
-const EditTools = ({ canvasRef }) => {
+const EditTools = ({ canvasRef, scene }) => {
   const [activeIcon, setActiveIcon] = useState('10101');
   const [data, setData] = usePersistentData({});
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
-    const scene = new Scene(canvas, ctx, data);
-    scene.render();
-  }, [canvasRef, data]);
+    scene && scene.render(data);
+  }, [data, scene]);
 
   const renderIcons = () => {
     const CATEGORY_IDS = Object.keys(CLOTHES_LINEUP);

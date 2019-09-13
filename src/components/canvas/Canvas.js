@@ -26,7 +26,7 @@ const Canvas = () => {
   const [jpeg, setJpeg] = useState('');
   const [imageUrl, setImageUrl] = useState('');
   // eslint-disable-next-line no-unused-vars
-  const [data, setData, canvasRef] = usePersistentCanvas();
+  const [data, setData, canvasRef, scene] = usePersistentCanvas();
   const [tweetData, setTweetData] = useState({});
   const [loading, setLoading] = useState(false);
 
@@ -87,11 +87,14 @@ const Canvas = () => {
         <Helmet>
           <meta charSet="utf-8" />
           <title>Avatar Generator</title>
-          <meta name="description" content="Create your own avatar using HTML Canvas and tweet it!" />
+          <meta
+            name="description"
+            content="Create your own avatar using HTML Canvas and tweet it!"
+          />
         </Helmet>
         <canvas ref={canvasRef} width={480} height={window.innerHeight} />
         <ToolsContainer>
-          <EditTools canvasRef={canvasRef} />
+          <EditTools canvasRef={canvasRef} scene={scene} />
         </ToolsContainer>
         <Buttons>
           <Button onClick={saveBase64}>Save</Button>

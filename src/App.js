@@ -43,18 +43,16 @@ const Container = styled.div`
 function App() {
   return (
     <Router className="App">
-      <React.StrictMode>
-        <ScrollToTop>
-          <GlobalStyle />
-          <Container>
-            <Navigation />
-            <Switch>
-              <Route exact path="/" component={Landing} />
-              <Route exact path="/avatar-generator" component={Canvas} />
-            </Switch>
-          </Container>
-        </ScrollToTop>
-      </React.StrictMode>
+      <ScrollToTop>
+        <GlobalStyle />
+        <Container>
+          <Navigation />
+          <Switch>
+            <Route exact path="/" component={Landing} />
+            <Route exact path="/avatar-generator" component={Canvas} />
+          </Switch>
+        </Container>
+      </ScrollToTop>
     </Router>
   );
 }

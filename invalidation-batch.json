@@ -1,12 +1,13 @@
 {
   "Paths": {
-    "Quantity": 4,
+    "Quantity": 5,
     "Items": [
       "/static",
       "/asset-manifest.json",
       "/index.html",
-      "/manifest.json"
+      "/manifest.json",
+      "/sw.js"
     ]
   },
-  "CallerReference": "clear-caches-2019-08-23-17-30"
+  "CallerReference": "clear-caches-2019-09-13-16:55"
 }
