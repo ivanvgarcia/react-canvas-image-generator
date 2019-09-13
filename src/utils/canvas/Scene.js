@@ -14,17 +14,17 @@ class Scene {
     this.data = data;
   }
 
-  renderBackground() {
+  renderBackground(data) {
     let bg = createImage('images/ui/bg.png');
 
     bg.onload = () => {
       this.ctx.drawImage(bg, 0, 0);
-      this.avatar.render(this.data);
+      this.avatar.render(data);
     };
   }
 
-  render() {
-    this.renderBackground();
+  render(data) {
+    this.renderBackground(data);
   }
 }
 
