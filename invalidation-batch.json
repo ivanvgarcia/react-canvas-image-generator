@@ -6,8 +6,8 @@
       "/asset-manifest.json",
       "/index.html",
       "/manifest.json",
-      "/sw.js"
+      "/service-worker.js"
     ]
   },
-  "CallerReference": "clear-caches-2019-09-17-15:06"
+  "CallerReference": "clear-caches-2019-09-17-15:16"
 }

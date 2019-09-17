@@ -34,7 +34,7 @@ const EditTools = ({ canvasRef, scene }) => {
     <Thumbnail
       key={avatarData}
       src={path}
-      alt="hair"
+      alt="avatar-clothes"
       onClick={() => changeClothes(avatarData[idx])}
     />
   );
