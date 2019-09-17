@@ -12,8 +12,10 @@ export const usePersistentCanvas = () => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
     ctx.scale(0.75, 0.75);
-    setScene(new Scene(canvas, ctx, data));
+    setScene(new Scene(canvas, ctx));
   }, [data]);
+
+  scene && scene.start(data);
 
   return [data, setData, canvasRef, scene];
 };
