@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Scene from 'utils/canvas/Scene';
-// import Avatar from 'utils/canvas/Avatar';
 import usePersistentData from 'components/hooks/usePersistentData';
 
 export const usePersistentCanvas = () => {
@@ -10,6 +9,10 @@ export const usePersistentCanvas = () => {
 
   React.useEffect(() => {
     const canvas = canvasRef.current;
+    window.addEventListener('resize', () => {
+      canvas.height = window.innerHeight;
+      ctx.scale(0.75, 0.75);
+    });
     const ctx = canvas.getContext('2d');
     ctx.scale(0.75, 0.75);
     setScene(new Scene(canvas, ctx));
