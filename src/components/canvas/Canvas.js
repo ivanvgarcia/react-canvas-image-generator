@@ -17,41 +17,18 @@ import {
   ToolsContainer,
   TweetContainer,
   TwitterContent,
-  TextArea,
   PlaceHolder
 } from 'components/canvas/CanvasStyles';
-import { Form, CenterContent } from 'components/commonStyles';
 
 const Canvas = () => {
   const [jpeg, setJpeg] = useState('');
   const [imageUrl, setImageUrl] = useState('');
   // eslint-disable-next-line no-unused-vars
   const [data, setData, canvasRef, scene] = usePersistentCanvas();
-  const [tweetData, setTweetData] = useState({});
+
   const [loading, setLoading] = useState(false);
 
   // const copyRef = React.useRef(null);
-
-  const handleChange = e => {
-    setTweetData({ ...tweetData, tweet: e.target.value });
-  };
-
-  const handleSubmit = e => {
-    e.preventDefault();
-
-    if (tweetData && tweetData.tweet) {
-      setTweetData({ ...tweetData, isSubmitted: true });
-      setLoading(true);
-      return;
-    }
-
-    setTweetData({
-      tweet:
-        'I created this cool anime Avatar. Make your own by going to www.avatar.com',
-      isSubmitted: true
-    });
-    setLoading(true);
-  };
 
   const saveBase64 = () => {
     const canvas = canvasRef.current;
@@ -73,6 +50,7 @@ const Canvas = () => {
     if (jpeg) {
       // copyRef.current.select();
       // document.execCommand('copy');
+      setLoading(true);
       savePhotoToAWS(jpeg);
       // const image = new Image();
       // image.src = jpeg;
@@ -80,6 +58,10 @@ const Canvas = () => {
       // w.document.write(image.outerHTML);
     }
   }, [jpeg]);
+
+  useEffect(() => {
+    setLoading(false);
+  }, [imageUrl]);
 
   return (
     <Main>
@@ -118,35 +100,17 @@ const Canvas = () => {
             <PlaceHolder>Your image will appear here.</PlaceHolder>
           )}
 
-          {loading && <Loader />}
-
-          {tweetData.isSubmitted && imageUrl.length ? (
+          {imageUrl.length > 0 && (
             <TwitterShareButton
               url={imageUrl}
               options={{
-                text: `${tweetData.tweet || 'hey'}`,
-                via: 'From Software',
+                text: `${'Avatar'}`,
+                via: 'United',
                 size: 'large'
               }}
             />
-          ) : (
-            <Form onSubmit={handleSubmit}>
-              <TextArea
-                placeholder={'Write a tweet....'}
-                onChange={handleChange}
-              />
-              <CenterContent>
-                <Button
-                  fontSize=".8rem"
-                  boxShadow="0 8px 2px blue"
-                  hoverBoxShadow="0 10px 2px blue"
-                  translateY="translateY(-2px)"
-                >
-                  Submit
-                </Button>
-              </CenterContent>
-            </Form>
           )}
+          {!imageUrl.length && loading && <Loader />}
         </TwitterContent>
       </TweetContainer>
     </Main>

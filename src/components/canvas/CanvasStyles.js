@@ -125,7 +125,7 @@ export const TextArea = styled.textarea`
 `;
 
 export const PlaceHolder = styled.div`
-  color: white;
+  color: tomato;
   font-size: 0.8rem;
   display: flex;
   justify-content: center;
