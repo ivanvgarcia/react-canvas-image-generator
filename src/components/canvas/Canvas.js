@@ -4,6 +4,7 @@ import EditTools from 'components/editTools/EditTools';
 import avatarApi from 'config/baseUrl';
 import { TwitterShareButton } from 'react-twitter-embed';
 import Loader from 'components/loader/Loader';
+import { Helmet } from 'react-helmet';
 
 import {
   Main,
@@ -12,44 +13,22 @@ import {
   SampleImage,
   Buttons,
   Button,
+  CanvasContainer,
   ToolsContainer,
   TweetContainer,
   TwitterContent,
-  TextArea,
   PlaceHolder
 } from 'components/canvas/CanvasStyles';
-import { Form, CenterContent } from 'components/commonStyles';
 
 const Canvas = () => {
   const [jpeg, setJpeg] = useState('');
   const [imageUrl, setImageUrl] = useState('');
   // eslint-disable-next-line no-unused-vars
-  const [data, setData, canvasRef] = usePersistentCanvas();
-  const [tweetData, setTweetData] = useState({});
+  const [data, setData, canvasRef, scene] = usePersistentCanvas();
+
   const [loading, setLoading] = useState(false);
 
   // const copyRef = React.useRef(null);
-
-  const handleChange = e => {
-    setTweetData({ ...tweetData, tweet: e.target.value });
-  };
-
-  const handleSubmit = e => {
-    e.preventDefault();
-
-    if (tweetData && tweetData.tweet) {
-      setTweetData({ ...tweetData, isSubmitted: true });
-      setLoading(true);
-      return;
-    }
-
-    setTweetData({
-      tweet:
-        'I created this cool anime Avatar. Make your own by going to www.avatar.com',
-      isSubmitted: true
-    });
-    setLoading(true);
-  };
 
   const saveBase64 = () => {
     const canvas = canvasRef.current;
@@ -71,6 +50,7 @@ const Canvas = () => {
     if (jpeg) {
       // copyRef.current.select();
       // document.execCommand('copy');
+      setLoading(true);
       savePhotoToAWS(jpeg);
       // const image = new Image();
       // image.src = jpeg;
@@ -79,16 +59,30 @@ const Canvas = () => {
     }
   }, [jpeg]);
 
+  useEffect(() => {
+    setLoading(false);
+  }, [imageUrl]);
+
   return (
     <Main>
-      <canvas ref={canvasRef} width={480} height={window.innerHeight} />
-      <ToolsContainer>
-        <EditTools canvasRef={canvasRef} />
-      </ToolsContainer>
-      <Buttons>
-        <Button onClick={saveBase64}>Save</Button>
-        {/* <Button onClick={handleClear}>Clear</Button> */}
-      </Buttons>
+      <CanvasContainer>
+        <Helmet>
+          <meta charSet="utf-8" />
+          <title>Avatar Generator</title>
+          <meta
+            name="description"
+            content="Create your own avatar using HTML Canvas and tweet it!"
+          />
+        </Helmet>
+        <canvas ref={canvasRef} width={480} height={window.innerHeight} />
+        <ToolsContainer>
+          <EditTools canvasRef={canvasRef} scene={scene} />
+        </ToolsContainer>
+        <Buttons>
+          <Button onClick={saveBase64}>Save</Button>
+          {/* <Button onClick={handleClear}>Clear</Button> */}
+        </Buttons>
+      </CanvasContainer>
 
       <TweetContainer>
         <h1>Avatar Generator</h1>
@@ -106,35 +100,17 @@ const Canvas = () => {
             <PlaceHolder>Your image will appear here.</PlaceHolder>
           )}
 
-          {loading && <Loader />}
-
-          {tweetData.isSubmitted && imageUrl.length ? (
+          {imageUrl.length > 0 && (
             <TwitterShareButton
               url={imageUrl}
               options={{
-                text: `${tweetData.tweet || 'hey'}`,
-                via: 'From Software',
+                text: `${'Avatar'}`,
+                via: 'United',
                 size: 'large'
               }}
             />
-          ) : (
-            <Form onSubmit={handleSubmit}>
-              <TextArea
-                placeholder={'Write a tweet....'}
-                onChange={handleChange}
-              />
-              <CenterContent>
-                <Button
-                  fontSize=".8rem"
-                  boxShadow="0 8px 2px blue"
-                  hoverBoxShadow="0 10px 2px blue"
-                  translateY="translateY(-2px)"
-                >
-                  Submit
-                </Button>
-              </CenterContent>
-            </Form>
           )}
+          {!imageUrl.length && loading && <Loader />}
         </TwitterContent>
       </TweetContainer>
     </Main>
