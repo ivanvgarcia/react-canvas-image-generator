@@ -31,6 +31,8 @@ const Canvas = () => {
   // const copyRef = React.useRef(null);
 
   const saveBase64 = () => {
+    setJpeg('');
+    setImageUrl('');
     const canvas = canvasRef.current;
     const jpegUrl = canvas.toDataURL('image/png');
     setJpeg(jpegUrl);
@@ -47,16 +49,14 @@ const Canvas = () => {
   };
 
   useEffect(() => {
-    if (jpeg) {
-      // copyRef.current.select();
-      // document.execCommand('copy');
-      setLoading(true);
-      savePhotoToAWS(jpeg);
-      // const image = new Image();
-      // image.src = jpeg;
-      // var w = window.open('');
-      // w.document.write(image.outerHTML);
-    }
+    // copyRef.current.select();
+    // document.execCommand('copy');
+    setLoading(true);
+    savePhotoToAWS(jpeg);
+    // const image = new Image();
+    // image.src = jpeg;
+    // var w = window.open('');
+    // w.document.write(image.outerHTML);
   }, [jpeg]);
 
   useEffect(() => {
