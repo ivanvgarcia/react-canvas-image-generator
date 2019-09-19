@@ -79,10 +79,10 @@ const EditTools = ({ canvasRef, scene }) => {
   };
 
   return (
-    <>
+    <div>
       {renderIcons()}
       <Slider {...SETTINGS}>{renderThumbnails()}</Slider>
-    </>
+    </div>
   );
 };
 

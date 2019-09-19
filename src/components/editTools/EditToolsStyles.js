@@ -6,7 +6,7 @@ export const Icon = styled.img`
     cursor: pointer;
   }
   @media (max-width: 500px) {
-    width: 80px;
+    width: 50px;
   }
 `;
 

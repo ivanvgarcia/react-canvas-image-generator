@@ -17,7 +17,8 @@ import {
   ToolsContainer,
   TweetContainer,
   TwitterContent,
-  PlaceHolder
+  CanvasCSS,
+  LoaderText
 } from 'components/canvas/CanvasStyles';
 
 const Canvas = () => {
@@ -31,6 +32,8 @@ const Canvas = () => {
   // const copyRef = React.useRef(null);
 
   const saveBase64 = () => {
+    setJpeg('');
+    setImageUrl(null);
     const canvas = canvasRef.current;
     const jpegUrl = canvas.toDataURL('image/png');
     setJpeg(jpegUrl);
@@ -48,19 +51,20 @@ const Canvas = () => {
 
   useEffect(() => {
     if (jpeg) {
-      // copyRef.current.select();
-      // document.execCommand('copy');
       setLoading(true);
       savePhotoToAWS(jpeg);
-      // const image = new Image();
-      // image.src = jpeg;
-      // var w = window.open('');
-      // w.document.write(image.outerHTML);
     }
+    // copyRef.current.select();
+    // document.execCommand('copy');
+
+    // const image = new Image();
+    // image.src = jpeg;
+    // var w = window.open('');
+    // w.document.write(image.outerHTML);
   }, [jpeg]);
 
   useEffect(() => {
-    setLoading(false);
+    imageUrl && setLoading(false);
   }, [imageUrl]);
 
   return (
@@ -74,10 +78,8 @@ const Canvas = () => {
             content="Create your own avatar using HTML Canvas and tweet it!"
           />
         </Helmet>
-        <canvas ref={canvasRef} width={480} height={window.innerHeight} />
-        <ToolsContainer>
-          <EditTools canvasRef={canvasRef} scene={scene} />
-        </ToolsContainer>
+        <CanvasCSS ref={canvasRef} height={window.innerHeight} />
+
         <Buttons>
           <Button onClick={saveBase64}>Save</Button>
           {/* <Button onClick={handleClear}>Clear</Button> */}
@@ -85,22 +87,10 @@ const Canvas = () => {
       </CanvasContainer>
 
       <TweetContainer>
-        <h1>Avatar Generator</h1>
-        {/* {jpeg && (
-          <Base64TextContainer>
-            <Base64Text ref={copyRef} value={jpeg} readOnly />
-          </Base64TextContainer>
-
-        )} */}
-
         <TwitterContent>
-          {jpeg ? (
-            <SampleImage src={jpeg} alt="base" />
-          ) : (
-            <PlaceHolder>Your image will appear here.</PlaceHolder>
-          )}
+          {jpeg && <SampleImage src={jpeg} alt="base" />}
 
-          {imageUrl.length > 0 && (
+          {jpeg && imageUrl && !loading ? (
             <TwitterShareButton
               url={imageUrl}
               options={{
@@ -109,9 +99,18 @@ const Canvas = () => {
                 size: 'large'
               }}
             />
+          ) : (
+            loading && (
+              <>
+                <LoaderText>Saving image...</LoaderText>
+                <Loader />
+              </>
+            )
           )}
-          {!imageUrl.length && loading && <Loader />}
         </TwitterContent>
+        <ToolsContainer>
+          <EditTools canvasRef={canvasRef} scene={scene} />
+        </ToolsContainer>
       </TweetContainer>
     </Main>
   );

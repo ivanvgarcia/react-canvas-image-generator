@@ -9,12 +9,19 @@ export const usePersistentCanvas = () => {
 
   React.useEffect(() => {
     const canvas = canvasRef.current;
-    window.addEventListener('resize', () => {
-      canvas.height = window.innerHeight;
-      ctx.scale(0.75, 0.75);
-    });
+
     const ctx = canvas.getContext('2d');
-    ctx.scale(0.75, 0.75);
+    if (window.innerWidth < 330) {
+      ctx.canvas.width = window.innerWidth;
+      ctx.scale(0.55, 0.55);
+    } else if (window.innerWidth < 500) {
+      ctx.canvas.width = window.innerWidth;
+      ctx.scale(0.57, 0.6);
+    } else {
+      ctx.canvas.width = 638;
+      ctx.canvas.height = 1136;
+    }
+
     setScene(new Scene(canvas, ctx));
   }, [data]);
 
