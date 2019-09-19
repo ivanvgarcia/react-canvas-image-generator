@@ -14,18 +14,14 @@ export const usePersistentCanvas = () => {
     if (window.innerWidth < 500) {
       ctx.canvas.width = window.innerWidth;
       ctx.scale(0.65, 0.65);
-      return;
-    }
-
-    if (window.innerWidth < 330) {
+    } else if (window.innerWidth < 330) {
       ctx.canvas.width = window.innerWidth;
       ctx.scale(0.55, 0.55);
-      return;
+    } else {
+      ctx.canvas.width = 475;
+      ctx.canvas.height = window.innerHeight;
+      ctx.scale(0.75, 0.75);
     }
-
-    ctx.canvas.width = 475;
-    ctx.canvas.height = window.innerHeight;
-    ctx.scale(0.75, 0.75);
 
     setScene(new Scene(canvas, ctx));
   }, [data]);
