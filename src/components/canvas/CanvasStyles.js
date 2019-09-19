@@ -14,6 +14,7 @@ export const CanvasContainer = styled.div`
 
 export const CanvasCSS = styled.canvas`
   width: 100%;
+  height: 100%;
 `;
 
 export const ToolsContainer = styled.div`

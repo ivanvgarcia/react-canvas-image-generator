@@ -16,14 +16,19 @@ export const NavItem = styled.li`
   list-style: none;
   text-decoration: none;
   padding 20px;
+  @media (max-width: 850px) {
+    padding 5px;
+  }
 
   a {
     color: white;
-    margin: 0 10px;
     text-decoration: none;
     font-weight: bold;
     transition: opacity 0.2s linear;
     padding: 20px 0;
+    @media (max-width: 850px) {
+      padding 5px;
+    }
   }
   a:hover {
     opacity: 0.8;
