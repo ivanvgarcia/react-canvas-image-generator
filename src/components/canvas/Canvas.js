@@ -17,7 +17,8 @@ import {
   ToolsContainer,
   TweetContainer,
   TwitterContent,
-  CanvasCSS
+  CanvasCSS,
+  LoaderText
 } from 'components/canvas/CanvasStyles';
 
 const Canvas = () => {
@@ -49,10 +50,13 @@ const Canvas = () => {
   };
 
   useEffect(() => {
+    if (jpeg) {
+      setLoading(true);
+      savePhotoToAWS(jpeg);
+    }
     // copyRef.current.select();
     // document.execCommand('copy');
-    setLoading(true);
-    savePhotoToAWS(jpeg);
+
     // const image = new Image();
     // image.src = jpeg;
     // var w = window.open('');
@@ -60,7 +64,7 @@ const Canvas = () => {
   }, [jpeg]);
 
   useEffect(() => {
-    setLoading(false);
+    imageUrl && setLoading(false);
   }, [imageUrl]);
 
   return (
@@ -86,7 +90,7 @@ const Canvas = () => {
         <TwitterContent>
           {jpeg && <SampleImage src={jpeg} alt="base" />}
 
-          {jpeg && imageUrl && (
+          {jpeg && imageUrl && !loading ? (
             <TwitterShareButton
               url={imageUrl}
               options={{
@@ -95,8 +99,14 @@ const Canvas = () => {
                 size: 'large'
               }}
             />
+          ) : (
+            loading && (
+              <>
+                <LoaderText>Saving image...</LoaderText>
+                <Loader />
+              </>
+            )
           )}
-          {!imageUrl && loading && <Loader />}
         </TwitterContent>
         <ToolsContainer>
           <EditTools canvasRef={canvasRef} scene={scene} />

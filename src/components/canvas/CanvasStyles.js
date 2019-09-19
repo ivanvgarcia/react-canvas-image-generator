@@ -122,3 +122,8 @@ export const PlaceHolder = styled.div`
   width: 240px;
   height: 410.5px;
 `;
+
+export const LoaderText = styled.p`
+  margin: 10px 0;
+  font-size: 0.8rem;
+`;
