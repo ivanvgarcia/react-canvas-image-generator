@@ -32,7 +32,7 @@ const Canvas = () => {
 
   const saveBase64 = () => {
     setJpeg('');
-    setImageUrl('');
+    setImageUrl(null);
     const canvas = canvasRef.current;
     const jpegUrl = canvas.toDataURL('image/png');
     setJpeg(jpegUrl);
@@ -86,7 +86,7 @@ const Canvas = () => {
         <TwitterContent>
           {jpeg && <SampleImage src={jpeg} alt="base" />}
 
-          {imageUrl.length > 0 && (
+          {jpeg && imageUrl && (
             <TwitterShareButton
               url={imageUrl}
               options={{
@@ -96,7 +96,7 @@ const Canvas = () => {
               }}
             />
           )}
-          {!imageUrl.length && loading && <Loader />}
+          {!imageUrl && loading && <Loader />}
         </TwitterContent>
         <ToolsContainer>
           <EditTools canvasRef={canvasRef} scene={scene} />
