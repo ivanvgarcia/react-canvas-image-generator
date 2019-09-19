@@ -21,7 +21,7 @@
     "start": "react-scripts start",
     "build-sw": "node ./src/sw-build.js",
     "update-invalidation": "node ./scripts/updateInvalidation.js",
-    "clean-cra-sw": "rm -f build/precache-manifest.*.js && rm -f build/sw.js",
+    "clean-cra-sw": "rm -f build/precache-manifest.*.js && rm -f build/service-worker.js",
     "build": "react-scripts build && yarn run build-sw && yarn run clean-cra-sw",
     "deploy": "yarn run build && yarn run deploy:publish && yarn run update-invalidation && yarn run deploy:create-invalidation",
     "deploy:publish": "aws s3 sync build/ s3://avatar-jp --exclude 'images/*'",
