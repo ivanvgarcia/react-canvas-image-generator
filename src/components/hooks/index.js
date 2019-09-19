@@ -12,6 +12,14 @@ export const usePersistentCanvas = () => {
     window.addEventListener('resize', () => {
       if (window.innerWidth < 500) {
         ctx.canvas.width = window.innerWidth;
+        ctx.scale(0.65, 0.65);
+        return;
+      }
+
+      if (window.innerWidth < 330) {
+        ctx.canvas.width = window.innerWidth;
+        ctx.scale(0.55, 0.55);
+        return;
       }
       canvas.height = window.innerHeight;
       ctx.scale(0.75, 0.75);
