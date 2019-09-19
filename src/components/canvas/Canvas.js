@@ -17,7 +17,7 @@ import {
   ToolsContainer,
   TweetContainer,
   TwitterContent,
-  PlaceHolder
+  CanvasCSS
 } from 'components/canvas/CanvasStyles';
 
 const Canvas = () => {
@@ -74,10 +74,8 @@ const Canvas = () => {
             content="Create your own avatar using HTML Canvas and tweet it!"
           />
         </Helmet>
-        <canvas ref={canvasRef} width={480} height={window.innerHeight} />
-        <ToolsContainer>
-          <EditTools canvasRef={canvasRef} scene={scene} />
-        </ToolsContainer>
+        <CanvasCSS ref={canvasRef} height={window.innerHeight} />
+
         <Buttons>
           <Button onClick={saveBase64}>Save</Button>
           {/* <Button onClick={handleClear}>Clear</Button> */}
@@ -85,20 +83,8 @@ const Canvas = () => {
       </CanvasContainer>
 
       <TweetContainer>
-        <h1>Avatar Generator</h1>
-        {/* {jpeg && (
-          <Base64TextContainer>
-            <Base64Text ref={copyRef} value={jpeg} readOnly />
-          </Base64TextContainer>
-
-        )} */}
-
         <TwitterContent>
-          {jpeg ? (
-            <SampleImage src={jpeg} alt="base" />
-          ) : (
-            <PlaceHolder>Your image will appear here.</PlaceHolder>
-          )}
+          {jpeg && <SampleImage src={jpeg} alt="base" />}
 
           {imageUrl.length > 0 && (
             <TwitterShareButton
@@ -112,6 +98,9 @@ const Canvas = () => {
           )}
           {!imageUrl.length && loading && <Loader />}
         </TwitterContent>
+        <ToolsContainer>
+          <EditTools canvasRef={canvasRef} scene={scene} />
+        </ToolsContainer>
       </TweetContainer>
     </Main>
   );
