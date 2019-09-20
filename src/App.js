@@ -8,7 +8,6 @@ import Navigation from 'components/navigation/Navigation';
 import { Provider } from 'react-redux';
 import store from './store.js';
 import { checkSession } from './actions/auth';
-import { useDispatch } from 'react-redux';
 
 const GlobalStyle = createGlobalStyle`
   html, body {

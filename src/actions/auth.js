@@ -1,11 +1,11 @@
 import {
-  REGISTER_SUCCESS,
-  REGISTER_FAIL,
+  //   REGISTER_SUCCESS,
+  //   REGISTER_FAIL,
   USER_LOADED,
-  AUTH_ERROR,
-  LOGIN_SUCCESS,
-  LOGIN_FAIL,
-  LOGOUT
+  //   AUTH_ERROR,
+  LOGIN_SUCCESS
+  //   LOGIN_FAIL,
+  //   LOGOUT
 } from './types';
 import avatarApi from '../config/baseUrl';
 
