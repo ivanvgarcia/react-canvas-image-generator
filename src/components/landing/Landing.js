@@ -5,7 +5,7 @@ import { Helmet } from 'react-helmet';
 import { useDispatch, useSelector } from 'react-redux';
 import { twitterSignIn } from '../../actions/auth';
 import styled from 'styled-components';
-import axios from 'axios';
+import avatarApi from '../../config/baseUrl';
 
 const TwitterButton = styled.button`
   display: flex;
@@ -28,7 +28,7 @@ const Landing = ({ location: { search } }) => {
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
 
   const signIn = async () => {
-    const res = await axios.get('http://localhost:5000/sessions/connect');
+    const res = await avatarApi.get('/sessions/connect');
 
     setUrl(res.data.redirectUrl);
   };
