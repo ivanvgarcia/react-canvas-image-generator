@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import styled, { createGlobalStyle } from 'styled-components';
 import ScrollToTop from 'components/ScrollToTop';
 import Landing from 'components/landing/Landing';
 import Canvas from 'components/canvas/Canvas';
 import Navigation from 'components/navigation/Navigation';
+import { Provider } from 'react-redux';
+import store from './store.js';
+import { checkSession } from './actions/auth';
+import { useDispatch } from 'react-redux';
 
 const GlobalStyle = createGlobalStyle`
   html, body {
@@ -41,18 +45,26 @@ const Container = styled.div`
 `;
 
 function App() {
+  useEffect(() => {
+    if (!store.getState().auth.user) {
+      console.log('ran');
+      store.dispatch(checkSession());
+    }
+  }, []);
   return (
     <Router className="App">
-      <ScrollToTop>
-        <GlobalStyle />
-        <Container>
-          <Navigation />
-          <Switch>
-            <Route exact path="/" component={Landing} />
-            <Route exact path="/avatar-generator" component={Canvas} />
-          </Switch>
-        </Container>
-      </ScrollToTop>
+      <Provider store={store}>
+        <ScrollToTop>
+          <GlobalStyle />
+          <Container>
+            <Navigation />
+            <Switch>
+              <Route exact path="/" component={Landing} />
+              <Route exact path="/avatar-generator" component={Canvas} />
+            </Switch>
+          </Container>
+        </ScrollToTop>
+      </Provider>
     </Router>
   );
 }

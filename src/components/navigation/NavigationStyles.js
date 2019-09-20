@@ -16,17 +16,20 @@ export const Nav = styled.ul`
 export const NavItem = styled.li`
   list-style: none;
   text-decoration: none;
-  padding 20px;
+  padding 10px;
+  display: flex;
+  align-items: center;
+  cursor: pointer
   @media (max-width: 850px) {
     padding 5px;
   }
 
-  a {
+  a, p {
     color: white;
     text-decoration: none;
     font-weight: bold;
     transition: opacity 0.2s linear;
-    padding: 20px 0;
+    padding: 10px 0;
     @media (max-width: 850px) {
       padding 5px;
     }
@@ -34,7 +37,14 @@ export const NavItem = styled.li`
       font-size: .8rem;
     }
   }
+  p {margin: 0}
   a:hover {
     opacity: 0.8;
   }
+`;
+
+export const Avatar = styled.img`
+  width: 20px;
+  margin-right: 10px;
+  border-radius: 50%;
 `;
