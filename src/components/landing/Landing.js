@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { Banner } from 'components/landing/LandingStyles';
 import { Helmet } from 'react-helmet';
 import { useDispatch, useSelector } from 'react-redux';
@@ -26,16 +26,23 @@ const Landing = ({ location: { search } }) => {
   const [url, setUrl] = useState(null);
   const dispatch = useDispatch();
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
+  const loading = useSelector(state => state.auth.loading);
 
   const signIn = async () => {
-    const res = await avatarApi.get('/sessions/connect');
+    const res = await avatarApi.get('/auth/connect');
 
     setUrl(res.data.redirectUrl);
   };
 
   useEffect(() => {
-    search.length > 0 && dispatch(twitterSignIn(search));
-  }, [dispatch, search]);
+    if (!isAuthenticated) {
+      search.length > 0 && dispatch(twitterSignIn(search));
+    }
+  }, [dispatch, isAuthenticated, search]);
+
+  if (isAuthenticated) {
+    return <Redirect to="/dashboard" />;
+  }
 
   if (url) {
     return (window.location.href = url);

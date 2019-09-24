@@ -8,22 +8,24 @@ const Navigation = () => {
   const loading = useSelector(state => state.auth.loading);
 
   return (
-    <Nav>
-      <NavItem>
-        <NavLink to="/">Home</NavLink>
-      </NavItem>
-      <NavItem>
-        <NavLink to="/avatar-generator">Generator</NavLink>
-      </NavItem>
-      {!loading && user && (
+    !loading && (
+      <Nav>
         <NavItem>
-          <NavLink to="/avatar-generator">
-            <Avatar src={user.profile_image_url_https} alt={user.name} />
-          </NavLink>
-          <p>{user.name}</p>
+          <NavLink to="/">Home</NavLink>
         </NavItem>
-      )}
-    </Nav>
+        <NavItem>
+          <NavLink to="/avatar-generator">Generator</NavLink>
+        </NavItem>
+        {!loading && user && (
+          <NavItem>
+            <NavLink to="/avatar-generator">
+              <Avatar src={user.profile_image_url_https} alt={user.name} />
+            </NavLink>
+            <p>{user.name}</p>
+          </NavItem>
+        )}
+      </Nav>
+    )
   );
 };
 

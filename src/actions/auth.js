@@ -3,7 +3,8 @@ import {
   //   REGISTER_FAIL,
   USER_LOADED,
   //   AUTH_ERROR,
-  LOGIN_SUCCESS
+  LOGIN_SUCCESS,
+  AUTH_ERROR
   //   LOGIN_FAIL,
   //   LOGOUT
 } from './types';
@@ -11,16 +12,23 @@ import avatarApi from '../config/baseUrl';
 
 export const checkSession = search => async dispatch => {
   try {
-    const res = await avatarApi.get(`/sessions/check`);
+    const res = await avatarApi.get(`/auth/current`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.token}`
+      }
+    });
+    console.log(res);
 
-    const user = JSON.parse(res.data.user);
+    const payload = res.data;
 
     dispatch({
       type: USER_LOADED,
-      payload: user
+      payload
     });
   } catch (error) {
-    console.error(error);
+    dispatch({
+      type: AUTH_ERROR
+    });
   }
 };
 
@@ -30,16 +38,18 @@ export const twitterSignIn = search => async dispatch => {
     const query = new URLSearchParams(search);
     const token = query.get('oauth_token');
     const verifier = query.get('oauth_verifier');
-    console.log(token, verifier);
+
     const res = await avatarApi.get(
-      `sessions/saveAccessTokens?oauth_token=${token}&oauth_verifier=${verifier}`
+      `auth/saveToken?oauth_token=${token}&oauth_verifier=${verifier}`
     );
 
-    const user = JSON.parse(res.data.user);
+    console.log(res);
+
+    const payload = res.data;
 
     dispatch({
       type: LOGIN_SUCCESS,
-      payload: user
+      payload
     });
   } catch (error) {
     console.error(error);

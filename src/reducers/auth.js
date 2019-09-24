@@ -18,24 +18,24 @@ const initialState = {
 
 export default function(state = initialState, action) {
   const { type, payload } = action;
-
+  console.log(payload && payload.data.user);
   switch (type) {
     case USER_LOADED:
       return {
         ...state,
-        // token: localStorage.getItem('token'),
+        token: localStorage.getItem('token'),
         isAuthenticated: true,
         loading: false,
-        user: payload
+        user: payload.data.user
       };
     case REGISTER_SUCCESS:
     case LOGIN_SUCCESS:
-      //   localStorage.setItem('token', payload.token);
+      localStorage.setItem('token', payload.token);
       return {
         ...state,
         isAuthenticated: true,
         loading: false,
-        user: payload
+        user: payload.data.user
       };
     case REGISTER_FAIL:
     case AUTH_ERROR:
@@ -43,7 +43,6 @@ export default function(state = initialState, action) {
     case LOGOUT:
     case ACCOUNT_DELETED:
       localStorage.removeItem('token');
-      localStorage.removeItem('presist:root');
       return {
         ...state,
         token: null,

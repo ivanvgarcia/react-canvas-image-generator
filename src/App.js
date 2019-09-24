@@ -4,6 +4,7 @@ import styled, { createGlobalStyle } from 'styled-components';
 import ScrollToTop from 'components/ScrollToTop';
 import Landing from 'components/landing/Landing';
 import Canvas from 'components/canvas/Canvas';
+import Dashboard from 'components/dashboard/Dashboard';
 import Navigation from 'components/navigation/Navigation';
 import { Provider } from 'react-redux';
 import store from './store.js';
@@ -46,10 +47,10 @@ const Container = styled.div`
 function App() {
   useEffect(() => {
     if (!store.getState().auth.user) {
-      console.log('ran');
       store.dispatch(checkSession());
     }
   }, []);
+
   return (
     <Router className="App">
       <Provider store={store}>
@@ -60,6 +61,7 @@ function App() {
             <Switch>
               <Route exact path="/" component={Landing} />
               <Route exact path="/avatar-generator" component={Canvas} />
+              <Route exact path="/dashboard" component={Dashboard} />
             </Switch>
           </Container>
         </ScrollToTop>
