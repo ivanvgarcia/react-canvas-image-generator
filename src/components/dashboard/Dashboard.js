@@ -1,10 +1,10 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 const Dashboard = () => {
-  const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
+  //   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
   const user = useSelector(state => state.auth.user);
-  const loading = useSelector(state => state.auth.loading);
+  //   const loading = useSelector(state => state.auth.loading);
 
   const renderUser = () =>
     user && (

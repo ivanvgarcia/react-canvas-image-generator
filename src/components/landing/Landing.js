@@ -26,7 +26,7 @@ const Landing = ({ location: { search } }) => {
   const [url, setUrl] = useState(null);
   const dispatch = useDispatch();
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
-  const loading = useSelector(state => state.auth.loading);
+  // const loading = useSelector(state => state.auth.loading);
 
   const signIn = async () => {
     const res = await avatarApi.get('/auth/connect');
