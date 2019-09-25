@@ -6,7 +6,7 @@ let baseURL;
 if (dev) {
   baseURL = 'http://localhost:5000';
 } else {
-  baseURL = 'https://avatar-jp-staging.herokuapp.com/api/v1';
+  baseURL = 'https://avatar-jp.herokuapp.com/api/v1';
 }
 
 export const avatarApi = axios.create({
