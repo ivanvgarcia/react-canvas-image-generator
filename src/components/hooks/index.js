@@ -22,6 +22,33 @@ export const usePersistentCanvas = () => {
       ctx.canvas.height = 1136;
     }
 
+    let mouse = {
+      x: 0,
+      y: 0
+    };
+
+    canvas.addEventListener('wheel', trackWheel);
+    canvas.addEventListener('mousemove', move);
+    canvas.addEventListener('mousedown', move);
+    canvas.addEventListener('mouseup', move);
+    canvas.addEventListener('mouseout', move);
+
+    function move(event) {
+      // mouse move event
+      mouse.x = event.clientX;
+      mouse.y = event.clientY;
+      console.log(mouse);
+      ctx.scale(1, 1);
+    }
+
+    function trackWheel(event) {
+      // mouse move event
+      mouse.x = event.clientX;
+      mouse.y = event.clientY;
+      console.log(mouse);
+      ctx.scale(1, 1);
+    }
+
     setScene(new Scene(canvas, ctx));
   }, [data]);
 

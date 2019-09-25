@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { usePersistentCanvas } from 'components/hooks';
 import EditTools from 'components/editTools/EditTools';
 import avatarApi from 'config/baseUrl';
 import { TwitterShareButton } from 'react-twitter-embed';
 import Loader from 'components/loader/Loader';
 import { Helmet } from 'react-helmet';
+import { useSelector } from 'react-redux';
 
 import {
   Main,
@@ -26,8 +27,8 @@ const Canvas = () => {
   const [imageUrl, setImageUrl] = useState('');
   // eslint-disable-next-line no-unused-vars
   const [data, setData, canvasRef, scene] = usePersistentCanvas();
-
   const [loading, setLoading] = useState(false);
+  const user = useSelector(state => state.auth.user);
 
   // const copyRef = React.useRef(null);
 
@@ -39,20 +40,27 @@ const Canvas = () => {
     setJpeg(jpegUrl);
   };
 
-  const savePhotoToAWS = async jpeg => {
-    const body = { base64: jpeg };
-    try {
-      const result = await avatarApi.post('/upload/', body);
-      setImageUrl(result.data.url);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const savePhotoToAWS = useCallback(
+    async jpeg => {
+      const body = { base64: jpeg };
+      console.log(user);
+      if (user) {
+        body.id = user._id;
+      }
+      try {
+        const result = await avatarApi.post('/upload/', body);
+        setImageUrl(result.data.url);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    [user]
+  );
 
   useEffect(() => {
     if (jpeg) {
       setLoading(true);
-      savePhotoToAWS(jpeg);
+      savePhotoToAWS(jpeg, user);
     }
     // copyRef.current.select();
     // document.execCommand('copy');
@@ -61,7 +69,7 @@ const Canvas = () => {
     // image.src = jpeg;
     // var w = window.open('');
     // w.document.write(image.outerHTML);
-  }, [jpeg]);
+  }, [jpeg, savePhotoToAWS, user]);
 
   useEffect(() => {
     imageUrl && setLoading(false);

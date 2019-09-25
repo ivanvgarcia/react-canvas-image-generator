@@ -26,7 +26,7 @@ const Landing = ({ location: { search } }) => {
   const [url, setUrl] = useState(null);
   const dispatch = useDispatch();
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
-  // const loading = useSelector(state => state.auth.loading);
+  const loading = useSelector(state => state.auth.loading);
 
   const signIn = async () => {
     const res = await avatarApi.get('/auth/connect');
@@ -35,10 +35,10 @@ const Landing = ({ location: { search } }) => {
   };
 
   useEffect(() => {
-    if (!isAuthenticated) {
+    if (!loading && !isAuthenticated) {
       search.length > 0 && dispatch(twitterSignIn(search));
     }
-  }, [dispatch, isAuthenticated, search]);
+  }, [dispatch, isAuthenticated, loading, search]);
 
   if (isAuthenticated) {
     return <Redirect to="/dashboard" />;

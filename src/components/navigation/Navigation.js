@@ -6,6 +6,16 @@ import { useSelector } from 'react-redux';
 const Navigation = () => {
   const user = useSelector(state => state.auth.user);
   const loading = useSelector(state => state.auth.loading);
+  const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
+
+  const authLinks = () => (
+    <NavItem>
+      <NavLink to="/avatar-generator">
+        <Avatar src={user.profile_image_url_https} alt={user.name} />
+      </NavLink>
+      <p>{user.name}</p>
+    </NavItem>
+  );
 
   return (
     !loading && (
@@ -16,14 +26,8 @@ const Navigation = () => {
         <NavItem>
           <NavLink to="/avatar-generator">Generator</NavLink>
         </NavItem>
-        {!loading && user && (
-          <NavItem>
-            <NavLink to="/avatar-generator">
-              <Avatar src={user.profile_image_url_https} alt={user.name} />
-            </NavLink>
-            <p>{user.name}</p>
-          </NavItem>
-        )}
+
+        {!loading && <>{isAuthenticated && authLinks()}</>}
       </Nav>
     )
   );

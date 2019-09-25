@@ -2,7 +2,7 @@ import Avatar from 'utils/canvas/Avatar';
 
 class Scene {
   constructor(canvas, ctx) {
-    this.avatar = new Avatar(canvas, ctx);
+    this.avatar = new Avatar();
     this.canvas = canvas;
     this.ctx = ctx;
   }
