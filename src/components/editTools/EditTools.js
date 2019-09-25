@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Icon, Thumbnail } from './EditToolsStyles';
+import { Icon, Thumbnail, SliderContainer } from './EditToolsStyles';
 import { getThumbnails, getToolIcons } from 'utils/canvasToolIcons';
 import { CLOTHES_LINEUP, SETTINGS } from 'utils/constantData';
 
@@ -79,10 +79,10 @@ const EditTools = ({ canvasRef, scene }) => {
   };
 
   return (
-    <div>
+    <SliderContainer>
       {renderIcons()}
       <Slider {...SETTINGS}>{renderThumbnails()}</Slider>
-    </div>
+    </SliderContainer>
   );
 };
 

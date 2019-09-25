@@ -11,16 +11,14 @@ export const usePersistentCanvas = () => {
     const canvas = canvasRef.current;
 
     const ctx = canvas.getContext('2d');
+
     if (window.innerWidth < 330) {
       ctx.canvas.width = window.innerWidth;
-      ctx.scale(0.55, 0.55);
-    } else if (window.innerWidth < 500) {
-      ctx.canvas.width = window.innerWidth;
-      ctx.scale(0.57, 0.6);
-    } else {
-      ctx.canvas.width = 638;
-      ctx.canvas.height = 1136;
     }
+
+    ctx.canvas.width = 638;
+
+    ctx.canvas.height = window.innerHeight + 100;
 
     let mouse = {
       x: 0,

@@ -40,12 +40,12 @@ const Landing = ({ location: { search } }) => {
     }
   }, [dispatch, isAuthenticated, loading, search]);
 
-  if (isAuthenticated) {
-    return <Redirect to="/dashboard" />;
-  }
-
   if (url) {
     return (window.location.href = url);
+  }
+
+  if (!loading && isAuthenticated) {
+    return <Redirect to="/dashboard" />;
   }
 
   return (

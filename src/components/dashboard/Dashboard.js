@@ -41,7 +41,7 @@ const Dashboard = () => {
   const renderUser = () =>
     user && (
       <div>
-        <img src={user.profile_image_url_https} alt="" />
+        <img src={user.photo} alt="user" />
         <p>{user.name}</p>
         <a href={`https://twitter.com/${user.screen_name}`}>Twitter Profile</a>
 

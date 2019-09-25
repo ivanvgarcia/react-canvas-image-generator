@@ -30,11 +30,11 @@ const GlobalStyle = createGlobalStyle`
   }
   .slick-slider .slick-prev {
     z-index: 999 ;
-    left: 5px ;
+    left: -20px ;
   }
   .slick-slider .slick-next {
     z-index: 999 ;
-    right: 5px ;
+    right: -20px ;
   }
   h1 {
     color: white;
@@ -47,6 +47,7 @@ const Container = styled.div`
 
 function App() {
   useEffect(() => {
+    console.log(store);
     if (!store.getState().auth.user) {
       store.dispatch(checkSession());
     }
