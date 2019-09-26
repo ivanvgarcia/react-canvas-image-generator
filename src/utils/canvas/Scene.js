@@ -8,13 +8,14 @@ class Scene {
   }
 
   render() {
-    this.avatar.render(this.ctx);
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this.avatar.render(this.ctx, this.canvas);
   }
 
   start() {
     setInterval(() => {
       this.render();
-    }, 100);
+    }, 10);
   }
 
   onClothesSelected(clothesId) {

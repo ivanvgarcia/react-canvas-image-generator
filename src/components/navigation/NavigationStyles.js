@@ -3,12 +3,13 @@ import styled from 'styled-components';
 export const Nav = styled.ul`
   position: fixed;
   padding-left: 10px;
-  top: 10px;
+  top: 2px;
   right: 0;
   background: rgb(219, 71, 107);
   box-shadow: 0 2px 3px #000;
   display: flex;
   z-index: 999999;
+  margin: 0;
   border-top-left-radius: 30px;
   border-bottom-left-radius: 30px;
 `;

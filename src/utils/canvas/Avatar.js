@@ -1,7 +1,7 @@
 import { UPPER_POSE_MAP, LOWER_POSE_MAP } from '../constantData';
 
 const createImage = function(path) {
-  var image = new Image();
+  const image = new Image();
   image.src = path;
   return image;
 };
@@ -32,8 +32,6 @@ class Avatar {
   }
 
   render(ctx) {
-    ctx.drawImage(this.bgImage, 0, 0);
-
     if (this.clothesInfoMap['10201']) {
       ctx.drawImage(this.clothesInfoMap['10201'].back, 0, 0);
     }

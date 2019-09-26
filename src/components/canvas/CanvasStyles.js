@@ -1,24 +1,48 @@
 import styled from 'styled-components';
 
-export const Main = styled.div`
-  position: relative;
-  min-height: 100vh;
+export const Main = styled.div``;
+
+export const FlexContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  margin-top: 100px;
+  height: 100vh;
+  overflow-y: auto;
+  img {
+    width: 100%;
+    cursor: pointer;
+  }
+`;
+
+export const AvatarCard = styled.div`
+  position: relative;
+  width: 45%;
+  cursor: pointer;
+`;
+
+export const Tag = styled.p`
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: green;
+  padding: 5px;
 `;
 
 export const CanvasContainer = styled.div`
-  position: relative;
+  margin: 0 auto;
 `;
 
 export const CanvasCSS = styled.canvas`
   width: 100%;
-  height: 100%;
 `;
 
 export const ToolsContainer = styled.div`
-  margin-top: 40px;
-  position: sticky;
-  top: 120px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
 `;
 
 export const Image = styled.img`
@@ -41,14 +65,13 @@ export const Buttons = styled.div`
 `;
 
 export const Button = styled.button`
-  padding: 10px 20px;
+  padding: 5px 10px;
   background: dodgerblue;
   border: none;
-  border-radius: 20px;
   box-shadow: ${props => props.boxShadow || '0 10px 2px blue'};
   color: white;
   margin: 10px;
-  font-size: ${props => props.fontSize || '1.2rem'}
+  font-size: ${props => props.fontSize || '1rem'}
   transition: all 0.2s linear;
 
   :hover {
@@ -77,11 +100,7 @@ export const Title = styled.h1`
 export const TweetContainer = styled.div`
   min-width: 300px;
   flex: 1;
-  background-color: #330000;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 800 400'%3E%3Cdefs%3E%3CradialGradient id='a' cx='396' cy='281' r='514' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%23D18'/%3E%3Cstop offset='1' stop-color='%23330000'/%3E%3C/radialGradient%3E%3ClinearGradient id='b' gradientUnits='userSpaceOnUse' x1='400' y1='148' x2='400' y2='333'%3E%3Cstop offset='0' stop-color='%23FA3' stop-opacity='0'/%3E%3Cstop offset='1' stop-color='%23FA3' stop-opacity='0.5'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill='url(%23a)' width='800' height='400'/%3E%3Cg fill-opacity='0.4'%3E%3Ccircle fill='url(%23b)' cx='267.5' cy='61' r='300'/%3E%3Ccircle fill='url(%23b)' cx='532.5' cy='61' r='300'/%3E%3Ccircle fill='url(%23b)' cx='400' cy='30' r='300'/%3E%3C/g%3E%3C/svg%3E");
-  background-attachment: fixed;
-  background-size: cover;
-  @media (max-width: 750px) {
+  @media (max-width: 650px) {
     position: absolute;
     bottom: 0px;
     left: 0;
@@ -95,6 +114,7 @@ export const TwitterContent = styled.div`
   flex-direction: column;
   align-items: center;
   margin: 120px auto 0px;
+  width: 90%;
   justify-content: center;
   box-shadow: 0 2px 8px rgba(0, 0, 0.1);
   background-color: #ffffff;
