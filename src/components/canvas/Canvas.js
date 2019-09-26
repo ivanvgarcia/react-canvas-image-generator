@@ -8,7 +8,6 @@ import { TwitterShareButton } from 'react-twitter-embed';
 import Loader from 'components/loader/Loader';
 import { Helmet } from 'react-helmet';
 import { useSelector } from 'react-redux';
-import axios from 'axios';
 import { Stage, Layer, Text, Image } from 'react-konva';
 import useImage from 'use-image';
 
@@ -89,7 +88,7 @@ const AvatarCanvas = props => {
 
   useEffect(() => {
     (async () => {
-      const res = await axios.get('http://localhost:5000/api/v1/avatar');
+      const res = await avatarApi.get('/avatar');
       setAvatars({ chosen: [], fetched: [...res.data.data] });
     })();
   }, []);
