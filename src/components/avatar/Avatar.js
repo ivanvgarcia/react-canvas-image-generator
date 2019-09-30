@@ -47,8 +47,8 @@ const Avatar = ({ zIndex, chosenAvatar, selectedAvatar }) => {
         //   step: (history.step += 1)
         // });
       }}
-      x={10}
-      y={30}
+      x={chosenAvatar.x}
+      y={chosenAvatar.y}
       scale={{ x: position.scaleX, y: position.scaleY }}
       onTap={e => {
         const node = avatarOne.current;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Stage, Layer } from 'react-konva';
 import Avatar from 'components/avatar/Avatar';
 import TransformerComponent from 'components/avatar/TransformerComponent';
