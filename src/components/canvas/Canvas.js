@@ -7,10 +7,8 @@ import avatarApi from 'config/baseUrl';
 import { TwitterShareButton } from 'react-twitter-embed';
 import Loader from 'components/loader/Loader';
 import { Helmet } from 'react-helmet';
-import { useSelector } from 'react-redux';
-import useImage from 'use-image';
-import Avatar from 'components/avatar/Avatar';
-import TransformerComponent from 'components/avatar/TransformerComponent';
+import { useSelector, useDispatch } from 'react-redux';
+
 import KonvaCanvas from 'components/konva/KonvasCanvas';
 
 import {
@@ -28,9 +26,14 @@ import {
   AvatarCard,
   Tag
 } from 'components/canvas/CanvasStyles';
+import { getAvatars, chooseAvatar } from 'actions/avatar';
 
 const AvatarCanvas = props => {
   const user = useSelector(state => state.auth.user);
+  const avatars = useSelector(state => state.avatar.avatars);
+  const chosen = useSelector(state => state.avatar.chosenAvatars);
+
+  const dispatch = useDispatch();
   const [data, setData, canvasRef, scene] = usePersistentCanvas();
   const [jpeg, setJpeg] = useState('');
   const [imageUrl, setImageUrl] = useState('');
@@ -42,11 +45,6 @@ const AvatarCanvas = props => {
     current: 1,
     next: 2
   });
-  const [avatars, setAvatars] = useState({
-    fetched: [],
-    chosen: [],
-    completedCanvas: ''
-  });
 
   const saveBase64 = () => {
     let jpegUrl;
@@ -54,10 +52,10 @@ const AvatarCanvas = props => {
       jpegUrl = konva.toDataURL({
         mimetype: 'image/png'
       });
-      setAvatars({
-        ...avatars,
-        completedCanvas: jpegUrl
-      });
+      // setAvatars({
+      //   ...avatars,
+      //   completedCanvas: jpegUrl
+      // });
     } else {
       const canvas = canvasRef.current;
       jpegUrl = canvas.toDataURL('image/png');
@@ -71,10 +69,12 @@ const AvatarCanvas = props => {
         scaleX: 0.4,
         scaleY: 0.4
       };
-      setAvatars({
-        chosen: [createdAvatar, ...avatars.chosen],
-        fetched: [createdAvatar, ...avatars.fetched]
-      });
+
+      dispatch(chooseAvatar(createdAvatar));
+      // setAvatars({
+      //   chosen: [createdAvatar, ...avatars.chosen],
+      //   fetched: [createdAvatar, ...avatars.fetched]
+      // });
     }
 
     setJpeg(jpegUrl);
@@ -82,10 +82,9 @@ const AvatarCanvas = props => {
 
   useEffect(() => {
     (async () => {
-      const res = await avatarApi.get('/avatar');
-      setAvatars({ chosen: [], fetched: [...res.data.data] });
+      await dispatch(getAvatars());
     })();
-  }, []);
+  }, [dispatch]);
 
   const savePhotoToAWS = useCallback(
     async jpeg => {
@@ -108,12 +107,6 @@ const AvatarCanvas = props => {
   //     savePhotoToAWS(jpeg);
   //   }
   // }, [jpeg, savePhotoToAWS]);
-
-  useEffect(() => {
-    if (avatars.completedCanvas) {
-      console.log('holla');
-    }
-  }, [avatars.completedCanvas]);
 
   useEffect(() => {
     // imageUrl && setLoading(false);
@@ -168,36 +161,33 @@ const AvatarCanvas = props => {
   };
 
   const chooseAvatars = clickedAvatar => {
-    if (avatars.chosen && avatars.chosen.length === 4)
+    if (chosen && chosen.length === 4)
       return console.error('You have chosen the limit');
-    setAvatars({
-      ...avatars,
-      chosen: [
-        ...avatars.chosen,
-        {
-          ...clickedAvatar,
-          x: 0,
-          y: 0,
-          scaleX: 0.4,
-          scaleY: 0.4,
-          name: `avatar${clickedAvatar._id}`
-        }
-      ]
-    });
+
+    dispatch(
+      chooseAvatar({
+        ...clickedAvatar,
+        x: 0,
+        y: 0,
+        scaleX: 0.4,
+        scaleY: 0.4,
+        name: `avatar${clickedAvatar._id}`
+      })
+    );
   };
 
   const checkChosen = avatar => {
-    return avatars.chosen.some(chosen => chosen._id === avatar._id);
+    return chosen.some(chosen => chosen._id === avatar._id);
   };
 
   return (
     <Main>
       <Helmet>
-        <meta charSet="utf-8" />
+        <meta charSet='utf-8' />
         <title>Avatar Generator</title>
         <meta
-          name="description"
-          content="Create your own avatar using HTML Canvas and tweet it!"
+          name='description'
+          content='Create your own avatar using HTML Canvas and tweet it!'
         />
       </Helmet>
       <Buttons>
@@ -221,12 +211,12 @@ const AvatarCanvas = props => {
 
       {screen.current === 2 && (
         <FlexContainer>
-          {avatars.fetched.map(avatar => (
+          {avatars.map(avatar => (
             <AvatarCard key={avatar._id}>
               {checkChosen(avatar) && <Tag>chosen</Tag>}
               <img
                 src={avatar.url}
-                alt="avatar"
+                alt='avatar'
                 onClick={() => chooseAvatars(avatar)}
               />
             </AvatarCard>
@@ -238,13 +228,12 @@ const AvatarCanvas = props => {
         <KonvaCanvas
           avatars={avatars}
           avatar={avatar}
-          setAvatars={setAvatars}
           setKonva={setKonva}
           selectedAvatar={selectedAvatar}
         />
       )}
 
-      {screen.current === 4 && <img src={jpeg} alt="" />}
+      {screen.current === 4 && <img src={jpeg} alt='' />}
 
       {/* {screen.current === 2 && (
         <TwitterContent>

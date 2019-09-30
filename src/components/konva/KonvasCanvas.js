@@ -26,16 +26,16 @@ const KonvasCanvas = ({ avatars, avatar, setKonva, selectedAvatar }) => {
         }}
       >
         <Layer>
-          {avatars.chosen.map(avatar => (
+          {avatars.map(avatar => (
             <Avatar
               chosenAvatar={avatar}
-              zIndex={avatars.chosen.length}
+              zIndex={avatars.length}
               selectedAvatar={selectedAvatar}
             />
           ))}
           <TransformerComponent
             selectedAvatar={avatar}
-            zIndex={avatars.chosen.length}
+            zIndex={avatars.length}
           />
         </Layer>
       </Stage>
