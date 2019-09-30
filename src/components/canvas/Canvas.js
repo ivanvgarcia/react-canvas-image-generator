@@ -8,8 +8,10 @@ import { TwitterShareButton } from 'react-twitter-embed';
 import Loader from 'components/loader/Loader';
 import { Helmet } from 'react-helmet';
 import { useSelector } from 'react-redux';
-import { Stage, Layer, Text, Image } from 'react-konva';
 import useImage from 'use-image';
+import Avatar from 'components/avatar/Avatar';
+import TransformerComponent from 'components/avatar/TransformerComponent';
+import KonvaCanvas from 'components/konva/KonvasCanvas';
 
 import {
   Main,
@@ -28,15 +30,15 @@ import {
 } from 'components/canvas/CanvasStyles';
 
 const AvatarCanvas = props => {
-  console.log(props);
   const user = useSelector(state => state.auth.user);
 
-  const editCanvasRef = useRef();
-
-  const [jpeg, setJpeg] = useState(null);
-  const [imageUrl, setImageUrl] = useState(null);
   const [data, setData, canvasRef, scene] = usePersistentCanvas();
-  const [createdAvatar, setCreatedAvatar] = useState(false);
+
+  const [jpeg, setJpeg] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
+  const [avatar, selectedAvatar] = useState(null);
+  const [position, setPosition] = useState({ isDragging: false, x: 0, y: 0 });
+
   const [editCanvas, setEditCanvas] = useState(false);
   const [screen, setScreen] = useState({
     previous: 0,
@@ -45,7 +47,8 @@ const AvatarCanvas = props => {
   });
   const [avatars, setAvatars] = useState({
     fetched: [],
-    chosen: []
+    chosen: [],
+    completedCanvas: ''
   });
   const [coords, setCoords] = useState({
     isDragging: false,
@@ -53,37 +56,24 @@ const AvatarCanvas = props => {
     y: 50
   });
 
-  const AvatarOne = () => {
-    const [image] = useImage(avatars.chosen[0].url);
-    return (
-      <Image image={image} draggable x={20} y={50} scale={{ x: 0.4, y: 0.4 }} />
-    );
-  };
-
-  const AvatarTwo = () => {
-    const [image] = useImage(avatars.chosen[1].url);
-    return <Image image={image} draggable scale={{ x: 0.4, y: 0.4 }} />;
-  };
-
-  const AvatarThree = () => {
-    const [image] = useImage(avatars.chosen[2].url);
-    return <Image image={image} draggable scale={{ x: 0.4, y: 0.4 }} />;
-  };
-
-  const AvatarFour = () => {
-    const [image] = useImage(avatars.chosen[3].url);
-    return <Image image={image} draggable scale={{ x: 0.4, y: 0.4 }} />;
-  };
-
-  const saveBase64 = () => {
+  const saveBase64 = isCompleted => {
     const canvas = canvasRef.current;
     const jpegUrl = canvas.toDataURL('image/png');
+
     setJpeg(jpegUrl);
-    const createdAvatar = { _id: `user-${Date.now()}`, url: jpegUrl };
-    setAvatars({
-      chosen: [createdAvatar, ...avatars.chosen],
-      fetched: [createdAvatar, ...avatars.fetched]
-    });
+
+    if (isCompleted) {
+      setAvatars({
+        ...avatars,
+        completedCanvas: jpegUrl
+      });
+    } else {
+      const createdAvatar = { _id: `user-${Date.now()}`, url: jpegUrl };
+      setAvatars({
+        chosen: [createdAvatar, ...avatars.chosen],
+        fetched: [createdAvatar, ...avatars.fetched]
+      });
+    }
   };
 
   useEffect(() => {
@@ -110,10 +100,10 @@ const AvatarCanvas = props => {
   );
 
   useEffect(() => {
-    if (jpeg) {
-      // savePhotoToAWS(jpeg, user);
+    if (avatars.completedCanvas) {
+      console.log('holla');
     }
-  }, [jpeg]);
+  }, [avatars.completedCanvas]);
 
   useEffect(() => {
     // imageUrl && setLoading(false);
@@ -158,23 +148,28 @@ const AvatarCanvas = props => {
         setScreen({ ...screen, previous: 2, current: 3, next: 4 });
         setEditCanvas(true);
         break;
+      case 4:
+        setScreen({ ...screen, previous: 3, current: 4, next: 5 });
+        saveBase64(true);
+        break;
       default:
         return;
     }
   };
-  console.log(screen);
 
   const chooseAvatars = clickedAvatar => {
     if (avatars.chosen && avatars.chosen.length === 4)
       return console.error('You have chosen the limit');
-    setAvatars({ ...avatars, chosen: [...avatars.chosen, clickedAvatar] });
+    setAvatars({
+      ...avatars,
+      chosen: [...avatars.chosen, { ...clickedAvatar }]
+    });
   };
 
   const checkChosen = avatar => {
     return avatars.chosen.some(chosen => chosen._id === avatar._id);
   };
 
-  console.log(avatars.chosen);
   return (
     <Main>
       <Helmet>
@@ -187,7 +182,11 @@ const AvatarCanvas = props => {
       </Helmet>
       <Buttons>
         <Button onClick={() => goBack(screen.previous)}>Back</Button>
-        <Button onClick={() => goNext(screen.next)}>Next</Button>
+        {screen.current < 4 ? (
+          <Button onClick={() => goNext(screen.next)}>Next</Button>
+        ) : (
+          <Button onClick={() => goNext(screen.next)}>Save</Button>
+        )}
       </Buttons>
 
       {screen.current === 1 && (
@@ -216,14 +215,11 @@ const AvatarCanvas = props => {
       )}
 
       {screen.current === 3 && (
-        <Stage width={640} height={1136}>
-          <Layer>
-            <AvatarOne />
-            <AvatarTwo />
-            <AvatarThree />
-            <AvatarFour />
-          </Layer>
-        </Stage>
+        <KonvaCanvas
+          avatars={avatars}
+          avatar={avatar}
+          selectedAvatar={selectedAvatar}
+        />
       )}
 
       {/* {screen.current === 2 && (
