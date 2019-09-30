@@ -31,14 +31,11 @@ import {
 
 const AvatarCanvas = props => {
   const user = useSelector(state => state.auth.user);
-
   const [data, setData, canvasRef, scene] = usePersistentCanvas();
-
   const [jpeg, setJpeg] = useState('');
   const [imageUrl, setImageUrl] = useState('');
   const [avatar, selectedAvatar] = useState(null);
-  const [position, setPosition] = useState({ isDragging: false, x: 0, y: 0 });
-
+  const [konva, setKonva] = useState(null);
   const [editCanvas, setEditCanvas] = useState(false);
   const [screen, setScreen] = useState({
     previous: 0,
@@ -50,30 +47,37 @@ const AvatarCanvas = props => {
     chosen: [],
     completedCanvas: ''
   });
-  const [coords, setCoords] = useState({
-    isDragging: false,
-    x: 50,
-    y: 50
-  });
 
-  const saveBase64 = isCompleted => {
-    const canvas = canvasRef.current;
-    const jpegUrl = canvas.toDataURL('image/png');
-
-    setJpeg(jpegUrl);
-
-    if (isCompleted) {
+  const saveBase64 = () => {
+    let jpegUrl;
+    if (konva) {
+      jpegUrl = konva.toDataURL({
+        mimetype: 'image/png'
+      });
       setAvatars({
         ...avatars,
         completedCanvas: jpegUrl
       });
     } else {
-      const createdAvatar = { _id: `user-${Date.now()}`, url: jpegUrl };
+      const canvas = canvasRef.current;
+      jpegUrl = canvas.toDataURL('image/png');
+      const id = `user-${Date.now()}`;
+      const createdAvatar = {
+        _id: id,
+        url: jpegUrl,
+        name: id,
+        x: 0,
+        y: 0,
+        scaleX: 0.4,
+        scaleY: 0.4
+      };
       setAvatars({
         chosen: [createdAvatar, ...avatars.chosen],
         fetched: [createdAvatar, ...avatars.fetched]
       });
     }
+
+    setJpeg(jpegUrl);
   };
 
   useEffect(() => {
@@ -98,6 +102,12 @@ const AvatarCanvas = props => {
     },
     [user]
   );
+
+  // useEffect(() => {
+  //   if (jpeg) {
+  //     savePhotoToAWS(jpeg);
+  //   }
+  // }, [jpeg, savePhotoToAWS]);
 
   useEffect(() => {
     if (avatars.completedCanvas) {
@@ -149,8 +159,8 @@ const AvatarCanvas = props => {
         setEditCanvas(true);
         break;
       case 4:
+        saveBase64();
         setScreen({ ...screen, previous: 3, current: 4, next: 5 });
-        saveBase64(true);
         break;
       default:
         return;
@@ -162,7 +172,17 @@ const AvatarCanvas = props => {
       return console.error('You have chosen the limit');
     setAvatars({
       ...avatars,
-      chosen: [...avatars.chosen, { ...clickedAvatar }]
+      chosen: [
+        ...avatars.chosen,
+        {
+          ...clickedAvatar,
+          x: 0,
+          y: 0,
+          scaleX: 0.4,
+          scaleY: 0.4,
+          name: `avatar${clickedAvatar._id}`
+        }
+      ]
     });
   };
 
@@ -218,9 +238,13 @@ const AvatarCanvas = props => {
         <KonvaCanvas
           avatars={avatars}
           avatar={avatar}
+          setAvatars={setAvatars}
+          setKonva={setKonva}
           selectedAvatar={selectedAvatar}
         />
       )}
+
+      {screen.current === 4 && <img src={jpeg} alt="" />}
 
       {/* {screen.current === 2 && (
         <TwitterContent>

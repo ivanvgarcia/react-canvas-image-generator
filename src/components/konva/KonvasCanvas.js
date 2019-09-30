@@ -3,15 +3,13 @@ import { Stage, Layer } from 'react-konva';
 import Avatar from 'components/avatar/Avatar';
 import TransformerComponent from 'components/avatar/TransformerComponent';
 
-const KonvasCanvas = ({ avatars, avatar, selectedAvatar }) => {
+const KonvasCanvas = ({ avatars, avatar, setKonva, selectedAvatar }) => {
   const konvaRef = useRef(null);
-  const [canvas, setCanvas] = useState('');
-  const [img, setImg] = useState('');
 
   useEffect(() => {
     const konva = konvaRef.current;
-    setCanvas(konva);
-  }, []);
+    setKonva(konva);
+  }, [setKonva]);
 
   return (
     <>
@@ -19,6 +17,13 @@ const KonvasCanvas = ({ avatars, avatar, selectedAvatar }) => {
         width={window.innerWidth}
         height={window.innerHeight}
         ref={konvaRef}
+        onMouseDown={e => {
+          // deselect when clicked on empty area
+          const clickedOnEmpty = e.target === e.target.getStage();
+          if (clickedOnEmpty) {
+            selectedAvatar(null);
+          }
+        }}
       >
         <Layer>
           {avatars.chosen.map(avatar => (
@@ -28,21 +33,12 @@ const KonvasCanvas = ({ avatars, avatar, selectedAvatar }) => {
               selectedAvatar={selectedAvatar}
             />
           ))}
-          <TransformerComponent selectedAvatar={avatar} />
+          <TransformerComponent
+            selectedAvatar={avatar}
+            zIndex={avatars.chosen.length}
+          />
         </Layer>
       </Stage>
-      <button
-        onClick={() => {
-          const url = canvas.toDataURL({
-            mimetype: 'image/png'
-          });
-          console.log(canvas);
-          setImg(url);
-        }}
-      >
-        Click
-      </button>
-      {img && <img src={img} alt="" />}
     </>
   );
 };
