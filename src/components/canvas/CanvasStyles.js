@@ -1,24 +1,90 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
-export const Main = styled.div`
-  position: relative;
-  min-height: 100vh;
-  display: flex;
+const rotate = keyframes`
+  0% {
+    transform: rotate(0deg) translate(0px);
+  }
+
+  25% {
+    transform: rotate(-10deg) translate(20px);
+  }
+
+  75% {
+    transform: rotate(-20deg) translate(50px);
+  }
+
+  100% {
+    transform: rotate(-15deg) translate(-15px);
+  }
 `;
 
-export const CanvasContainer = styled.div`
+export const Main = styled.div``;
+
+
+export const FlexContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+  height: 100vh;
+  overflow-y: auto;
+  img {
+    width: 100%;
+    cursor: pointer;
+  }
+`;
+
+
+export const AvatarCard = styled.div`
   position: relative;
+  width: 40%;
+  cursor: pointer;
+  margin: 25px 10px;
+`;
+
+export const Tag = styled.p`
+  color: white;
+  position: absolute;
+  top: -15px;
+  left: 0;
+  margin: 0;
+  background: #FF69B4;
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px;
+  padding: 5px 15px 5px 10px;
+  z-index: 5;
+  font-size: .8rem
+  box-shadow: 0 6px 15px rgba(0, 0, 0.1);
+  animation: ${rotate} .5s linear forwards;
+
+`
+export const CardBackground = styled.div`
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  background-color: #ffffff;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg stroke='%23CCC' stroke-width='0' %3E%3Crect fill='%23F5F5F5' x='-60' y='-60' width='110' height='240'/%3E%3C/g%3E%3C/svg%3E"); 
+  box-shadow: 0 2px 8px rgba(0, 0, 0.1);
+`;
+
+
+export const CanvasContainer = styled.div`
+  margin: 0 auto;
 `;
 
 export const CanvasCSS = styled.canvas`
   width: 100%;
-  height: 100%;
 `;
 
 export const ToolsContainer = styled.div`
-  margin-top: 40px;
-  position: sticky;
-  top: 120px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
 `;
 
 export const Image = styled.img`
@@ -30,76 +96,22 @@ export const Image = styled.img`
   }
 `;
 
-export const SampleImage = styled.img`
-  width: 100%;
-`;
-
 export const Buttons = styled.div`
   position: absolute;
   top: 10px;
   left: 10px;
+  z-index: 9999;
 `;
 
-export const Button = styled.button`
-  padding: 10px 20px;
-  background: dodgerblue;
-  border: none;
-  border-radius: 20px;
-  box-shadow: ${props => props.boxShadow || '0 10px 2px blue'};
-  color: white;
-  margin: 10px;
-  font-size: ${props => props.fontSize || '1.2rem'}
-  transition: all 0.2s linear;
-
-  :hover {
-    box-shadow: ${props => props.hoverBoxShadow || '0 15px 2px blue'};
-    transform: ${props => props.translateY || 'translateY(-5px)'};
-    cursor: pointer;
-  }
-
-  :active {
-    box-shadow: 0 5px 2px blue;
-    transform: translateY(5px);
-  }
-
-  :focus {
-    outline: none;
-  }
-`;
+export const Button = styled.button``;
 
 export const Title = styled.h1`
   color: white;
   font-family: Helvetica;
-  font-size: 3rem;
+  font-size: ${props => props.size || "3rem"};
   text-shadow: 1px 2px 2px dodgerblue, 2px 3px 3px #000, 3px 4px 6px blue;
 `;
 
-export const TweetContainer = styled.div`
-  min-width: 300px;
-  flex: 1;
-  background-color: #330000;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 800 400'%3E%3Cdefs%3E%3CradialGradient id='a' cx='396' cy='281' r='514' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%23D18'/%3E%3Cstop offset='1' stop-color='%23330000'/%3E%3C/radialGradient%3E%3ClinearGradient id='b' gradientUnits='userSpaceOnUse' x1='400' y1='148' x2='400' y2='333'%3E%3Cstop offset='0' stop-color='%23FA3' stop-opacity='0'/%3E%3Cstop offset='1' stop-color='%23FA3' stop-opacity='0.5'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill='url(%23a)' width='800' height='400'/%3E%3Cg fill-opacity='0.4'%3E%3Ccircle fill='url(%23b)' cx='267.5' cy='61' r='300'/%3E%3Ccircle fill='url(%23b)' cx='532.5' cy='61' r='300'/%3E%3Ccircle fill='url(%23b)' cx='400' cy='30' r='300'/%3E%3C/g%3E%3C/svg%3E");
-  background-attachment: fixed;
-  background-size: cover;
-  @media (max-width: 750px) {
-    position: absolute;
-    bottom: 0px;
-    left: 0;
-    width: 100%;
-    background: none;
-  }
-`;
-
-export const TwitterContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 120px auto 0px;
-  justify-content: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0.1);
-  background-color: #ffffff;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg stroke='%23CCC' stroke-width='0' %3E%3Crect fill='%23F5F5F5' x='-60' y='-60' width='110' height='240'/%3E%3C/g%3E%3C/svg%3E");
-`;
 
 export const TextArea = styled.textarea`
   width: 100%;
