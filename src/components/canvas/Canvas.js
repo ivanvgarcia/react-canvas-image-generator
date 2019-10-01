@@ -84,7 +84,7 @@ const AvatarCanvas = props => {
       return check;
     };
     if (!window.mobilecheck()) {
-      // setIsMobile(true)
+      setIsMobile(true)
     }
   }, [isMobile])
 
