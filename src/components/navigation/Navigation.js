@@ -18,18 +18,16 @@ const Navigation = () => {
   );
 
   return (
-    !loading && (
-      <Nav>
-        <NavItem>
-          <NavLink to="/">Home</NavLink>
-        </NavItem>
-        <NavItem>
-          <NavLink to="/avatar-generator">Generator</NavLink>
-        </NavItem>
+    <Nav>
+      <NavItem>
+        <NavLink to="/">Home</NavLink>
+      </NavItem>
+      <NavItem>
+        <NavLink to="/avatar-generator">Generator</NavLink>
+      </NavItem>
 
-        {!loading && <>{isAuthenticated && authLinks()}</>}
-      </Nav>
-    )
+      {!loading && <>{isAuthenticated && authLinks()}</>}
+    </Nav>
   );
 };
 

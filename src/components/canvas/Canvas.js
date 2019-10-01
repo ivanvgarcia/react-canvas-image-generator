@@ -8,9 +8,7 @@ import { TwitterShareButton } from 'react-twitter-embed';
 import Loader from 'components/loader/Loader';
 import { Helmet } from 'react-helmet';
 import { useSelector, useDispatch } from 'react-redux';
-
 import KonvaCanvas from 'components/konva/KonvasCanvas';
-
 import {
   Main,
   SampleImage,
@@ -24,9 +22,10 @@ import {
   LoaderText,
   FlexContainer,
   AvatarCard,
-  Tag
+  Tag,
 } from 'components/canvas/CanvasStyles';
 import { getAvatars, chooseAvatar, addChosenAvatar } from 'actions/avatar';
+import ConfirmationScreen from '../confirmationScreen/ConfirmationScreen';
 
 const AvatarCanvas = props => {
   const user = useSelector(state => state.auth.user);
@@ -51,12 +50,9 @@ const AvatarCanvas = props => {
     if (konva) {
       jpegUrl = konva.toDataURL({
         mimetype: 'image/png',
-        quality: 2
+        quality: 1,
+        pixelRatio: 2 // or other value you need
       });
-      // setAvatars({
-      //   ...avatars,
-      //   completedCanvas: jpegUrl
-      // });
     } else {
       const canvas = canvasRef.current;
       jpegUrl = canvas.toDataURL('image/png');
@@ -106,21 +102,6 @@ const AvatarCanvas = props => {
   //   }
   // }, [jpeg, savePhotoToAWS]);
 
-  useEffect(() => {
-    // imageUrl && setLoading(false);
-  }, [imageUrl]);
-
-  // useEffect(() => {
-  //   if (editCanvas) {
-  //     avatars.chosen.forEach(avatar => {
-  //       const image = new Image();
-  //       image.src = avatar.url;
-
-  //       ctx.drawImage(image, 0, 0);
-  //     });
-  //   }
-  // }, [avatars.chosen, editCanvas]);
-
   const goBack = step => {
     switch (step) {
       case 1:
@@ -128,11 +109,12 @@ const AvatarCanvas = props => {
         break;
       case 2:
         setScreen({ ...screen, previous: 1, current: 2, next: 3 });
-        setEditCanvas(false);
         break;
       case 3:
         setScreen({ ...screen, previous: 2, current: 3, next: 4 });
-        setEditCanvas(false);
+        break;
+      case 4:
+        setScreen({ ...screen, previous: 3, current: 4, next: 5 });
         break;
       default:
         return;
@@ -147,11 +129,13 @@ const AvatarCanvas = props => {
         break;
       case 3:
         setScreen({ ...screen, previous: 2, current: 3, next: 4 });
-        setEditCanvas(true);
         break;
       case 4:
         saveBase64();
         setScreen({ ...screen, previous: 3, current: 4, next: 5 });
+        break;
+      case 5:
+        setScreen({ ...screen, previous: 4, current: 6, next: 6 });
         break;
       default:
         return;
@@ -190,10 +174,8 @@ const AvatarCanvas = props => {
       </Helmet>
       <Buttons>
         <Button onClick={() => goBack(screen.previous)}>Back</Button>
-        {screen.current < 4 ? (
+        {screen.current < 4 && (
           <Button onClick={() => goNext(screen.next)}>Next</Button>
-        ) : (
-          <Button onClick={() => goNext(screen.next)}>Save</Button>
         )}
       </Buttons>
 
@@ -230,12 +212,12 @@ const AvatarCanvas = props => {
         />
       )}
 
-      {screen.current === 4 && <img src={jpeg} alt="" />}
+      {screen.current === 4 && (
+        <ConfirmationScreen avatarImg={jpeg} goNext={goNext} goBack={goBack} screen={screen} />
+      )}
 
       {/* {screen.current === 2 && (
-        <TwitterContent>
-          {jpeg && <SampleImage src={jpeg} alt="base" />}
-        </TwitterContent>
+      
       )} */}
       {/* <TweetContainer>
         <TwitterContent>

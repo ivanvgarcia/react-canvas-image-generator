@@ -52,6 +52,21 @@ const GlobalStyle = createGlobalStyle`
   #root.konvajs-content {
     width:100%;
   }
+
+  button {
+    padding: 5px 10px;
+    background: #FF69B4;
+    border: none;
+    // box-shadow: ${props => props.boxShadow || '0 1px 3px #e2e2e2'};
+    color: white;
+    font-size: ${props => props.fontSize || '1rem'}
+    transition: all 0.2s linear;
+    margin: 0 5px;
+  
+    :hover {
+      cursor: pointer;
+    }
+  }
 `;
 
 const Container = styled.div`
@@ -60,9 +75,7 @@ const Container = styled.div`
 
 function App() {
   useEffect(() => {
-    if (!store.getState().auth.user) {
-      store.dispatch(checkSession());
-    }
+    store.dispatch(checkSession());
   }, []);
 
   return (
