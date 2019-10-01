@@ -2,6 +2,7 @@ import {
   GET_AVATARS,
   CHOOSE_AVATAR,
   ADD_CHOSEN_AVATAR,
+  REMOVE_CHOSEN_AVATAR,
   REORDER_AVATARS
 } from './types';
 import avatarApi from '../config/baseUrl';
@@ -33,7 +34,6 @@ export const chooseAvatar = payload => async dispatch => {
 };
 
 export const addChosenAvatar = payload => async dispatch => {
-  console.log('run');
   try {
     dispatch({
       type: ADD_CHOSEN_AVATAR,
@@ -43,6 +43,18 @@ export const addChosenAvatar = payload => async dispatch => {
     console.log(error);
   }
 };
+
+export const removeChosenAvatar = payload => async dispatch => {
+  try {
+    dispatch({
+      type: REMOVE_CHOSEN_AVATAR,
+      payload
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 
 export const reorderAvatars = payload => async dispatch => {
   console.log('run');

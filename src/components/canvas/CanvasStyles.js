@@ -1,13 +1,32 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+const rotate = keyframes`
+  0% {
+    transform: rotate(0deg) translate(0px);
+  }
+
+  25% {
+    transform: rotate(-10deg) translate(20px);
+  }
+
+  75% {
+    transform: rotate(-20deg) translate(50px);
+  }
+
+  100% {
+    transform: rotate(-15deg) translate(-15px);
+  }
+`;
 
 export const Main = styled.div``;
+
 
 export const FlexContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  margin-top: 100px;
+  margin-top: 50px;
   height: 100vh;
   overflow-y: auto;
   img {
@@ -16,19 +35,42 @@ export const FlexContainer = styled.div`
   }
 `;
 
+
 export const AvatarCard = styled.div`
   position: relative;
-  width: 45%;
+  width: 40%;
   cursor: pointer;
+  margin: 25px 10px;
 `;
 
 export const Tag = styled.p`
+  color: white;
   position: absolute;
+  top: -15px;
+  left: 0;
+  margin: 0;
+  background: #FF69B4;
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px;
+  padding: 5px 15px 5px 10px;
+  z-index: 5;
+  font-size: .8rem
+  box-shadow: 0 6px 15px rgba(0, 0, 0.1);
+  animation: ${rotate} .5s linear forwards;
+
+`
+export const CardBackground = styled.div`
+  position: absolute;
+  z-index: -1;
   top: 0;
   left: 0;
-  background: green;
-  padding: 5px;
+  background-color: #ffffff;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg stroke='%23CCC' stroke-width='0' %3E%3Crect fill='%23F5F5F5' x='-60' y='-60' width='110' height='240'/%3E%3C/g%3E%3C/svg%3E"); 
+  box-shadow: 0 2px 8px rgba(0, 0, 0.1);
 `;
+
 
 export const CanvasContainer = styled.div`
   margin: 0 auto;
@@ -54,8 +96,6 @@ export const Image = styled.img`
   }
 `;
 
-
-
 export const Buttons = styled.div`
   position: absolute;
   top: 10px;
@@ -68,7 +108,7 @@ export const Button = styled.button``;
 export const Title = styled.h1`
   color: white;
   font-family: Helvetica;
-  font-size: 3rem;
+  font-size: ${props => props.size || "3rem"};
   text-shadow: 1px 2px 2px dodgerblue, 2px 3px 3px #000, 3px 4px 6px blue;
 `;
 

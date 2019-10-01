@@ -2,6 +2,7 @@ import {
   GET_AVATARS,
   CHOOSE_AVATAR,
   ADD_CHOSEN_AVATAR,
+  REMOVE_CHOSEN_AVATAR,
   REORDER_AVATARS
 } from '../actions/types';
 
@@ -10,7 +11,7 @@ const initialState = {
   chosenAvatars: []
 };
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
@@ -28,6 +29,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         avatars: [payload, ...state.avatars]
+      };
+    case REMOVE_CHOSEN_AVATAR:
+      return {
+        ...state,
+        chosenAvatars: state.chosenAvatars.filter(avatar => avatar._id !== payload)
       };
     case REORDER_AVATARS:
       return {

@@ -9,7 +9,6 @@ const ConfirmationScreen = ({ avatarImg, goNext, goBack, screen }) => {
   const handleConfirm = (e) => {
     const answer = e.currentTarget.textContent
     if (answer === "No") {
-      console.log("hey")
       return goBack(screen.previous)
     }
     setConfirm(true)
