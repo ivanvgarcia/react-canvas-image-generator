@@ -50,7 +50,8 @@ const AvatarCanvas = props => {
     let jpegUrl;
     if (konva) {
       jpegUrl = konva.toDataURL({
-        mimetype: 'image/png'
+        mimetype: 'image/png',
+        quality: 2
       });
       // setAvatars({
       //   ...avatars,
