@@ -2,19 +2,20 @@ import React, { useRef, useEffect, useState } from 'react';
 import { Image } from 'react-konva';
 import { useSelector, useDispatch } from 'react-redux';
 import { reorderAvatars } from 'actions/avatar';
+import Hammer from 'hammerjs';
 
 const Avatar = ({ zIndex, chosenAvatar, selectedAvatar }) => {
-  const avatarOne = useRef();
+  const avatarRef = useRef();
   const avatars = useSelector(state => state.avatar.chosenAvatars);
   const dispatch = useDispatch();
 
   const [image, setImage] = useState(null);
-  const [position, setPosition] = useState({
-    x: 0,
-    y: 0,
-    scaleX: 0.4,
-    scaleY: 0.4
-  });
+  // const [position, setPosition] = useState({
+  //   x: 0,
+  //   y: 0,
+  //   scaleX: 0.4,
+  //   scaleY: 0.4
+  // });
 
   // const [history, setHistory] = useState({
   //   position: [],
@@ -29,6 +30,17 @@ const Avatar = ({ zIndex, chosenAvatar, selectedAvatar }) => {
     };
     image.crossOrigin = '';
     image.src = chosenAvatar.url;
+
+    var mc = new Hammer.Manager(image, { domEvents: true });
+    var Rotate = new Hammer.Rotate();
+    mc.add(Rotate);
+    console.log(mc);
+    mc.on('rotate', function(e) {
+      console.log(e);
+      // do something cool
+      var rotation = Math.round(e.rotation);
+      avatarRef.style.transform = 'rotate(' + rotation + 'deg)';
+    });
   }, [chosenAvatar.url]);
 
   return (
@@ -54,12 +66,12 @@ const Avatar = ({ zIndex, chosenAvatar, selectedAvatar }) => {
       y={chosenAvatar.y}
       scale={{ x: chosenAvatar.scaleX, y: chosenAvatar.scaleY }}
       onTap={e => {
-        const node = avatarOne.current;
+        const node = avatarRef.current;
         node.zIndex(zIndex);
-        selectedAvatar(avatarOne.current.attrs.name);
+        selectedAvatar(avatarRef.current.attrs.name);
       }}
       onTransformEnd={() => {
-        const node = avatarOne.current;
+        const node = avatarRef.current;
         const scaleX = node.scaleX();
         const scaleY = node.scaleY();
         const items = avatars.slice();
@@ -72,7 +84,7 @@ const Avatar = ({ zIndex, chosenAvatar, selectedAvatar }) => {
         };
         dispatch(reorderAvatars(items));
       }}
-      ref={avatarOne}
+      ref={avatarRef}
     />
   );
 };
