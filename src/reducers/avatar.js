@@ -1,4 +1,9 @@
-import { GET_AVATARS, CHOOSE_AVATAR } from '../actions/types';
+import {
+  GET_AVATARS,
+  CHOOSE_AVATAR,
+  ADD_CHOSEN_AVATAR,
+  REORDER_AVATARS
+} from '../actions/types';
 
 const initialState = {
   avatars: [],
@@ -17,9 +22,18 @@ export default function(state = initialState, action) {
     case CHOOSE_AVATAR:
       return {
         ...state,
-        chosenAvatars: [...state.chosenAvatars, payload]
+        chosenAvatars: [payload, ...state.chosenAvatars]
       };
-
+    case ADD_CHOSEN_AVATAR:
+      return {
+        ...state,
+        avatars: [payload, ...state.avatars]
+      };
+    case REORDER_AVATARS:
+      return {
+        ...state,
+        chosenAvatars: payload
+      };
     default:
       return state;
   }

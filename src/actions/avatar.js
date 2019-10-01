@@ -1,10 +1,15 @@
-import { GET_AVATARS, CHOOSE_AVATAR } from './types';
+import {
+  GET_AVATARS,
+  CHOOSE_AVATAR,
+  ADD_CHOSEN_AVATAR,
+  REORDER_AVATARS
+} from './types';
 import avatarApi from '../config/baseUrl';
 
 export const getAvatars = () => async dispatch => {
   try {
     const res = await avatarApi.get(`/avatar`);
-    console.log(res);
+
     const payload = res.data.data;
 
     dispatch({
@@ -17,10 +22,33 @@ export const getAvatars = () => async dispatch => {
 };
 
 export const chooseAvatar = payload => async dispatch => {
-  console.log(payload);
   try {
     dispatch({
       type: CHOOSE_AVATAR,
+      payload
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const addChosenAvatar = payload => async dispatch => {
+  console.log('run');
+  try {
+    dispatch({
+      type: ADD_CHOSEN_AVATAR,
+      payload
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const reorderAvatars = payload => async dispatch => {
+  console.log('run');
+  try {
+    dispatch({
+      type: REORDER_AVATARS,
       payload
     });
   } catch (error) {

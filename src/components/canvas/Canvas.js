@@ -26,7 +26,7 @@ import {
   AvatarCard,
   Tag
 } from 'components/canvas/CanvasStyles';
-import { getAvatars, chooseAvatar } from 'actions/avatar';
+import { getAvatars, chooseAvatar, addChosenAvatar } from 'actions/avatar';
 
 const AvatarCanvas = props => {
   const user = useSelector(state => state.auth.user);
@@ -46,7 +46,7 @@ const AvatarCanvas = props => {
     next: 2
   });
 
-  const saveBase64 = () => {
+  const saveBase64 = async () => {
     let jpegUrl;
     if (konva) {
       jpegUrl = konva.toDataURL({
@@ -71,10 +71,7 @@ const AvatarCanvas = props => {
       };
 
       dispatch(chooseAvatar(createdAvatar));
-      // setAvatars({
-      //   chosen: [createdAvatar, ...avatars.chosen],
-      //   fetched: [createdAvatar, ...avatars.fetched]
-      // });
+      dispatch(addChosenAvatar(createdAvatar));
     }
 
     setJpeg(jpegUrl);
@@ -183,11 +180,11 @@ const AvatarCanvas = props => {
   return (
     <Main>
       <Helmet>
-        <meta charSet='utf-8' />
+        <meta charSet="utf-8" />
         <title>Avatar Generator</title>
         <meta
-          name='description'
-          content='Create your own avatar using HTML Canvas and tweet it!'
+          name="description"
+          content="Create your own avatar using HTML Canvas and tweet it!"
         />
       </Helmet>
       <Buttons>
@@ -216,7 +213,7 @@ const AvatarCanvas = props => {
               {checkChosen(avatar) && <Tag>chosen</Tag>}
               <img
                 src={avatar.url}
-                alt='avatar'
+                alt="avatar"
                 onClick={() => chooseAvatars(avatar)}
               />
             </AvatarCard>
@@ -226,14 +223,13 @@ const AvatarCanvas = props => {
 
       {screen.current === 3 && (
         <KonvaCanvas
-          avatars={avatars}
           avatar={avatar}
           setKonva={setKonva}
           selectedAvatar={selectedAvatar}
         />
       )}
 
-      {screen.current === 4 && <img src={jpeg} alt='' />}
+      {screen.current === 4 && <img src={jpeg} alt="" />}
 
       {/* {screen.current === 2 && (
         <TwitterContent>
