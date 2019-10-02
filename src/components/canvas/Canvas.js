@@ -97,12 +97,6 @@ const AvatarCanvas = props => {
     })();
   }, [dispatch]);
 
-  // useEffect(() => {
-  //   return () => {
-  //     scene && scene.clearSceneInterval();
-  //   };
-  // }, []);
-
   const savePhotoToAWS = useCallback(
     async jpeg => {
       const body = { base64: jpeg };
@@ -126,7 +120,7 @@ const AvatarCanvas = props => {
   // }, [jpeg, savePhotoToAWS]);
 
   const goBack = () => {
-    const previous = screen.previous - 2;
+    const previous = screen.previous - 1;
     const current = screen.previous;
     const next = screen.current;
 
@@ -172,6 +166,7 @@ const AvatarCanvas = props => {
         return;
     }
   };
+  console.log(screen);
 
   if (isMobile)
     return (
