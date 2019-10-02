@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Nav, NavItem, Avatar } from 'components/navigation/NavigationStyles';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+
+import { Nav, NavItem, Avatar } from 'components/navigation/NavigationStyles';
+import SelectLanguage from 'components/selectLanguage/SelectLanguage';
 
 const Navigation = () => {
   const user = useSelector(state => state.auth.user);
@@ -35,6 +37,9 @@ const Navigation = () => {
             <NavLink to="/avatar-generator">{t('nav.generator')}</NavLink>
           </NavItem>
           {!loading && <>{isAuthenticated && authLinks()}</>}
+          <NavItem>
+            <SelectLanguage />
+          </NavItem>
         </>
       ) : (
         <NavItem>
