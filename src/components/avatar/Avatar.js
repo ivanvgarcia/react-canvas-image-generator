@@ -19,6 +19,14 @@ const Avatar = ({ zIndex, chosenAvatar, selectedAvatar }) => {
     image.src = chosenAvatar.url;
   }, [chosenAvatar.url]);
 
+  // useEffect(() => {
+  //   const avatar = avatarRef.current;
+
+  //   return () => {
+  //     avatar.destroy();
+  //   };
+  // }, []);
+
   return (
     <Image
       name={`avatar${chosenAvatar._id}`}

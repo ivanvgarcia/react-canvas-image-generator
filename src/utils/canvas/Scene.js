@@ -5,6 +5,7 @@ class Scene {
     this.avatar = new Avatar();
     this.canvas = canvas;
     this.ctx = ctx;
+    this.interval = 0;
   }
 
   render() {
@@ -13,9 +14,7 @@ class Scene {
   }
 
   start() {
-    setInterval(() => {
-      this.render();
-    }, 10);
+    this.render();
   }
 
   onClothesSelected(clothesId) {

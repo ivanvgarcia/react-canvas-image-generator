@@ -17,7 +17,6 @@ export const checkSession = search => async dispatch => {
         Authorization: `Bearer ${localStorage.token}`
       }
     });
-    console.log(res);
 
     const payload = res.data;
 

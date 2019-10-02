@@ -55,9 +55,7 @@ export const removeChosenAvatar = payload => async dispatch => {
   }
 };
 
-
 export const reorderAvatars = payload => async dispatch => {
-  console.log('run');
   try {
     dispatch({
       type: REORDER_AVATARS,

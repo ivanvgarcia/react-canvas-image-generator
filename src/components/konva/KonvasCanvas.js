@@ -2,8 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { Stage, Layer } from 'react-konva';
 import Avatar from 'components/avatar/Avatar';
 import TransformerComponent from 'components/avatar/TransformerComponent';
-import { ReactReduxContext, Provider } from 'react-redux';
-import { useSelector } from 'react-redux';
+import { ReactReduxContext, Provider, useSelector } from 'react-redux';
 
 const KonvasCanvas = ({ avatar, setKonva, selectedAvatar }) => {
   const konvaRef = useRef(null);
@@ -11,10 +10,10 @@ const KonvasCanvas = ({ avatar, setKonva, selectedAvatar }) => {
 
   useEffect(() => {
     const konva = konvaRef.current;
+
     setKonva(konva);
   }, [setKonva]);
 
-  console.log(avatars);
   return (
     <ReactReduxContext.Consumer>
       {({ store }) => (
@@ -34,6 +33,7 @@ const KonvasCanvas = ({ avatar, setKonva, selectedAvatar }) => {
             <Layer>
               {avatars.map(avatar => (
                 <Avatar
+                  key={avatar._id}
                   chosenAvatar={avatar}
                   zIndex={avatars.length}
                   selectedAvatar={selectedAvatar}

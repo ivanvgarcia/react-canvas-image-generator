@@ -14,7 +14,9 @@ export const usePersistentCanvas = () => {
     setScene(new Scene(canvas, ctx));
   }, [data]);
 
-  scene && scene.start(data);
+  setInterval(() => {
+    scene && scene.start(data);
+  }, 100);
 
   return [data, setData, canvasRef, scene, setScene];
 };

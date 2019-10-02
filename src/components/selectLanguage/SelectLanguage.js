@@ -5,11 +5,9 @@ import { ReactComponent as JPIcon } from 'components/svgs/japan.svg';
 import { Styles } from 'components/selectLanguage/styles';
 
 const SelectLanguage = () => {
-  const { t, i18n } = useTranslation();
+  const {  i18n } = useTranslation();
   const [open, setOpen] = useState(false);
-
-  console.log(i18n);
-
+  
   return (
     <div>
       <Styles.Select onClick={() => setOpen(!open)}>
