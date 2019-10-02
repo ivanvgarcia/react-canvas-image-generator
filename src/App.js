@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Suspense } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import styled, { createGlobalStyle } from 'styled-components';
 import ScrollToTop from 'components/ScrollToTop';
@@ -81,17 +81,23 @@ function App() {
   return (
     <Router className="App">
       <Provider store={store}>
-        <ScrollToTop>
-          <GlobalStyle />
-          <Container>
-            <Navigation />
-            <Switch>
-              <Route exact path="/" component={Landing} />
-              <Route exact path="/avatar-generator" component={AvatarCanvas} />
-              <PrivateRoute exact path="/dashboard" component={Dashboard} />
-            </Switch>
-          </Container>
-        </ScrollToTop>
+        <Suspense fallback={<div>Loading</div>}>
+          <ScrollToTop>
+            <GlobalStyle />
+            <Container>
+              <Navigation />
+              <Switch>
+                <Route exact path="/" component={Landing} />
+                <Route
+                  exact
+                  path="/avatar-generator"
+                  component={AvatarCanvas}
+                />
+                <PrivateRoute exact path="/dashboard" component={Dashboard} />
+              </Switch>
+            </Container>
+          </ScrollToTop>
+        </Suspense>
       </Provider>
     </Router>
   );

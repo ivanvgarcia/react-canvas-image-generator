@@ -1,0 +1,11 @@
+{
+  "nav": {
+    "home": "ホーム",
+    "generator": "ジェネレーター"
+  },
+  "landing": {
+    "title": "Cocoppaジェネレーター",
+    "cta-button": "アバターを作する",
+    "login": "ツイッターログイン"
+  }
+}

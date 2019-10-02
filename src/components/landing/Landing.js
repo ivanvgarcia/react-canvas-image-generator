@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { Banner } from 'components/landing/LandingStyles';
+import { Title } from 'components/canvas/CanvasStyles';
 import { Helmet } from 'react-helmet';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import { twitterSignIn } from '../../actions/auth';
 import styled from 'styled-components';
 import avatarApi from '../../config/baseUrl';
@@ -27,6 +29,7 @@ const Landing = ({ location: { search } }) => {
   const dispatch = useDispatch();
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
   const loading = useSelector(state => state.auth.loading);
+  const { t } = useTranslation();
 
   const signIn = async () => {
     const res = await avatarApi.get('/auth/connect');
@@ -58,8 +61,8 @@ const Landing = ({ location: { search } }) => {
           content="Landing page for the avatar generator project."
         />
       </Helmet>
-      <h1>Avatar Generator</h1>
-      <Link to="/avatar-generator">Create Your Avatar</Link>
+      <Title size="1.8rem">{t('landing.title')}</Title>
+      <Link to="/avatar-generator">{t('landing.cta-button')}</Link>
 
       {!isAuthenticated && (
         <>
@@ -70,7 +73,7 @@ const Landing = ({ location: { search } }) => {
           </p>
           <TwitterButton onClick={signIn}>
             <img src="images/twitter.png" alt="twitter" />
-            Twitter Login
+            {t('landing.login')}
           </TwitterButton>
         </>
       )}

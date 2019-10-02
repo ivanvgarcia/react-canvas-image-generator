@@ -1,0 +1,11 @@
+{
+  "nav": {
+    "home": "Home",
+    "generator": "Generator"
+  },
+  "landing": {
+    "title": "Cocoppa Doll Generator",
+    "cta-button": "Create Your Avatar",
+    "login": "Twitter Login"
+  }
+}
