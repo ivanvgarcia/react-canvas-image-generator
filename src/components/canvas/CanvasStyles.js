@@ -20,7 +20,6 @@ const rotate = keyframes`
 
 export const Main = styled.div``;
 
-
 export const FlexContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -34,7 +33,6 @@ export const FlexContainer = styled.div`
     cursor: pointer;
   }
 `;
-
 
 export const AvatarCard = styled.div`
   position: relative;
@@ -58,7 +56,7 @@ export const Tag = styled.p`
   box-shadow: 0 6px 15px rgba(0, 0, 0.1);
   animation: ${rotate} .5s linear forwards;
 
-`
+`;
 export const CardBackground = styled.div`
   position: absolute;
   z-index: -1;
@@ -67,10 +65,9 @@ export const CardBackground = styled.div`
   background-color: #ffffff;
   width: 100%;
   height: 100%;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg stroke='%23CCC' stroke-width='0' %3E%3Crect fill='%23F5F5F5' x='-60' y='-60' width='110' height='240'/%3E%3C/g%3E%3C/svg%3E"); 
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg stroke='%23CCC' stroke-width='0' %3E%3Crect fill='%23F5F5F5' x='-60' y='-60' width='110' height='240'/%3E%3C/g%3E%3C/svg%3E");
   box-shadow: 0 2px 8px rgba(0, 0, 0.1);
 `;
-
 
 export const CanvasContainer = styled.div`
   margin: 0 auto;
@@ -107,11 +104,9 @@ export const Button = styled.button``;
 
 export const Title = styled.h1`
   color: white;
-  font-family: Helvetica;
-  font-size: ${props => props.size || "3rem"};
+  font-size: ${props => props.size || '3rem'};
   text-shadow: 1px 2px 2px dodgerblue, 2px 3px 3px #000, 3px 4px 6px blue;
 `;
-
 
 export const TextArea = styled.textarea`
   width: 100%;

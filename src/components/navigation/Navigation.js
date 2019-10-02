@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import { Nav, NavItem, Avatar } from 'components/navigation/NavigationStyles';
 import SelectLanguage from 'components/selectLanguage/SelectLanguage';
+import { ReactComponent as Menu } from 'components/svgs/menu.svg';
 
 const Navigation = () => {
   const user = useSelector(state => state.auth.user);
@@ -28,7 +29,7 @@ const Navigation = () => {
       {open ? (
         <>
           <NavItem>
-            <p onClick={() => setOpen(false)}>Close</p>
+            <Menu onClick={() => setOpen(false)} />          
           </NavItem>
           <NavItem>
             <NavLink to="/">{t('nav.home')}</NavLink>
@@ -43,7 +44,7 @@ const Navigation = () => {
         </>
       ) : (
         <NavItem>
-          <p onClick={() => setOpen(true)}>Open</p>
+          <Menu onClick={() => setOpen(true)} />
         </NavItem>
       )}
     </Nav>
