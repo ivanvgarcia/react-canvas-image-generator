@@ -12,6 +12,7 @@ import Navigation from 'components/navigation/Navigation';
 import PrivateRoute from 'components/routing/PrivateRoute';
 import GlobalStyle from "components/commonStyles/globalStyles";
 import { MainContainer } from "components/commonStyles/";
+import FullLoader from 'components/loader/FullLoader.js';
 
 function App() {
   useEffect(() => {
@@ -21,7 +22,7 @@ function App() {
   return (
     <Router className="App">
       <Provider store={store}>
-        <Suspense fallback={<div>Loading</div>}>
+        <Suspense fallback={<FullLoader message="Loading App..." />}>
           <ScrollToTop>
             <GlobalStyle />
             <MainContainer>

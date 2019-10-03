@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next';
 import { twitterSignIn } from '../../actions/auth';
 import styled from 'styled-components';
 import avatarApi from '../../config/baseUrl';
+import FullLoader from 'components/loader/FullLoader';
 
 const TwitterButton = styled.button`
   display: flex;
@@ -49,6 +50,10 @@ const Landing = ({ location: { search } }) => {
 
   if (!loading && isAuthenticated) {
     return <Redirect to="/dashboard" />;
+  }
+
+  if (search.length > 0) {
+    return <FullLoader message="Signing in..." />
   }
 
   return (
