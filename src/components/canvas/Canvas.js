@@ -74,9 +74,9 @@ const AvatarCanvas = props => {
   };
 
   useEffect(() => {
-    window.mobilecheck = function() {
+    window.mobilecheck = function () {
       let check = false;
-      (function(a) {
+      (function (a) {
         if (
           /(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i.test(
             a
@@ -170,6 +170,10 @@ const AvatarCanvas = props => {
     }
   };
 
+  const addVibration = () => {
+    window.navigator.vibrate(200);
+  }
+
   if (isMobile)
     return (
       <h1>Sorry, you need to be on a mobile device to access this feature!</h1>
@@ -188,13 +192,11 @@ const AvatarCanvas = props => {
       <Buttons>
         <Back
           onClick={goBack}
-          onTouchStart={() => {
-            window.navigator.vibrate(200);
-          }}
+          onTouchStart={addVibration}
         >
           Back
         </Back>
-        {screen.current < 4 && <Next onClick={goNext}>Next</Next>}
+        {screen.current < 4 && <Next onClick={goNext} onTouchStart={addVibration}>Next</Next>}
       </Buttons>
 
       {screen.current === 1 && (
