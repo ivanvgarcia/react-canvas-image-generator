@@ -27,7 +27,7 @@ const Navigation = () => {
     <NavItem>
       <StyledNavLink to="/avatar-generator">
         <Avatar src={user.profile_image_url_https} alt={user.name} />
-        {user.profile.name}
+        {user.name}
       </StyledNavLink>
     </NavItem>
   );
