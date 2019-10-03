@@ -12,7 +12,7 @@ const Avatar = ({ zIndex, chosenAvatar, selectedAvatar }) => {
   useEffect(() => {
     let image = new window.Image();
 
-    image.onload = function() {
+    image.onload = function () {
       setImage(image);
     };
 
@@ -41,31 +41,46 @@ const Avatar = ({ zIndex, chosenAvatar, selectedAvatar }) => {
           ...item,
           x: e.target.x(),
           y: e.target.y(),
-          scaleX: e.target.scaleX(),
-          scaleY: e.target.scaleY()
         };
         dispatch(reorderAvatars(items));
       }}
-      onDragStart={e => {}}
+      onDragStart={e => { }}
       x={chosenAvatar.x}
       y={chosenAvatar.y}
       scale={{ x: chosenAvatar.scaleX, y: chosenAvatar.scaleY }}
+      rotation={chosenAvatar.rotation}
+      skew={{ x: chosenAvatar.skewX, y: chosenAvatar.skewY }}
       onTap={e => {
         const node = avatarRef.current;
+        console.log(node)
         node.zIndex(zIndex);
         selectedAvatar(avatarRef.current.attrs.name);
       }}
       onTransformEnd={() => {
         const node = avatarRef.current;
+        const x = node.x();
+        const y = node.y();
         const scaleX = node.scaleX();
         const scaleY = node.scaleY();
+        const offsetX = node.offsetX();
+        const offsetY = node.offsetY();
+        const rotation = node.rotation();
+        const skewX = node.skewX();
+        const skewY = node.skewY();
         const items = avatars.slice();
         const item = items.find(i => i._id === chosenAvatar._id);
         const index = items.indexOf(item);
         items[index] = {
           ...item,
+          x,
+          y,
           scaleX: scaleX,
-          scaleY: scaleY
+          scaleY: scaleY,
+          offsetX: offsetX,
+          offsetY: offsetY,
+          rotation: rotation,
+          skewX: skewX,
+          skewY: skewY
         };
         dispatch(reorderAvatars(items));
       }}

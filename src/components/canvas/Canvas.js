@@ -34,7 +34,6 @@ const AvatarCanvas = props => {
   const [isMobile, setIsMobile] = useState(false);
   const [jpeg, setJpeg] = useState('');
   const [groupAvatarImg, setGroupAvatarImg] = useState('');
-  const [imageUrl, setImageUrl] = useState('');
   const [avatar, selectedAvatar] = useState(null);
   const [konva, setKonva] = useState(null);
   const [editCanvas, setEditCanvas] = useState(false);
@@ -64,7 +63,12 @@ const AvatarCanvas = props => {
         x: 0,
         y: 0,
         scaleX: 0.4,
-        scaleY: 0.4
+        scaleY: 0.4,
+        offsetX: 0,
+        offsetY: 0,
+        rotation: 0,
+        skewX: 0,
+        skewY: 0,
       };
 
       dispatch(chooseAvatar(createdAvatar));
@@ -108,7 +112,6 @@ const AvatarCanvas = props => {
       }
       try {
         const result = await avatarApi.post('/upload/', body);
-        setImageUrl(result.data.url);
       } catch (error) {
         console.error(error);
       }
@@ -116,11 +119,11 @@ const AvatarCanvas = props => {
     [user]
   );
 
-  useEffect(() => {
-    if (jpeg) {
-      savePhotoToAWS(jpeg);
-    }
-  }, [jpeg, savePhotoToAWS]);
+  // useEffect(() => {
+  //   if (jpeg) {
+  //     savePhotoToAWS(jpeg);
+  //   }
+  // }, [jpeg, savePhotoToAWS]);
 
   const goBack = () => {
     const previous = screen.previous - 1;
@@ -156,14 +159,14 @@ const AvatarCanvas = props => {
         setScreen({ ...screen, previous, current, next });
         break;
       case 3:
-        setScreen({ ...screen, previous: 2, current: 3, next: 4 });
+        setScreen({ ...screen, previous, current, next });
         break;
       case 4:
         saveBase64();
-        setScreen({ ...screen, previous: 3, current: 4, next: 5 });
+        setScreen({ ...screen, previous, current, next });
         break;
       case 5:
-        setScreen({ ...screen, previous: 4, current: 6, next: 6 });
+        setScreen({ ...screen, previous, current, next });
         break;
       default:
         return;

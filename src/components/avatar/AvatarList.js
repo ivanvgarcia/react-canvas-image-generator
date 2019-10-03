@@ -30,7 +30,12 @@ const AvatarList = () => {
         y: 0,
         scaleX: 0.4,
         scaleY: 0.4,
-        name: `avatar${clickedAvatar._id}`
+        name: `avatar${clickedAvatar._id}`,
+        offsetX: 0,
+        offsetY: 0,
+        rotation: 0,
+        skewX: 0,
+        skewY: 0,
       })
     );
   };
