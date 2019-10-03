@@ -1,4 +1,26 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+import { NavLink } from 'react-router-dom';
+
+const slideIn = keyframes`
+  from {
+    transform: translateX(100%)
+  }
+
+  to: {
+    transform: translateX(0)
+  }
+`;
+
+export const StyledNavLink = styled(NavLink)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 0.6rem;
+  svg {
+    width: 30px;
+    margin-bottom: 5px;
+  }
+`;
 
 export const Nav = styled.ul`
   position: fixed;
@@ -7,11 +29,17 @@ export const Nav = styled.ul`
   right: 0;
   background: rgb(219, 71, 107);
   box-shadow: 0 2px 3px #000;
-  display: flex;
   z-index: 999999;
   margin: 0;
-  border-top-left-radius: 30px;
-  border-bottom-left-radius: 30px;
+  display: flex;
+
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+  min-height: 73px;
+  div {
+    display: flex;
+    animation: ${slideIn} .3s linear forwards;
+  }
 `;
 
 export const NavItem = styled.li`

@@ -1,13 +1,21 @@
-import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useState, useRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
-import { Nav, NavItem, Avatar } from 'components/navigation/NavigationStyles';
+import {
+  Nav,
+  StyledNavLink,
+  NavItem,
+  Avatar
+} from 'components/navigation/NavigationStyles';
 import SelectLanguage from 'components/selectLanguage/SelectLanguage';
-import { ReactComponent as Menu } from 'components/svgs/menu.svg';
+import { ReactComponent as MenuIcon } from 'components/svgs/menu.svg';
+import { ReactComponent as HomeIcon } from 'components/svgs/home.svg';
+import { ReactComponent as AvatarIcon } from 'components/svgs/avatar.svg';
+import { ReactComponent as CloseMenuIcon } from 'components/svgs/close.svg';
 
 const Navigation = () => {
+  const navRef = useRef();
   const user = useSelector(state => state.auth.user);
   const loading = useSelector(state => state.auth.loading);
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
@@ -17,34 +25,53 @@ const Navigation = () => {
 
   const authLinks = () => (
     <NavItem>
-      <NavLink to="/avatar-generator">
+      <StyledNavLink to="/avatar-generator">
         <Avatar src={user.profile_image_url_https} alt={user.name} />
-      </NavLink>
-      <p>{user.name}</p>
+        {user.profile.name}
+      </StyledNavLink>
     </NavItem>
   );
 
+  const handleClickOutside = event => {
+    if (!navRef.current.contains(event.target)) {
+      setOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   return (
-    <Nav>
+    <Nav ref={navRef}>
       {open ? (
-        <>
+        <div>
           <NavItem>
-            <Menu onClick={() => setOpen(false)} />          
+            <CloseMenuIcon onClick={() => setOpen(false)} />
           </NavItem>
           <NavItem>
-            <NavLink to="/">{t('nav.home')}</NavLink>
+            <StyledNavLink to="/">
+              <HomeIcon />
+              {t('nav.home')}
+            </StyledNavLink>
           </NavItem>
           <NavItem>
-            <NavLink to="/avatar-generator">{t('nav.generator')}</NavLink>
+            <StyledNavLink to="/avatar-generator">
+              <AvatarIcon />
+              {t('nav.generator')}
+            </StyledNavLink>
           </NavItem>
           {!loading && <>{isAuthenticated && authLinks()}</>}
           <NavItem>
             <SelectLanguage />
           </NavItem>
-        </>
+        </div>
       ) : (
         <NavItem>
-          <Menu onClick={() => setOpen(true)} />
+          <MenuIcon onClick={() => setOpen(true)} />
         </NavItem>
       )}
     </Nav>

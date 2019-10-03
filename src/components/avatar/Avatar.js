@@ -15,6 +15,8 @@ const Avatar = ({ zIndex, chosenAvatar, selectedAvatar }) => {
     image.onload = function() {
       setImage(image);
     };
+
+    image.crossOrigin = '';
     image.src = chosenAvatar.url;
   }, [chosenAvatar.url]);
 

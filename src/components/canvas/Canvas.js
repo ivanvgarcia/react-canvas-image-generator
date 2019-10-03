@@ -23,7 +23,9 @@ import {
   addChosenAvatar,
   removeChosenAvatar
 } from 'actions/avatar';
-import ConfirmationScreen from '../confirmationScreen/ConfirmationScreen';
+import ConfirmationScreen from 'components/confirmationScreen/ConfirmationScreen';
+import { ReactComponent as Back } from 'components/svgs/back.svg';
+import { ReactComponent as Next } from 'components/svgs/next.svg';
 
 const AvatarCanvas = props => {
   const user = useSelector(state => state.auth.user);
@@ -31,6 +33,7 @@ const AvatarCanvas = props => {
   const [data, setData, canvasRef, scene] = usePersistentCanvas();
   const [isMobile, setIsMobile] = useState(false);
   const [jpeg, setJpeg] = useState('');
+  const [grouAvatarImg, setGroupAvatarImg] = useState('');
   const [imageUrl, setImageUrl] = useState('');
   const [avatar, selectedAvatar] = useState(null);
   const [konva, setKonva] = useState(null);
@@ -49,6 +52,7 @@ const AvatarCanvas = props => {
         quality: 1,
         pixelRatio: 2 // or other value you need
       });
+      setGroupAvatarImg(jpegUrl);
     } else {
       const canvas = canvasRef.current;
       jpegUrl = canvas.toDataURL('image/png');
@@ -65,9 +69,8 @@ const AvatarCanvas = props => {
 
       dispatch(chooseAvatar(createdAvatar));
       dispatch(addChosenAvatar(createdAvatar));
+      setJpeg(jpegUrl);
     }
-
-    setJpeg(jpegUrl);
   };
 
   useEffect(() => {
@@ -183,8 +186,15 @@ const AvatarCanvas = props => {
         />
       </Helmet>
       <Buttons>
-        <Button onClick={goBack}>Back</Button>
-        {screen.current < 4 && <Button onClick={goNext}>Next</Button>}
+        <Back
+          onClick={goBack}
+          onTouchStart={() => {
+            window.navigator.vibrate(200);
+          }}
+        >
+          Back
+        </Back>
+        {screen.current < 4 && <Next onClick={goNext}>Next</Next>}
       </Buttons>
 
       {screen.current === 1 && (
