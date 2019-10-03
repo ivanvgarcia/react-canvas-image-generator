@@ -52,8 +52,11 @@ const AvatarCanvas = props => {
         pixelRatio: 2 // or other value you need
       });
       setGroupAvatarImg(jpegUrl);
-    } else {
-      const canvas = canvasRef.current;
+    }
+
+    const canvas = canvasRef.current;
+
+    if (canvas) {
       jpegUrl = canvas.toDataURL('image/png');
       const id = `user-${Date.now()}`;
       const createdAvatar = {
@@ -73,8 +76,10 @@ const AvatarCanvas = props => {
 
       dispatch(chooseAvatar(createdAvatar));
       dispatch(addChosenAvatar(createdAvatar));
-      setJpeg(jpegUrl);
     }
+
+    setJpeg(jpegUrl);
+
   };
 
   useEffect(() => {
@@ -163,6 +168,7 @@ const AvatarCanvas = props => {
         break;
       case 4:
         saveBase64();
+        savePhotoToAWS(jpeg)
         setScreen({ ...screen, previous, current, next });
         break;
       case 5:

@@ -29,7 +29,7 @@ const Avatar = ({ zIndex, chosenAvatar, selectedAvatar }) => {
   // }, []);
 
   return (
-    <Image
+    image && <Image
       name={`avatar${chosenAvatar._id}`}
       image={image}
       draggable
@@ -52,7 +52,6 @@ const Avatar = ({ zIndex, chosenAvatar, selectedAvatar }) => {
       skew={{ x: chosenAvatar.skewX, y: chosenAvatar.skewY }}
       onTap={e => {
         const node = avatarRef.current;
-        console.log(node)
         node.zIndex(zIndex);
         selectedAvatar(avatarRef.current.attrs.name);
       }}

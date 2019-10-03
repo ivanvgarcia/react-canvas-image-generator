@@ -42,8 +42,6 @@ export const twitterSignIn = search => async dispatch => {
       `auth/saveToken?oauth_token=${token}&oauth_verifier=${verifier}`
     );
 
-    console.log(res);
-
     const payload = res.data;
 
     dispatch({
