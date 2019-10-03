@@ -14,7 +14,7 @@ const FullLoader = ({ message }) => {
         <span></span>
       </Styles.FullLoaderContent>
 
-      <img src="https://avatar-jp-images.s3-ap-northeast-1.amazonaws.com/userAvatar_1570072645876.png" alt="avatar" />
+      <img src={process.env.PUBLIC_URL + '/images/avatar.png'} alt="avatar" />
     </Styles.FullLoaderContainer>
   )
 }
