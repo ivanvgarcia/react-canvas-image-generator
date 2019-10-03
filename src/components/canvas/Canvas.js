@@ -33,7 +33,7 @@ const AvatarCanvas = props => {
   const [data, setData, canvasRef, scene] = usePersistentCanvas();
   const [isMobile, setIsMobile] = useState(false);
   const [jpeg, setJpeg] = useState('');
-  const [grouAvatarImg, setGroupAvatarImg] = useState('');
+  const [groupAvatarImg, setGroupAvatarImg] = useState('');
   const [imageUrl, setImageUrl] = useState('');
   const [avatar, selectedAvatar] = useState(null);
   const [konva, setKonva] = useState(null);
@@ -219,7 +219,7 @@ const AvatarCanvas = props => {
 
       {screen.current === 4 && (
         <ConfirmationScreen
-          avatarImg={jpeg}
+          avatarImg={groupAvatarImg}
           goNext={goNext}
           goBack={goBack}
           screen={screen}
