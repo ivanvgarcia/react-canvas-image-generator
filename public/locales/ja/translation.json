@@ -7,5 +7,13 @@
     "title": "Cocoppaジェネレーター",
     "cta-button": "アバターを作する",
     "login": "ツイッターログイン"
+  },
+  "dashboard": {
+    "title": "マイページ",
+    "twitter-button": "ツイッタープロフィール",
+    "title-2": "私のアバター"
+  },
+  "avatar-list": {
+    "title": "アバターを選択"
   }
 }

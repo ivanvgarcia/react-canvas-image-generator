@@ -7,5 +7,13 @@
     "title": "Cocoppa Doll Generator",
     "cta-button": "Create Your Avatar",
     "login": "Twitter Login"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "twitter-button": "Twitter Profile",
+    "title-2": "My Avatars"
+  },
+  "avatar-list": {
+    "title": "Choose Your Avatars"
   }
 }

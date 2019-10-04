@@ -8,12 +8,14 @@ import {
 } from 'components/canvas/CanvasStyles';
 import { useSelector, useDispatch } from 'react-redux';
 import { chooseAvatar, removeChosenAvatar } from 'actions/avatar';
+import { useTranslation } from 'react-i18next';
+
 
 const AvatarList = () => {
   const avatars = useSelector(state => state.avatar.avatars);
   const chosen = useSelector(state => state.avatar.chosenAvatars);
-
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const chooseAvatars = clickedAvatar => {
     const hasAvatar = chosen.some(avatar => avatar._id === clickedAvatar._id);
@@ -46,7 +48,7 @@ const AvatarList = () => {
 
   return (
     <FlexContainer>
-      <Title size={'1.6rem'}>Choose Your Avatars</Title>
+      <Title size={'1.6rem'}>{t("avatar-list.title")}</Title>
       {avatars.map(avatar => (
         <AvatarCard key={avatar._id}>
           {checkChosen(avatar) && (
