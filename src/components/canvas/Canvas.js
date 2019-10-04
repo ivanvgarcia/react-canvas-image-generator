@@ -10,9 +10,7 @@ import KonvaCanvas from 'components/konva/KonvasCanvas';
 import AvatarList from 'components/avatar/AvatarList';
 import {
   Main,
-  Title,
   Buttons,
-  Button,
   CanvasContainer,
   ToolsContainer,
   CanvasCSS
@@ -42,7 +40,6 @@ const AvatarCanvas = props => {
   const [groupAvatarImg, setGroupAvatarImg] = useState('');
   const [avatar, selectedAvatar] = useState(null);
   const [konva, setKonva] = useState(null);
-  const [editCanvas, setEditCanvas] = useState(false);
   const [screen, setScreen] = useState({
     previous: 0,
     current: 1,
@@ -128,12 +125,6 @@ const AvatarCanvas = props => {
     },
     [user]
   );
-
-  // useEffect(() => {
-  //   if (jpeg) {
-  //     savePhotoToAWS(jpeg);
-  //   }
-  // }, [jpeg, savePhotoToAWS]);
 
   const goBack = () => {
     const previous = screen.previous - 1;
@@ -221,6 +212,7 @@ const AvatarCanvas = props => {
           content="Create your own avatar using HTML Canvas and tweet it!"
         />
       </Helmet>
+
       <Buttons>
         {screen.current > 1 && (
           <Back onClick={goBack} onTouchStart={addVibration}>
