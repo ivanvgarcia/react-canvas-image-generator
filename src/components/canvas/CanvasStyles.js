@@ -94,8 +94,8 @@ export const Image = styled.img`
 `;
 
 export const Buttons = styled.div`
-  position: absolute;
-  top: 10px;
+  position: fixed;
+  top: 20px;
   left: 10px;
   z-index: 9999;
 `;

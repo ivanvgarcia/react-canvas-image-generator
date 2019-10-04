@@ -21,14 +21,20 @@ import {
   getAvatars,
   chooseAvatar,
   addChosenAvatar,
-  removeChosenAvatar
+  reorderAvatars,
+  increaseStep,
+  reduceStep
 } from 'actions/avatar';
 import ConfirmationScreen from 'components/confirmationScreen/ConfirmationScreen';
 import { ReactComponent as Back } from 'components/svgs/back.svg';
 import { ReactComponent as Next } from 'components/svgs/next.svg';
+import { ReactComponent as Undo } from 'components/svgs/undo.svg';
+import { ReactComponent as Redo } from 'components/svgs/redo.svg';
 
 const AvatarCanvas = props => {
   const user = useSelector(state => state.auth.user);
+  const history = useSelector(state => state.avatar.history);
+  const step = useSelector(state => state.avatar.step);
   const dispatch = useDispatch();
   const [data, setData, canvasRef, scene] = usePersistentCanvas();
   const [isMobile, setIsMobile] = useState(false);
@@ -71,7 +77,7 @@ const AvatarCanvas = props => {
         offsetY: 0,
         rotation: 0,
         skewX: 0,
-        skewY: 0,
+        skewY: 0
       };
 
       dispatch(chooseAvatar(createdAvatar));
@@ -79,13 +85,12 @@ const AvatarCanvas = props => {
     }
 
     setJpeg(jpegUrl);
-
   };
 
   useEffect(() => {
-    window.mobilecheck = function () {
+    window.mobilecheck = function() {
       let check = false;
-      (function (a) {
+      (function(a) {
         if (
           /(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i.test(
             a
@@ -168,7 +173,7 @@ const AvatarCanvas = props => {
         break;
       case 4:
         saveBase64();
-        savePhotoToAWS(jpeg)
+        savePhotoToAWS(jpeg);
         setScreen({ ...screen, previous, current, next });
         break;
       case 5:
@@ -179,9 +184,27 @@ const AvatarCanvas = props => {
     }
   };
 
+  const handleUndo = () => {
+    if (step === 0) {
+      return;
+    }
+    dispatch(reduceStep());
+    const previous = history[step - 1];
+    dispatch(reorderAvatars(previous));
+  };
+
+  const handleRedo = () => {
+    if (step === history.length - 1) {
+      return;
+    }
+    dispatch(increaseStep());
+    const next = history[step + 1];
+    dispatch(reorderAvatars(next));
+  };
+
   const addVibration = () => {
     window.navigator.vibrate(200);
-  }
+  };
 
   if (isMobile)
     return (
@@ -199,13 +222,26 @@ const AvatarCanvas = props => {
         />
       </Helmet>
       <Buttons>
-        <Back
-          onClick={goBack}
-          onTouchStart={addVibration}
-        >
-          Back
-        </Back>
-        {screen.current < 4 && <Next onClick={goNext} onTouchStart={addVibration}>Next</Next>}
+        {screen.current > 1 && (
+          <Back onClick={goBack} onTouchStart={addVibration}>
+            Back
+          </Back>
+        )}
+        {screen.current < 4 && (
+          <Next onClick={goNext} onTouchStart={addVibration}>
+            Undo
+          </Next>
+        )}
+        {screen.current === 3 && (
+          <>
+            <Undo onClick={handleUndo} onTouchStart={addVibration}>
+              Undo
+            </Undo>
+            <Redo onClick={handleRedo} onTouchStart={addVibration}>
+              Undo
+            </Redo>
+          </>
+        )}
       </Buttons>
 
       {screen.current === 1 && (
