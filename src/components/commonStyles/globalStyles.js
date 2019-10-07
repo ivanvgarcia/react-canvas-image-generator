@@ -2,6 +2,10 @@ import { createGlobalStyle } from 'styled-components';
 
 export default createGlobalStyle`
   @import url('https://fonts.googleapis.com/css?family=Open+Sans|Satisfy&display=swap');
+  @font-face {
+    font-family: Helvetica;
+    font-display: auto;
+  }
   html, body {
     height: 100%;
   }
