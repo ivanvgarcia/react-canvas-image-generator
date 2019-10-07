@@ -57,7 +57,7 @@ const AvatarList = () => {
             </CardBackground>
           )}
           <picture>
-            <source srcset={avatar.webp} type="image/webp"        alt="avatar"
+            <source srcSet={avatar.webp} type="image/webp"        alt="avatar"
             onClick={() => chooseAvatars(avatar)}/>
             <img
             src={avatar.url}

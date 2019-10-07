@@ -86,7 +86,7 @@ const Avatar = ({ zIndex, chosenAvatar, selectedAvatar }) => {
           const items = avatars.slice();
           const item = items.find(i => i._id === chosenAvatar._id);
           const index = items.indexOf(item);
-          items[index] = {
+          const avatar = items[index] = {
             ...item,
             x,
             y,
@@ -98,6 +98,11 @@ const Avatar = ({ zIndex, chosenAvatar, selectedAvatar }) => {
             skewX: skewX,
             skewY: skewY
           };
+
+          if (avatar.scaleX !== avatar.scaleY) {
+            avatar.scaleY = Math.abs(avatar.scaleX);
+          }
+
           dispatch(reorderAvatars(items));
           dispatch(setHistory(items));
         }}
