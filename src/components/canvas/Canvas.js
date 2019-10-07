@@ -118,7 +118,7 @@ const AvatarCanvas = props => {
         body.id = user._id;
       }
       try {
-        const result = await avatarApi.post('/upload/', body);
+        const result = await avatarApi.post('/upload/cloudinary', body);
       } catch (error) {
         console.error(error);
       }

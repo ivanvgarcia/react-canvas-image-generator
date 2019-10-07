@@ -57,7 +57,7 @@ const AvatarList = () => {
             </CardBackground>
           )}
           <img
-            src={avatar.url}
+            src={avatar.webp || avatar.url}
             alt="avatar"
             onClick={() => chooseAvatars(avatar)}
           />

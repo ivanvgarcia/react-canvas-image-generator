@@ -70,9 +70,11 @@ const Navigation = () => {
           </NavItem>
         </div>
       ) : (
+        <div>
         <NavItem>
           <MenuIcon onClick={() => setOpen(true)} />
         </NavItem>
+        </div>
       )}
     </Nav>
   );
