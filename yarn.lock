@@ -2921,11 +2921,6 @@ caniuse-lite@^1.0.0, caniuse-lite@^1.0.30000939, caniuse-lite@^1.0.30000955, can
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000967.tgz#a5039577806fccee80a04aaafb2c0890b1ee2f73"
   integrity sha512-rUBIbap+VJfxTzrM4akJ00lkvVb5/n5v3EGXfWzSH5zT8aJmGzjA8HWhJ4U6kCpzxozUSnB+yvAYDRPY6mRpgQ==
 
-canvas-image-cache@^0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/canvas-image-cache/-/canvas-image-cache-0.0.1.tgz#b4b261dd9c90ada2f7c1545da7dcb33470b7e0e2"
-  integrity sha512-Kv6x+PYboXnfrVLqqFaEn7FxLzryPdYZJUrKSZBefjj89EFVfRbCxiPxThKCveKu21MsRjfupxLaELhKWjta0A==
-
 capture-exit@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/capture-exit/-/capture-exit-2.0.0.tgz#fb953bfaebeb781f62898239dabb426d08a509a4"
@@ -5783,11 +5778,6 @@ gzip-size@5.0.0:
   dependencies:
     duplexer "^0.1.1"
     pify "^3.0.0"
-
-hammerjs@^2.0.8:
-  version "2.0.8"
-  resolved "https://registry.yarnpkg.com/hammerjs/-/hammerjs-2.0.8.tgz#04ef77862cff2bb79d30f7692095930222bf60f1"
-  integrity sha1-BO93hiz/K7edMPdpIJWTAiK/YPE=
 
 handle-thing@^2.0.0:
   version "2.0.0"
@@ -12517,11 +12507,6 @@ url@^0.11.0:
   dependencies:
     punycode "1.3.2"
     querystring "0.2.0"
-
-use-image@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/use-image/-/use-image-1.0.4.tgz#5e04c8956d051114677662dc2716b759e85f1a11"
-  integrity sha512-rtSdFy6uTaG/MGJj5N+FPrzObzzTnxs1N+FqazOsOf9tfvt9sTAaxivDudtjbaHg79dMDjnn8FADpqw3I6UOmw==
 
 use@^3.1.0:
   version "3.1.1"
