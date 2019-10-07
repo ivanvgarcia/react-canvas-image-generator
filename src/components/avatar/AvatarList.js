@@ -56,11 +56,15 @@ const AvatarList = () => {
               <Tag>Chosen!</Tag>
             </CardBackground>
           )}
-          <img
-            src={avatar.webp || avatar.url}
+          <picture>
+            <source srcset={avatar.webp} type="image/webp"        alt="avatar"
+            onClick={() => chooseAvatars(avatar)}/>
+            <img
+            src={avatar.url}
             alt="avatar"
             onClick={() => chooseAvatars(avatar)}
           />
+          </picture>
         </AvatarCard>
       ))}
     </FlexContainer>

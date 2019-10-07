@@ -36,9 +36,10 @@ export const Nav = styled.ul`
   border-top-left-radius: 50px;
   border-bottom-left-radius: 50px;
   min-height: 73px;
+  animation: ${slideIn} .3s linear forwards;
+
   div {
     display: flex;
-    animation: ${slideIn} .3s linear forwards;
   }
 `;
 
@@ -49,6 +50,8 @@ export const NavItem = styled.li`
   display: flex;
   align-items: center;
   cursor: pointer
+  animation: ${slideIn} .3s linear forwards;
+
   @media (max-width: 850px) {
     padding 5px;
   }

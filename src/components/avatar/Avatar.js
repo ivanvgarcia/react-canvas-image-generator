@@ -24,7 +24,7 @@ const Avatar = ({ zIndex, chosenAvatar, selectedAvatar }) => {
       setImage(image);
     };
     image.setAttribute('crossOrigin', 'anonymous');
-    image.src = chosenAvatar.url;
+    image.src = chosenAvatar.webp || chosenAvatar.url;
   }, [chosenAvatar.url]);
 
   useEffect(() => {

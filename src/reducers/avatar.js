@@ -8,14 +8,16 @@ import {
   RESET_HISTORY,
   REDUCE_STEP,
   CLEAR_HISTORY,
-  INCREASE_STEP
+  INCREASE_STEP,
+  AVATAR_ERROR
 } from '../actions/types';
 
 const initialState = {
   avatars: [],
   chosenAvatars: [],
   history: [],
-  step: -1
+  step: -1,
+  error: {}
 };
 
 export default function(state = initialState, action) {
@@ -75,6 +77,12 @@ export default function(state = initialState, action) {
         ...state,
         history: [],
         step: -1
+      };
+    case AVATAR_ERROR:
+      return {
+        ...state,
+        error: payload,
+        loading: false
       };
     default:
       return state;

@@ -17,3 +17,4 @@ export const RESET_HISTORY = 'RESET_HISTORY';
 export const INCREASE_STEP = 'INCREASE_STEP';
 export const REDUCE_STEP = 'REDUCE_STEP';
 export const CLEAR_HISTORY = 'CLEAR_HISTORY';
+export const AVATAR_ERROR = 'AVATAR_ERROR';

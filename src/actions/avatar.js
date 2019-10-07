@@ -8,7 +8,8 @@ import {
   CLEAR_HISTORY,
   RESET_HISTORY,
   INCREASE_STEP,
-  REDUCE_STEP
+  REDUCE_STEP,
+  AVATAR_ERROR
 } from './types';
 import avatarApi from '../config/baseUrl';
 
@@ -23,7 +24,10 @@ export const getAvatars = () => async dispatch => {
       payload
     });
   } catch (error) {
-    console.log(error);
+    dispatch({
+      type: AVATAR_ERROR,
+      payload: error
+    });
   }
 };
 
