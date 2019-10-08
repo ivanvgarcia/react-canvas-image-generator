@@ -1,8 +1,8 @@
 import React, { useEffect, Suspense } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import store from './store.js';
-import { checkSession } from './actions/auth';
+import store from 'store.js';
+import { checkSession } from 'actions/auth';
 
 import ScrollToTop from 'components/ScrollToTop';
 import Landing from 'components/landing/Landing';
@@ -10,8 +10,8 @@ import AvatarCanvas from 'components/canvas/Canvas';
 import Dashboard from 'components/dashboard/Dashboard';
 import Navigation from 'components/navigation/Navigation';
 import PrivateRoute from 'components/routing/PrivateRoute';
-import GlobalStyle from "components/commonStyles/globalStyles";
-import { MainContainer } from "components/commonStyles/";
+import GlobalStyle from 'components/commonStyles/globalStyles';
+import { MainContainer } from 'components/commonStyles';
 import FullLoader from 'components/loader/FullLoader.js';
 
 function App() {
