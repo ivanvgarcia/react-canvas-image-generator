@@ -7,7 +7,7 @@ import {
   StyledNavLink,
   NavItem,
   Avatar
-} from 'components/navigation/NavigationStyles';
+} from 'components/navigation/styles';
 import SelectLanguage from 'components/selectLanguage/SelectLanguage';
 import { ReactComponent as MenuIcon } from 'components/svgs/menu.svg';
 import { ReactComponent as HomeIcon } from 'components/svgs/home.svg';
@@ -71,9 +71,9 @@ const Navigation = () => {
         </div>
       ) : (
         <div>
-        <NavItem>
-          <MenuIcon onClick={() => setOpen(true)} />
-        </NavItem>
+          <NavItem>
+            <MenuIcon onClick={() => setOpen(true)} />
+          </NavItem>
         </div>
       )}
     </Nav>

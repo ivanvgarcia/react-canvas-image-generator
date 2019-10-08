@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Icon, Thumbnail, SliderContainer } from './EditToolsStyles';
+import { Icon, Thumbnail, SliderContainer } from './styles';
 import { getThumbnails, getToolIcons } from 'utils/canvasToolIcons';
 import { CLOTHES_LINEUP, SETTINGS } from 'utils/constantData';
 

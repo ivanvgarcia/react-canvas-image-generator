@@ -31,98 +31,62 @@ export const getAvatars = () => async dispatch => {
   }
 };
 
-export const chooseAvatar = payload => async dispatch => {
-  try {
-    dispatch({
-      type: CHOOSE_AVATAR,
-      payload
-    });
-  } catch (error) {
-    console.log(error);
-  }
+export const chooseAvatar = payload => dispatch => {
+  dispatch({
+    type: CHOOSE_AVATAR,
+    payload
+  });
 };
 
-export const addChosenAvatar = payload => async dispatch => {
-  try {
-    dispatch({
-      type: ADD_CHOSEN_AVATAR,
-      payload
-    });
-  } catch (error) {
-    console.log(error);
-  }
+export const addChosenAvatar = payload => dispatch => {
+  dispatch({
+    type: ADD_CHOSEN_AVATAR,
+    payload
+  });
 };
 
-export const removeChosenAvatar = payload => async dispatch => {
-  try {
-    dispatch({
-      type: REMOVE_CHOSEN_AVATAR,
-      payload
-    });
-  } catch (error) {
-    console.log(error);
-  }
+export const removeChosenAvatar = payload => dispatch => {
+  dispatch({
+    type: REMOVE_CHOSEN_AVATAR,
+    payload
+  });
 };
 
-export const reorderAvatars = payload => async dispatch => {
-  try {
-    dispatch({
-      type: REORDER_AVATARS,
-      payload
-    });
-  } catch (error) {
-    console.log(error);
-  }
+export const reorderAvatars = payload => dispatch => {
+  dispatch({
+    type: REORDER_AVATARS,
+    payload
+  });
 };
 
-export const setHistory = payload => async dispatch => {
-  try {
-    dispatch({
-      type: SET_HISTORY,
-      payload
-    });
-  } catch (error) {
-    console.log(error);
-  }
+export const setHistory = payload => dispatch => {
+  dispatch({
+    type: SET_HISTORY,
+    payload
+  });
 };
 
-export const resetHistory = payload => async dispatch => {
-  try {
-    dispatch({
-      type: RESET_HISTORY,
-      payload
-    });
-  } catch (error) {
-    console.log(error);
-  }
+export const resetHistory = payload => dispatch => {
+  dispatch({
+    type: RESET_HISTORY,
+    payload
+  });
 };
 
-export const clearHistory = () => async dispatch => {
-  try {
-    dispatch({
-      type: CLEAR_HISTORY
-    });
-  } catch (error) {
-    console.log(error);
-  }
+export const clearHistory = () => dispatch => {
+  dispatch({
+    type: CLEAR_HISTORY
+  });
 };
 
-export const increaseStep = () => async dispatch => {
-  try {
-    dispatch({
-      type: INCREASE_STEP
-    });
-  } catch (error) {
-    console.log(error);
-  }
+export const increaseStep = () => dispatch => {
+  dispatch({
+    type: INCREASE_STEP
+  });
 };
 
-export const reduceStep = () => async dispatch => {
-  try {
-    dispatch({
-      type: REDUCE_STEP
-    });
-  } catch (error) {
-    console.log(error);
-  }
+export const reduceStep = () => dispatch => {
+  dispatch({
+    type: REDUCE_STEP
+  });
 };

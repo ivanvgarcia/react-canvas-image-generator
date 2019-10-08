@@ -5,11 +5,10 @@ import {
   AvatarCard,
   CardBackground,
   Tag
-} from 'components/canvas/CanvasStyles';
+} from 'components/canvas/styles';
 import { useSelector, useDispatch } from 'react-redux';
 import { chooseAvatar, removeChosenAvatar } from 'actions/avatar';
 import { useTranslation } from 'react-i18next';
-
 
 const AvatarList = () => {
   const avatars = useSelector(state => state.avatar.avatars);
@@ -37,7 +36,7 @@ const AvatarList = () => {
         offsetY: 0,
         rotation: 0,
         skewX: 0,
-        skewY: 0,
+        skewY: 0
       })
     );
   };
@@ -48,7 +47,9 @@ const AvatarList = () => {
 
   return (
     <FlexContainer>
-      <Title size={'1.6rem'}>{t("avatar-list.title")}</Title>
+      <Title flex="100%" size={'1.6rem'}>
+        {t('avatar-list.title')}
+      </Title>
       {avatars.map(avatar => (
         <AvatarCard key={avatar._id}>
           {checkChosen(avatar) && (
@@ -57,13 +58,17 @@ const AvatarList = () => {
             </CardBackground>
           )}
           <picture>
-            <source srcSet={avatar.webp} type="image/webp"        alt="avatar"
-            onClick={() => chooseAvatars(avatar)}/>
+            <source
+              srcSet={avatar.webp}
+              type="image/webp"
+              alt="avatar"
+              onClick={() => chooseAvatars(avatar)}
+            />
             <img
-            src={avatar.url}
-            alt="avatar"
-            onClick={() => chooseAvatars(avatar)}
-          />
+              src={avatar.url}
+              alt="avatar"
+              onClick={() => chooseAvatars(avatar)}
+            />
           </picture>
         </AvatarCard>
       ))}

@@ -14,7 +14,7 @@ import {
   CanvasContainer,
   ToolsContainer,
   CanvasCSS
-} from 'components/canvas/CanvasStyles';
+} from 'components/canvas/styles';
 import {
   getAvatars,
   chooseAvatar,

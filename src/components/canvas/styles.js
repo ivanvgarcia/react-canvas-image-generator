@@ -103,6 +103,8 @@ export const Buttons = styled.div`
 export const Button = styled.button``;
 
 export const Title = styled.h1`
+  flex: ${props => props.flex || '0'};
+  text-align: center;
   color: white;
   font-size: ${props => props.size || '3rem'};
   text-shadow: 1px 2px 2px dodgerblue, 2px 3px 3px #000, 3px 4px 6px blue;

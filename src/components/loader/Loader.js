@@ -1,11 +1,14 @@
 import React from 'react';
-import { LoaderIcon } from 'components/loader/LoaderStyles';
+import { LoaderIcon } from 'components/loader/styles';
 
 const Loader = () => {
   return (
     <LoaderIcon>
-      <div></div><div></div><div></div><div></div>
-    </LoaderIcon >
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </LoaderIcon>
   );
 };
 

@@ -1,3 +1,3 @@
 User-agent: *
 Disallow: /
-Allow: https://d1riqzz03dhs7s.cloudfront.net/avatar-generator
+Allow: /avatar-generator

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, Redirect } from 'react-router-dom';
-import { Banner } from 'components/landing/LandingStyles';
-import { Title } from 'components/canvas/CanvasStyles';
+import { Banner } from 'components/landing/styles';
+import { Title } from 'components/canvas/styles';
 import { Helmet } from 'react-helmet';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
@@ -53,7 +53,7 @@ const Landing = ({ location: { search } }) => {
   }
 
   if (search.length > 0) {
-    return <FullLoader message="Signing in..." />
+    return <FullLoader message="Signing in..." />;
   }
 
   return (
