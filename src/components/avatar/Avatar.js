@@ -23,8 +23,12 @@ const Avatar = ({ zIndex, chosenAvatar, selectedAvatar }) => {
     image.onload = function() {
       setImage(image);
     };
-    image.setAttribute('crossOrigin', 'anonymous');
-    image.src = chosenAvatar.webp || chosenAvatar.url;
+
+    image.onerror = function() {
+      image.src = chosenAvatar.url;
+    };
+
+    image.src = chosenAvatar.webp;
   }, [chosenAvatar.url, chosenAvatar.webp]);
 
   useEffect(() => {
@@ -86,7 +90,7 @@ const Avatar = ({ zIndex, chosenAvatar, selectedAvatar }) => {
           const items = avatars.slice();
           const item = items.find(i => i._id === chosenAvatar._id);
           const index = items.indexOf(item);
-          const avatar = items[index] = {
+          const avatar = (items[index] = {
             ...item,
             x,
             y,
@@ -97,7 +101,7 @@ const Avatar = ({ zIndex, chosenAvatar, selectedAvatar }) => {
             rotation: rotation,
             skewX: skewX,
             skewY: skewY
-          };
+          });
 
           if (avatar.scaleX !== avatar.scaleY) {
             avatar.scaleY = Math.abs(avatar.scaleX);
