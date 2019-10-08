@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  Title,
-  FlexContainer,
-  AvatarCard,
-  CardBackground,
-  Tag
-} from 'components/canvas/styles';
+import { Styles } from 'components/avatar/styles';
 import { useSelector, useDispatch } from 'react-redux';
 import { chooseAvatar, removeChosenAvatar } from 'actions/avatar';
 import { useTranslation } from 'react-i18next';
@@ -46,16 +40,16 @@ const AvatarList = () => {
   };
 
   return (
-    <FlexContainer>
-      <Title flex="100%" size={'1.6rem'}>
+    <Styles.FlexContainer>
+      <Styles.Title flex="100%" size={'1.6rem'}>
         {t('avatar-list.title')}
-      </Title>
+      </Styles.Title>
       {avatars.map(avatar => (
-        <AvatarCard key={avatar._id}>
+        <Styles.AvatarCard key={avatar._id}>
           {checkChosen(avatar) && (
-            <CardBackground>
-              <Tag>Chosen!</Tag>
-            </CardBackground>
+            <Styles.CardBackground>
+              <Styles.Tag>Chosen!</Styles.Tag>
+            </Styles.CardBackground>
           )}
           <picture>
             <source
@@ -70,9 +64,9 @@ const AvatarList = () => {
               onClick={() => chooseAvatars(avatar)}
             />
           </picture>
-        </AvatarCard>
+        </Styles.AvatarCard>
       ))}
-    </FlexContainer>
+    </Styles.FlexContainer>
   );
 };
 

@@ -18,9 +18,7 @@ const rotate = keyframes`
   }
 `;
 
-export const Main = styled.div``;
-
-export const FlexContainer = styled.div`
+const FlexContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -34,14 +32,14 @@ export const FlexContainer = styled.div`
   }
 `;
 
-export const AvatarCard = styled.div`
+const AvatarCard = styled.div`
   position: relative;
   width: 40%;
   cursor: pointer;
   margin: 25px 10px;
 `;
 
-export const Tag = styled.p`
+const Tag = styled.p`
   color: white;
   position: absolute;
   top: -15px;
@@ -57,7 +55,7 @@ export const Tag = styled.p`
   animation: ${rotate} .5s linear forwards;
 
 `;
-export const CardBackground = styled.div`
+const CardBackground = styled.div`
   position: absolute;
   z-index: -1;
   top: 0;
@@ -69,22 +67,22 @@ export const CardBackground = styled.div`
   box-shadow: 0 2px 8px rgba(0, 0, 0.1);
 `;
 
-export const CanvasContainer = styled.div`
+const CanvasContainer = styled.div`
   margin: 0 auto;
 `;
 
-export const CanvasCSS = styled.canvas`
+const CanvasCSS = styled.canvas`
   width: 100%;
 `;
 
-export const ToolsContainer = styled.div`
+const ToolsContainer = styled.div`
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
 `;
 
-export const Image = styled.img`
+const Image = styled.img`
   width: 100%;
   transition: transform 0.2s linear;
   :hover {
@@ -93,16 +91,16 @@ export const Image = styled.img`
   }
 `;
 
-export const Buttons = styled.div`
+const Buttons = styled.div`
   position: fixed;
   top: 20px;
   left: 10px;
   z-index: 9999;
 `;
 
-export const Button = styled.button``;
+const Button = styled.button``;
 
-export const Title = styled.h1`
+const Title = styled.h1`
   flex: ${props => props.flex || '0'};
   text-align: center;
   color: white;
@@ -110,7 +108,7 @@ export const Title = styled.h1`
   text-shadow: 1px 2px 2px dodgerblue, 2px 3px 3px #000, 3px 4px 6px blue;
 `;
 
-export const TextArea = styled.textarea`
+const TextArea = styled.textarea`
   width: 100%;
   border: none;
   padding: 0;
@@ -118,7 +116,7 @@ export const TextArea = styled.textarea`
   font-size: 0.8rem;
 `;
 
-export const PlaceHolder = styled.div`
+const PlaceHolder = styled.div`
   color: tomato;
   font-size: 0.8rem;
   display: flex;
@@ -128,7 +126,20 @@ export const PlaceHolder = styled.div`
   height: 410.5px;
 `;
 
-export const LoaderText = styled.p`
+const LoaderText = styled.p`
   margin: 10px 0;
   font-size: 0.8rem;
 `;
+
+export const Styles = {
+  AvatarCard,
+  Tag,
+  CardBackground,
+  FlexContainer,
+  Image,
+  Button,
+  Title,
+  PlaceHolder,
+  LoaderText,
+  TextArea
+};

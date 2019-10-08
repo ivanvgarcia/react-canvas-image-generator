@@ -60,7 +60,7 @@ const Landing = ({ location: { search } }) => {
     <Banner>
       <Helmet>
         <meta charSet="utf-8" />
-        <title>Avatar Home</title>
+        <title>Cocoppa Home</title>
         <meta
           name="description"
           content="Landing page for the avatar generator project."

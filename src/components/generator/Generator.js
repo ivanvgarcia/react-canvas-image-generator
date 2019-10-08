@@ -8,13 +8,7 @@ import { Helmet } from 'react-helmet';
 import { useSelector, useDispatch } from 'react-redux';
 import KonvaCanvas from 'components/konva/KonvasCanvas';
 import AvatarList from 'components/avatar/AvatarList';
-import {
-  Main,
-  Buttons,
-  CanvasContainer,
-  ToolsContainer,
-  CanvasCSS
-} from 'components/canvas/styles';
+import { Styles } from 'components/generator/styles';
 import {
   getAvatars,
   chooseAvatar,
@@ -29,7 +23,7 @@ import { ReactComponent as Next } from 'components/svgs/next.svg';
 import { ReactComponent as Undo } from 'components/svgs/undo.svg';
 import { ReactComponent as Redo } from 'components/svgs/redo.svg';
 
-const AvatarCanvas = props => {
+const Generator = props => {
   const user = useSelector(state => state.auth.user);
   const history = useSelector(state => state.avatar.history);
   const step = useSelector(state => state.avatar.step);
@@ -47,24 +41,23 @@ const AvatarCanvas = props => {
   });
 
   const saveBase64 = async () => {
-    let jpegUrl;
     if (konva) {
-      jpegUrl = konva.toDataURL({
+      const image = konva.toDataURL({
         mimetype: 'image/png',
         quality: 1,
         pixelRatio: 2 // or other value you need
       });
-      setGroupAvatarImg(jpegUrl);
+      setGroupAvatarImg(image);
     }
 
     const canvas = canvasRef.current;
 
     if (canvas) {
-      jpegUrl = canvas.toDataURL('image/png');
+      const image = canvas.toDataURL('image/png');
       const id = `user-${Date.now()}`;
       const createdAvatar = {
         _id: id,
-        url: jpegUrl,
+        url: image,
         name: id,
         x: 0,
         y: 0,
@@ -79,9 +72,8 @@ const AvatarCanvas = props => {
 
       dispatch(chooseAvatar(createdAvatar));
       dispatch(addChosenAvatar(createdAvatar));
+      setJpeg(image);
     }
-
-    setJpeg(jpegUrl);
   };
 
   useEffect(() => {
@@ -203,17 +195,17 @@ const AvatarCanvas = props => {
     );
 
   return (
-    <Main>
+    <Styles.Main>
       <Helmet>
         <meta charSet="utf-8" />
-        <title>Avatar Generator</title>
+        <title>Cocoppa Generator</title>
         <meta
           name="description"
           content="Create your own avatar using HTML Canvas and tweet it!"
         />
       </Helmet>
 
-      <Buttons>
+      <Styles.Buttons>
         {screen.current > 1 && (
           <Back onClick={goBack} onTouchStart={addVibration}>
             Back
@@ -234,16 +226,16 @@ const AvatarCanvas = props => {
             </Redo>
           </>
         )}
-      </Buttons>
+      </Styles.Buttons>
 
       {screen.current === 1 && (
-        <CanvasContainer>
-          <CanvasCSS ref={canvasRef} width={640} height={1136} />
+        <Styles.CanvasContainer>
+          <Styles.CanvasCSS ref={canvasRef} width={640} height={1136} />
 
-          <ToolsContainer>
+          <Styles.ToolsContainer>
             <EditTools canvasRef={canvasRef} scene={scene} />
-          </ToolsContainer>
-        </CanvasContainer>
+          </Styles.ToolsContainer>
+        </Styles.CanvasContainer>
       )}
 
       {screen.current === 2 && <AvatarList />}
@@ -264,8 +256,8 @@ const AvatarCanvas = props => {
           screen={screen}
         />
       )}
-    </Main>
+    </Styles.Main>
   );
 };
 
-export default AvatarCanvas;
+export default Generator;

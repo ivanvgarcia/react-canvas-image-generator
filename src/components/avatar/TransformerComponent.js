@@ -17,13 +17,12 @@ class TransformerComponent extends Component {
     }
     if (selectedNode) {
       this.transformer.attachTo(selectedNode);
-      this.transformer.anchorStroke("#db476b");
-      this.transformer.anchorFill("#db476b");
+      this.transformer.anchorStroke('#db476b');
+      this.transformer.anchorFill('#db476b');
       this.transformer.anchorSize(20);
-      this.transformer.borderStroke("#000");
+      this.transformer.borderStroke('#000');
       this.transformer.borderDash([20, 10]);
       this.transformer.zIndex(this.props.zIndex);
-
     } else {
       this.transformer.detach();
     }

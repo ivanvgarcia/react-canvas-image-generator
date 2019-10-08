@@ -24,6 +24,8 @@ const Avatar = ({ zIndex, chosenAvatar, selectedAvatar }) => {
       setImage(image);
     };
 
+    image.setAttribute('crossOrigin', 'anonymous');
+
     image.onerror = function() {
       image.src = chosenAvatar.url;
     };
