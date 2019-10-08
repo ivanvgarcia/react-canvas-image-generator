@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { Banner } from 'components/landing/styles';
-import { Title } from 'components/canvas/styles';
+import { Styles } from 'components/avatar/styles';
 import { Helmet } from 'react-helmet';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
@@ -66,7 +66,7 @@ const Landing = ({ location: { search } }) => {
           content="Landing page for the avatar generator project."
         />
       </Helmet>
-      <Title size="1.7rem">{t('landing.title')}</Title>
+      <Styles.Title size="1.7rem">{t('landing.title')}</Styles.Title>
       <Link to="/avatar-generator">{t('landing.cta-button')}</Link>
 
       {!isAuthenticated && (
