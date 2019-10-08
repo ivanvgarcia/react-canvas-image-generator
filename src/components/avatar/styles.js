@@ -67,21 +67,6 @@ const CardBackground = styled.div`
   box-shadow: 0 2px 8px rgba(0, 0, 0.1);
 `;
 
-const CanvasContainer = styled.div`
-  margin: 0 auto;
-`;
-
-const CanvasCSS = styled.canvas`
-  width: 100%;
-`;
-
-const ToolsContainer = styled.div`
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-`;
-
 const Image = styled.img`
   width: 100%;
   transition: transform 0.2s linear;
@@ -89,13 +74,6 @@ const Image = styled.img`
     transform: scale(1.01);
     cursor: pointer;
   }
-`;
-
-const Buttons = styled.div`
-  position: fixed;
-  top: 20px;
-  left: 10px;
-  z-index: 9999;
 `;
 
 const Button = styled.button``;

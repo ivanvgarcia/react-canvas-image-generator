@@ -48,7 +48,7 @@ const Navigation = () => {
   return (
     <Nav ref={navRef}>
       {open ? (
-        <div>
+        <>
           <NavItem>
             <CloseMenuIcon onClick={() => setOpen(false)} />
           </NavItem>
@@ -68,13 +68,13 @@ const Navigation = () => {
           <NavItem>
             <SelectLanguage />
           </NavItem>
-        </div>
+        </>
       ) : (
-        <div>
+        <>
           <NavItem>
             <MenuIcon onClick={() => setOpen(true)} />
           </NavItem>
-        </div>
+        </>
       )}
     </Nav>
   );
