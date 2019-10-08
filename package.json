@@ -16,7 +16,7 @@
     "react-konva": "^16.9.0-1",
     "react-redux": "^7.1.1",
     "react-router-dom": "^5.0.1",
-    "react-scripts": "3.0.1",
+    "react-scripts": "3.2.0",
     "react-slick": "^0.24.0",
     "react-twitter-embed": "^2.0.8",
     "redux": "^4.0.4",
@@ -30,6 +30,7 @@
     "start": "react-scripts start",
     "build-sw": "node ./src/sw-build.js",
     "update-invalidation": "node ./scripts/updateInvalidation.js",
+    "gzip": "gzip -r build/static",
     "clean-cra-sw": "rm -f build/precache-manifest.*.js && rm -f build/service-worker.js",
     "build": "react-scripts build && yarn run build-sw && yarn run clean-cra-sw",
     "deploy": "yarn run build && yarn run deploy:publish && yarn run update-invalidation && yarn run deploy:create-invalidation",
@@ -54,6 +55,8 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^4.1.1",
+    "@testing-library/react": "^9.3.0",
     "eslint-plugin-react-hooks": "^2.0.1"
   }
 }

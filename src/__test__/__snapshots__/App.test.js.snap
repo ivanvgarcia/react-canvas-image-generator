@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-brqgnP joMbJc"
+  >
+    <ul
+      class="sc-hzDkRC XkaRE"
+    >
+      <li
+        class="sc-jhAzac csYfOn"
+      >
+        <svg>
+          menu.svg
+        </svg>
+      </li>
+    </ul>
+    <div
+      class="sc-bdVaJa Zgpxm"
+    >
+      <h1
+        class="sc-gzVnrw jCFwwF"
+      >
+        landing.title
+      </h1>
+      <a
+        href="/avatar-generator"
+      >
+        landing.cta-button
+      </a>
+      <p
+        style="text-align: center; color: white; font-size: 1.2rem;"
+      >
+        - or -
+      </p>
+      <button
+        class="sc-fjdhpX gbmzxk"
+      >
+        <img
+          alt="twitter"
+          src="images/twitter.png"
+        />
+        landing.login
+      </button>
+    </div>
+  </div>
+</DocumentFragment>
+`;

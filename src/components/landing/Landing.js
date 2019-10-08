@@ -66,7 +66,9 @@ const Landing = ({ location: { search } }) => {
           content="Landing page for the avatar generator project."
         />
       </Helmet>
-      <Styles.Title size="1.7rem">{t('landing.title')}</Styles.Title>
+      <Styles.Title data-testid="title" size="1.7rem">
+        {t('landing.title')}
+      </Styles.Title>
       <Link to="/avatar-generator">{t('landing.cta-button')}</Link>
 
       {!isAuthenticated && (
