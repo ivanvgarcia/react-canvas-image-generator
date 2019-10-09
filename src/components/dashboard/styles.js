@@ -27,11 +27,11 @@ const UserInfo = styled.div`
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  margin: 20px; 
+  margin: 20px;
 `;
 
 const UserImage = styled.img`
-margin-right: 10px;
+  margin-right: 10px;
 `;
 
 const UserName = styled.p`
@@ -39,19 +39,24 @@ const UserName = styled.p`
   font-size: 1.2rem;
   color: white;
   text-shadow: 1px 2px 2px dodgerblue, 2px 3px 3px #000, 3px 4px 6px blue;
-  font-family: "Satisfy";
+  font-family: 'Satisfy';
 `;
 
-const AvatarImage = styled.img`
-  width: 10%;
-  margin: 20px;
+const AvatarImage = styled.picture`
+  flex: 25%;
+  margin: 5px;
+  background-image: linear-gradient(115deg, #000, #242424);
+  border-radius: 10px;
+  img {
+    width: 100%;
+  }
 `;
 
 export const Styles = {
-    Dashboard,
-    FlexContainer,
-    AvatarImage,
-    UserInfo,
-    UserImage,
-    UserName,
-}
+  Dashboard,
+  FlexContainer,
+  AvatarImage,
+  UserInfo,
+  UserImage,
+  UserName
+};

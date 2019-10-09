@@ -1,9 +1,10 @@
 import React, { useEffect, Suspense } from 'react';
+import { ThemeProvider } from 'styled-components';
+import theme from 'theme';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from 'store.js';
 import { checkSession } from 'actions/auth';
-
 import ScrollToTop from 'components/ScrollToTop';
 import Landing from 'components/landing/Landing';
 import Generator from 'components/generator/Generator';
@@ -22,19 +23,21 @@ function App() {
   return (
     <Router className="App">
       <Provider store={store}>
-        <Suspense fallback={<FullLoader message="Loading App..." />}>
-          <ScrollToTop>
-            <GlobalStyle />
-            <MainContainer>
-              <Navigation />
-              <Switch>
-                <Route exact path="/" component={Landing} />
-                <Route exact path="/avatar-generator" component={Generator} />
-                <PrivateRoute exact path="/dashboard" component={Dashboard} />
-              </Switch>
-            </MainContainer>
-          </ScrollToTop>
-        </Suspense>
+        <ThemeProvider theme={theme}>
+          <Suspense fallback={<FullLoader message="Loading App..." />}>
+            <ScrollToTop>
+              <GlobalStyle />
+              <MainContainer>
+                <Navigation />
+                <Switch>
+                  <Route exact path="/" component={Landing} />
+                  <Route exact path="/avatar-generator" component={Generator} />
+                  <PrivateRoute exact path="/dashboard" component={Dashboard} />
+                </Switch>
+              </MainContainer>
+            </ScrollToTop>
+          </Suspense>
+        </ThemeProvider>
       </Provider>
     </Router>
   );

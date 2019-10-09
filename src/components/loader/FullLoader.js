@@ -8,7 +8,9 @@ const FullLoader = ({ message }) => {
     <Styles.FullLoaderContainer>
       <Styles.FullLoaderContent>
         <Loader />
-        <Styles.FullLoaderMessage>{message}</Styles.FullLoaderMessage>
+        <Styles.FullLoaderMessage data-testid="message">
+          {message}
+        </Styles.FullLoaderMessage>
         <span></span>
       </Styles.FullLoaderContent>
 

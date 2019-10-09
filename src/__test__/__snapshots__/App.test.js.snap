@@ -4,46 +4,42 @@ exports[`matches snapshot 1`] = `
 <DocumentFragment>
   <div
     class="sc-brqgnP joMbJc"
+    style="display: none;"
+  />
+  <div
+    class="sc-gqjmRU dWzuwP"
   >
-    <ul
-      class="sc-hzDkRC XkaRE"
-    >
-      <li
-        class="sc-jhAzac csYfOn"
-      >
-        <svg>
-          menu.svg
-        </svg>
-      </li>
-    </ul>
     <div
-      class="sc-bdVaJa Zgpxm"
+      class="sc-VigVT kTDZkf"
     >
-      <h1
-        class="sc-gzVnrw jCFwwF"
+      <div
+        class="sc-gZMcBi hnpcEz"
       >
-        landing.title
-      </h1>
-      <a
-        href="/avatar-generator"
-      >
-        landing.cta-button
-      </a>
+        <div />
+        <div />
+        <div />
+        <div />
+      </div>
       <p
-        style="text-align: center; color: white; font-size: 1.2rem;"
+        class="sc-jTzLTM dIxyfe"
+        data-testid="message"
       >
-        - or -
+        Loading App...
       </p>
-      <button
-        class="sc-fjdhpX gbmzxk"
-      >
-        <img
-          alt="twitter"
-          src="images/twitter.png"
-        />
-        landing.login
-      </button>
+      <span />
     </div>
+    <img
+      alt="avatar"
+      src="/images/avatar.png"
+    />
   </div>
+</DocumentFragment>
+`;
+
+exports[`matches snapshot 2`] = `
+<DocumentFragment>
+  <p>
+    Loading...
+  </p>
 </DocumentFragment>
 `;
