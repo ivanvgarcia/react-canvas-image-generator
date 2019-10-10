@@ -3,7 +3,7 @@ import { Stage, Layer, Image } from 'react-konva';
 import Avatar from 'components/avatar/Avatar';
 import TransformerComponent from 'components/avatar/TransformerComponent';
 import { ReactReduxContext, Provider, useSelector } from 'react-redux';
-import FullLoader from 'components/loader/FullLoader';
+import Loader from 'components/loader/Loader';
 
 const KonvasCanvas = ({ avatar, setKonva, selectedAvatar }) => {
   const konvaRef = useRef(null);
@@ -37,9 +37,9 @@ const KonvasCanvas = ({ avatar, setKonva, selectedAvatar }) => {
     divRef.current.scrollLeft = touch.clientX;
   };
 
-  if (!bg) {
-    return <FullLoader message={'Loading Assets'} />;
-  }
+  // if (!bg) {
+  //   return <FullLoader message={'Loading Assets'} />;
+  // }
 
   return (
     <ReactReduxContext.Consumer>
@@ -66,30 +66,34 @@ const KonvasCanvas = ({ avatar, setKonva, selectedAvatar }) => {
           >
             <Provider store={store}>
               <Layer ref={layer}>
-                <Image
-                  name={'background'}
-                  image={bg}
-                  width={window.innerHeight}
-                  height={window.innerHeight}
-                  onTap={e => {
-                    selectedAvatar(null);
-                  }}
-                  onTouchStart={handleTouchMove}
-                  onTouchMove={handleTouchMove}
-                />
+                {bg && (
+                  <>
+                    <Image
+                      name={'background'}
+                      image={bg}
+                      width={window.innerHeight}
+                      height={window.innerHeight}
+                      onTap={e => {
+                        selectedAvatar(null);
+                      }}
+                      onTouchStart={handleTouchMove}
+                      onTouchMove={handleTouchMove}
+                    />
 
-                {avatars.map(avatar => (
-                  <Avatar
-                    key={avatar._id}
-                    chosenAvatar={avatar}
-                    zIndex={avatars.length}
-                    selectedAvatar={selectedAvatar}
-                  />
-                ))}
-                <TransformerComponent
-                  selectedAvatar={avatar}
-                  zIndex={avatars.length}
-                />
+                    {avatars.map(avatar => (
+                      <Avatar
+                        key={avatar._id}
+                        chosenAvatar={avatar}
+                        zIndex={avatars.length}
+                        selectedAvatar={selectedAvatar}
+                      />
+                    ))}
+                    <TransformerComponent
+                      selectedAvatar={avatar}
+                      zIndex={avatars.length}
+                    />
+                  </>
+                )}
               </Layer>
             </Provider>
           </Stage>
