@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Styles } from 'components/confirmationScreen/styles';
 import { TwitterShareButton } from 'react-twitter-embed';
 import PropTypes from 'prop-types';
 import { ReactComponent as Facebook } from 'components/svgs/facebook.svg';
+import { Styles } from 'components/confirmationScreen/styles';
 
 const ConfirmationScreen = ({ avatarImg, goNext, goBack, screen }) => {
   const [confirm, setConfirm] = useState(false);

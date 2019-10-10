@@ -7,6 +7,7 @@ import { ReactReduxContext, Provider, useSelector } from 'react-redux';
 const KonvasCanvas = ({ avatar, setKonva, selectedAvatar }) => {
   const konvaRef = useRef(null);
   const divRef = useRef(null);
+  const layer = useRef(null);
   const avatars = useSelector(state => state.avatar.chosenAvatars);
   const [bg, setBg] = useState(null);
 
@@ -31,7 +32,14 @@ const KonvasCanvas = ({ avatar, setKonva, selectedAvatar }) => {
   return (
     <ReactReduxContext.Consumer>
       {({ store }) => (
-        <div style={{ overflowX: 'auto' }} ref={divRef}>
+        <div
+          style={{
+            overflowX: 'scroll',
+            overflowScrollingX: 'touch',
+            zIndex: 99999
+          }}
+          ref={divRef}
+        >
           <Stage
             width={window.innerHeight}
             height={window.innerHeight}
@@ -45,19 +53,21 @@ const KonvasCanvas = ({ avatar, setKonva, selectedAvatar }) => {
             }}
           >
             <Provider store={store}>
-              <Layer>
+              <Layer ref={layer}>
                 {bg && (
                   <Image
                     name={'background'}
                     image={bg}
                     width={window.innerHeight}
                     height={window.innerHeight}
-                    onTap={e => selectedAvatar(null)}
+                    onTap={e => {
+                      selectedAvatar(null);
+                    }}
+                    onTouchMove={e =>
+                      (divRef.current.scrollLeft = e.evt.touches[0].clientX)
+                    }
                   />
                 )}
-              </Layer>
-
-              <Layer>
                 {avatars.map(avatar => (
                   <Avatar
                     key={avatar._id}
