@@ -6,6 +6,7 @@ import { ReactReduxContext, Provider, useSelector } from 'react-redux';
 
 const KonvasCanvas = ({ avatar, setKonva, selectedAvatar }) => {
   const konvaRef = useRef(null);
+  const divRef = useRef(null);
   const avatars = useSelector(state => state.avatar.chosenAvatars);
   const [bg, setBg] = useState(null);
 
@@ -16,6 +17,8 @@ const KonvasCanvas = ({ avatar, setKonva, selectedAvatar }) => {
   }, [setKonva]);
 
   useEffect(() => {
+    divRef.current && (divRef.current.scrollLeft = window.innerWidth / 2);
+
     let image = new window.Image();
 
     image.onload = function() {
@@ -28,7 +31,7 @@ const KonvasCanvas = ({ avatar, setKonva, selectedAvatar }) => {
   return (
     <ReactReduxContext.Consumer>
       {({ store }) => (
-        <div style={{ overflowX: 'auto' }}>
+        <div style={{ overflowX: 'auto' }} ref={divRef}>
           <Stage
             width={window.innerHeight}
             height={window.innerHeight}

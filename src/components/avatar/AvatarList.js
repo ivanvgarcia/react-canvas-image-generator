@@ -21,7 +21,7 @@ const AvatarList = () => {
     dispatch(
       chooseAvatar({
         ...clickedAvatar,
-        x: 0,
+        x: window.innerWidth / 2,
         y: 0,
         scaleX: 0.4,
         scaleY: 0.4,
