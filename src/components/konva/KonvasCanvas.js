@@ -3,7 +3,6 @@ import { Stage, Layer, Image } from 'react-konva';
 import Avatar from 'components/avatar/Avatar';
 import TransformerComponent from 'components/avatar/TransformerComponent';
 import { ReactReduxContext, Provider, useSelector } from 'react-redux';
-import Loader from 'components/loader/Loader';
 
 const KonvasCanvas = ({ avatar, setKonva, selectedAvatar }) => {
   const konvaRef = useRef(null);
