@@ -215,11 +215,12 @@ const Generator = props => {
             Back
           </Back>
         )}
-        {screen.current < 4 && (
-          <Next onClick={avatars.length && goNext} onTouchStart={addVibration}>
-            Undo
-          </Next>
-        )}
+        {screen.current < 4 &&
+          (avatars.length > 0 && (
+            <Next onClick={goNext} onTouchStart={addVibration}>
+              Undo
+            </Next>
+          ))}
         {screen.current === 3 && (
           <>
             <Undo onClick={handleUndo} onTouchStart={addVibration}>

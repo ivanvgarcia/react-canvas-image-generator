@@ -3,6 +3,7 @@ import { Stage, Layer, Image } from 'react-konva';
 import Avatar from 'components/avatar/Avatar';
 import TransformerComponent from 'components/avatar/TransformerComponent';
 import { ReactReduxContext, Provider, useSelector } from 'react-redux';
+import FullLoader from 'components/loader/FullLoader';
 
 const KonvasCanvas = ({ avatar, setKonva, selectedAvatar }) => {
   const konvaRef = useRef(null);
@@ -13,7 +14,6 @@ const KonvasCanvas = ({ avatar, setKonva, selectedAvatar }) => {
 
   useEffect(() => {
     const konva = konvaRef.current;
-
     setKonva(konva);
   }, [setKonva]);
 
@@ -28,6 +28,18 @@ const KonvasCanvas = ({ avatar, setKonva, selectedAvatar }) => {
 
     image.src = '../../../images/bg.png';
   }, []);
+
+  const handleTouchMove = e => {
+    if (e.evt.touches.length === 0) return;
+    e.evt.preventDefault();
+    e.evt.stopPropagation();
+    const touch = e.evt.touches[0];
+    divRef.current.scrollLeft = touch.clientX;
+  };
+
+  if (!bg) {
+    return <FullLoader message={'Loading Assets'} />;
+  }
 
   return (
     <ReactReduxContext.Consumer>
@@ -54,20 +66,18 @@ const KonvasCanvas = ({ avatar, setKonva, selectedAvatar }) => {
           >
             <Provider store={store}>
               <Layer ref={layer}>
-                {bg && (
-                  <Image
-                    name={'background'}
-                    image={bg}
-                    width={window.innerHeight}
-                    height={window.innerHeight}
-                    onTap={e => {
-                      selectedAvatar(null);
-                    }}
-                    onTouchMove={e =>
-                      (divRef.current.scrollLeft = e.evt.touches[0].clientX)
-                    }
-                  />
-                )}
+                <Image
+                  name={'background'}
+                  image={bg}
+                  width={window.innerHeight}
+                  height={window.innerHeight}
+                  onTap={e => {
+                    selectedAvatar(null);
+                  }}
+                  onTouchStart={handleTouchMove}
+                  onTouchMove={handleTouchMove}
+                />
+
                 {avatars.map(avatar => (
                   <Avatar
                     key={avatar._id}
