@@ -25,6 +25,7 @@ import { ReactComponent as Redo } from 'components/svgs/redo.svg';
 
 const Generator = props => {
   const user = useSelector(state => state.auth.user);
+  const avatars = useSelector(state => state.avatar.avatars);
   const history = useSelector(state => state.avatar.history);
   const step = useSelector(state => state.avatar.step);
   const dispatch = useDispatch();
@@ -39,6 +40,10 @@ const Generator = props => {
     current: 1,
     next: 2
   });
+
+  const handleSelectedAvatar = () => {
+    selectedAvatar(null);
+  };
 
   const saveBase64 = async () => {
     if (konva) {
@@ -212,7 +217,7 @@ const Generator = props => {
           </Back>
         )}
         {screen.current < 4 && (
-          <Next onClick={goNext} onTouchStart={addVibration}>
+          <Next onClick={avatars.length && goNext} onTouchStart={addVibration}>
             Undo
           </Next>
         )}
@@ -245,6 +250,7 @@ const Generator = props => {
           avatar={avatar}
           setKonva={setKonva}
           selectedAvatar={selectedAvatar}
+          handleSelectedAvatar={handleSelectedAvatar}
         />
       )}
 

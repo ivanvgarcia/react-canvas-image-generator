@@ -26,6 +26,7 @@ class TransformerComponent extends Component {
     } else {
       this.transformer.detach();
     }
+
     this.transformer.getLayer().batchDraw();
   }
   render() {

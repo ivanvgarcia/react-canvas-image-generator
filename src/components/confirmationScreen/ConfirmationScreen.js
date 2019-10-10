@@ -37,8 +37,6 @@ const ConfirmationScreen = ({ avatarImg, goNext, goBack, screen }) => {
     })(document, 'script', 'facebook-jssdk');
   }, []);
 
-  console.log(avatarImg);
-
   return (
     <Styles.Confirmation>
       <img style={{ width: '100%' }} src={avatarImg} alt="avatar" />

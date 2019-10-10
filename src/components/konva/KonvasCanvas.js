@@ -19,7 +19,6 @@ const KonvasCanvas = ({ avatar, setKonva, selectedAvatar }) => {
     let image = new window.Image();
 
     image.onload = function() {
-      console.log('loadded');
       setBg(image);
     };
 
@@ -29,43 +28,49 @@ const KonvasCanvas = ({ avatar, setKonva, selectedAvatar }) => {
   return (
     <ReactReduxContext.Consumer>
       {({ store }) => (
-        <Stage
-          width={window.innerWidth}
-          height={window.innerHeight}
-          ref={konvaRef}
-          onMouseDown={e => {
-            // deselect when clicked on empty area
-            const clickedOnEmpty = e.target === e.target.getStage();
-            if (clickedOnEmpty) {
-              selectedAvatar(null);
-            }
-          }}
-        >
-          <Provider store={store}>
-            <Layer>
-              {bg && (
-                <Image
-                  name={'background'}
-                  image={bg}
-                  width={window.innerHeight}
-                  height={window.innerHeight}
-                />
-              )}
-              {avatars.map(avatar => (
-                <Avatar
-                  key={avatar._id}
-                  chosenAvatar={avatar}
+        <div style={{ overflowX: 'auto' }}>
+          <Stage
+            width={window.innerHeight}
+            height={window.innerHeight}
+            ref={konvaRef}
+            onMouseDown={e => {
+              // deselect when clicked on empty area
+              const clickedOnEmpty = e.target === e.target.getStage();
+              if (clickedOnEmpty) {
+                selectedAvatar(null);
+              }
+            }}
+          >
+            <Provider store={store}>
+              <Layer>
+                {bg && (
+                  <Image
+                    name={'background'}
+                    image={bg}
+                    width={window.innerHeight}
+                    height={window.innerHeight}
+                    onTap={e => selectedAvatar(null)}
+                  />
+                )}
+              </Layer>
+
+              <Layer>
+                {avatars.map(avatar => (
+                  <Avatar
+                    key={avatar._id}
+                    chosenAvatar={avatar}
+                    zIndex={avatars.length}
+                    selectedAvatar={selectedAvatar}
+                  />
+                ))}
+                <TransformerComponent
+                  selectedAvatar={avatar}
                   zIndex={avatars.length}
-                  selectedAvatar={selectedAvatar}
                 />
-              ))}
-              <TransformerComponent
-                selectedAvatar={avatar}
-                zIndex={avatars.length}
-              />
-            </Layer>
-          </Provider>
-        </Stage>
+              </Layer>
+            </Provider>
+          </Stage>
+        </div>
       )}
     </ReactReduxContext.Consumer>
   );

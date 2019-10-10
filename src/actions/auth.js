@@ -8,7 +8,7 @@ import {
   //   LOGIN_FAIL,
   //   LOGOUT
 } from './types';
-import avatarApi from '../config/baseUrl';
+import avatarApi from 'config/baseUrl';
 
 export const checkSession = search => async dispatch => {
   try {
