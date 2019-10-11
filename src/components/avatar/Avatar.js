@@ -42,6 +42,12 @@ const Avatar = ({ zIndex, chosenAvatar, selectedAvatar }) => {
     }
   }, [avatars, dispatch, init]);
 
+  const handleUserTap = () => {
+    const node = avatarRef.current;
+    node.zIndex(zIndex);
+    selectedAvatar(avatarRef.current.attrs.name);
+  };
+
   return (
     image && (
       <Image
@@ -73,11 +79,8 @@ const Avatar = ({ zIndex, chosenAvatar, selectedAvatar }) => {
         scale={{ x: chosenAvatar.scaleX, y: chosenAvatar.scaleY }}
         rotation={chosenAvatar.rotation}
         skew={{ x: chosenAvatar.skewX, y: chosenAvatar.skewY }}
-        onTap={e => {
-          const node = avatarRef.current;
-          node.zIndex(zIndex);
-          selectedAvatar(avatarRef.current.attrs.name);
-        }}
+        onTap={handleUserTap}
+        onClick={handleUserTap}
         onTransformEnd={() => {
           const node = avatarRef.current;
           const x = node.x();

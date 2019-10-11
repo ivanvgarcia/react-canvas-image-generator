@@ -8,6 +8,7 @@ const CanvasContainer = styled.div`
 
 const CanvasCSS = styled.canvas`
   width: 100%;
+  max-width: 640px;
 `;
 
 const ToolsContainer = styled.div`

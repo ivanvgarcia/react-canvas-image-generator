@@ -4,8 +4,11 @@ const Confirmation = styled.div`
   min-height: 100vh;
   display: flex;
   align-items: center;
-
   position: relative;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 640px;
+
   span {
     position: absolute;
     height: 100%;
@@ -31,6 +34,7 @@ const ConfirmationContent = styled.div`
   top: 0;
   left: 0;
   z-index: 100;
+  position: relative;
 `;
 
 const ConfirmationAlert = styled.div`
@@ -38,7 +42,7 @@ const ConfirmationAlert = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  position: fixed;
+  position: absolute;
   bottom: 20px;
   left: 0;
   width: 90%;
