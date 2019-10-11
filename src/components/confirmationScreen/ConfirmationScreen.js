@@ -39,63 +39,68 @@ const ConfirmationScreen = ({ avatarImg, goNext, goBack, screen }) => {
 
   return (
     <Styles.Confirmation>
-      <img style={{ width: '100%' }} src={avatarImg} alt="avatar" />
-      <Styles.ConfirmationAlert>
-        {!confirm ? (
-          <>
-            <Styles.ConfirmationText>
-              Are you happy with your creation?
-            </Styles.ConfirmationText>
-            <Styles.ConfirmationButtons>
-              <Styles.ConfirmationButton
-                backgroundColor="green"
-                onClick={handleConfirm}
-              >
-                Yes
-              </Styles.ConfirmationButton>
-              <Styles.ConfirmationButton
-                backgroundColor="red"
-                onClick={handleConfirm}
-              >
-                No
-              </Styles.ConfirmationButton>
-            </Styles.ConfirmationButtons>
-          </>
-        ) : (
-          <>
-            <Styles.ConfirmationText>
-              Your Avatar is Completed!
-            </Styles.ConfirmationText>
+      <span></span>
+      <Styles.ConfirmationContent>
+        <img style={{ width: '100%' }} src={avatarImg} alt="avatar" />
 
-            <Styles.ShareButtons>
-              <Styles.FaceBookShareButton
-                onClick={() => {
-                  // eslint-disable-next-line no-undef
-                  if (FB) {
+        <Styles.ConfirmationAlert>
+          {!confirm ? (
+            <>
+              <Styles.ConfirmationText>
+                Are you happy with your creation?
+              </Styles.ConfirmationText>
+              <Styles.ConfirmationButtons>
+                <Styles.ConfirmationButton
+                  backgroundColor="green"
+                  onClick={handleConfirm}
+                >
+                  Yes
+                </Styles.ConfirmationButton>
+                <Styles.ConfirmationButton
+                  backgroundColor="red"
+                  onClick={handleConfirm}
+                >
+                  No
+                </Styles.ConfirmationButton>
+              </Styles.ConfirmationButtons>
+            </>
+          ) : (
+            <>
+              <Styles.ConfirmationText>
+                Your Avatar is Completed!
+              </Styles.ConfirmationText>
+
+              <Styles.ShareButtons>
+                <Styles.FaceBookShareButton
+                  onClick={() => {
                     // eslint-disable-next-line no-undef
-                    FB.ui({
-                      method: 'share',
-                      href: 'https://d1riqzz03dhs7s.cloudfront.net/',
-                      hashtag: '#United',
-                      quote: 'Share your avatar'
-                    });
-                  }
-                }}
-              >
-                <Facebook></Facebook> Share
-              </Styles.FaceBookShareButton>
-              <TwitterShareButton
-                url={'Image URL'}
-                options={{
-                  text: `${'Avatar'}`,
-                  via: 'United',
-                  size: 'large'
-                }}
-              />
-            </Styles.ShareButtons>
-          </>
-        )}
-      </Styles.ConfirmationAlert>
+                    if (FB) {
+                      // eslint-disable-next-line no-undef
+                      FB.ui({
+                        method: 'share',
+                        redirect_uri: 'https://www.google.com',
+                        href: 'https://d1riqzz03dhs7s.cloudfront.net/',
+                        hashtag: '#United',
+                        quote: 'Share your avatar'
+                      });
+                    }
+                  }}
+                >
+                  <Facebook></Facebook> Share
+                </Styles.FaceBookShareButton>
+                <TwitterShareButton
+                  url={'Image URL'}
+                  options={{
+                    text: `${'Avatar'}`,
+                    via: 'United',
+                    size: 'large'
+                  }}
+                />
+              </Styles.ShareButtons>
+            </>
+          )}
+        </Styles.ConfirmationAlert>
+      </Styles.ConfirmationContent>
     </Styles.Confirmation>
   );
 };

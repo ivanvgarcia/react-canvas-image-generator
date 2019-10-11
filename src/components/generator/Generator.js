@@ -160,7 +160,7 @@ const Generator = props => {
         break;
       case 4:
         saveBase64();
-        savePhotoToAWS(jpeg);
+        // savePhotoToAWS(jpeg);
         setScreen({ ...screen, previous, current, next });
         break;
       case 5:

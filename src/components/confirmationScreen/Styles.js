@@ -1,8 +1,36 @@
 import styled from 'styled-components';
 
 const Confirmation = styled.div`
-  background-color: #ffffff;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg stroke='%23CCC' stroke-width='0' %3E%3Crect fill='%23F5F5F5' x='-60' y='-60' width='110' height='240'/%3E%3C/g%3E%3C/svg%3E");
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+
+  position: relative;
+  span {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    filter: blur(8px);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url(${process.env.PUBLIC_URL}/images/bg.png);
+    z-index: 1;
+  }
+`;
+
+const ConfirmationContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 100;
 `;
 
 const ConfirmationAlert = styled.div`
@@ -75,6 +103,7 @@ const SampleImage = styled.img`
 
 export const Styles = {
   Confirmation,
+  ConfirmationContent,
   ConfirmationAlert,
   ConfirmationText,
   ConfirmationButtons,
