@@ -8,6 +8,7 @@ export const LOGOUT = 'LOGOUT';
 export const ACCOUNT_DELETED = 'ACCOUNT_DELETED';
 
 export const GET_AVATARS = 'GET_AVATARS';
+export const GET_AVATAR = 'GET_AVATAR';
 export const CHOOSE_AVATAR = 'CHOOSE_AVATAR';
 export const ADD_CHOSEN_AVATAR = 'ADD_CHOSEN_AVATAR';
 export const REMOVE_CHOSEN_AVATAR = 'REMOVE_CHOSEN_AVATAR';

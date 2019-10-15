@@ -4,7 +4,13 @@ import PropTypes from 'prop-types';
 import { ReactComponent as Facebook } from 'components/svgs/facebook.svg';
 import { Styles } from 'components/confirmationScreen/styles';
 
-const ConfirmationScreen = ({ avatarImg, goNext, goBack, screen }) => {
+const ConfirmationScreen = ({
+  avatarImg,
+  goNext,
+  goBack,
+  screen,
+  savedAvatar
+}) => {
   const [confirm, setConfirm] = useState(false);
 
   const handleConfirm = e => {
@@ -78,8 +84,7 @@ const ConfirmationScreen = ({ avatarImg, goNext, goBack, screen }) => {
                       // eslint-disable-next-line no-undef
                       FB.ui({
                         method: 'share',
-                        redirect_uri: 'https://www.google.com',
-                        href: 'https://d1riqzz03dhs7s.cloudfront.net/',
+                        href: `https://d1riqzz03dhs7s.cloudfront.net/avatar/${savedAvatar}`,
                         hashtag: '#United',
                         quote: 'Share your avatar'
                       });

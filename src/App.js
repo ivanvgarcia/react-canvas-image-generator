@@ -8,6 +8,7 @@ import { checkSession } from 'actions/auth';
 import ScrollToTop from 'components/ScrollToTop';
 import Landing from 'components/landing/Landing';
 import Generator from 'components/generator/Generator';
+import AvatarShow from 'components/avatar/AvatarShow';
 import Dashboard from 'components/dashboard/Dashboard';
 import Navigation from 'components/navigation/Navigation';
 import PrivateRoute from 'components/routing/PrivateRoute';
@@ -32,6 +33,7 @@ function App() {
                 <Switch>
                   <Route exact path="/" component={Landing} />
                   <Route exact path="/avatar-generator" component={Generator} />
+                  <Route exact path="/avatar/:id" component={AvatarShow} />
                   <PrivateRoute exact path="/dashboard" component={Dashboard} />
                 </Switch>
               </MainContainer>

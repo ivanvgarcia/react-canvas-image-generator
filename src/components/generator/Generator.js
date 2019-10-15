@@ -33,6 +33,7 @@ const Generator = props => {
   const [isMobile, setIsMobile] = useState(false);
   const [jpeg, setJpeg] = useState('');
   const [groupAvatarImg, setGroupAvatarImg] = useState('');
+  const [savedAvatar, setSavedAvatar] = useState('');
   const [avatar, selectedAvatar] = useState(null);
   const [konva, setKonva] = useState(null);
   const [screen, setScreen] = useState({
@@ -115,6 +116,7 @@ const Generator = props => {
       }
       try {
         const result = await avatarApi.post('/upload/cloudinary', body);
+        setSavedAvatar(result.data.id);
       } catch (error) {
         console.error(error);
       }
@@ -160,7 +162,7 @@ const Generator = props => {
         break;
       case 4:
         saveBase64();
-        // savePhotoToAWS(jpeg);
+        savePhotoToAWS(jpeg);
         setScreen({ ...screen, previous, current, next });
         break;
       case 5:
@@ -263,6 +265,7 @@ const Generator = props => {
           goNext={goNext}
           goBack={goBack}
           screen={screen}
+          savedAvatar={savedAvatar}
         />
       )}
     </Styles.Main>
