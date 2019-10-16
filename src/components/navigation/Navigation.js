@@ -26,7 +26,7 @@ const Navigation = () => {
   const authLinks = () => (
     <NavItem>
       <StyledNavLink to="/dashboard">
-        <Avatar src={user.profile_image_url_https} alt={user.name} />
+        <Avatar src={user.photo} alt={user.name} />
         {user.name}
       </StyledNavLink>
     </NavItem>

@@ -5,10 +5,11 @@ import { Styles } from 'components/avatar/styles';
 import { Helmet } from 'react-helmet';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { twitterSignIn } from '../../actions/auth';
+import { twitterSignIn, facebookSignIn } from '../../actions/auth';
 import styled from 'styled-components';
 import avatarApi from '../../config/baseUrl';
 import FullLoader from 'components/loader/FullLoader';
+import FacebookLogin from 'react-facebook-login';
 
 const TwitterButton = styled.button`
   display: flex;
@@ -43,6 +44,10 @@ const Landing = ({ location: { search } }) => {
       search.length > 0 && dispatch(twitterSignIn(search));
     }
   }, [dispatch, isAuthenticated, loading, search]);
+
+  const facebookResponse = response => {
+    dispatch(facebookSignIn(response.accessToken));
+  };
 
   if (url) {
     return (window.location.href = url);
@@ -82,6 +87,16 @@ const Landing = ({ location: { search } }) => {
             <img src="images/twitter.png" alt="twitter" />
             {t('landing.login')}
           </TwitterButton>
+          <FacebookLogin
+            appId="396269361288665"
+            autoLoad={false}
+            fields="name,email,picture,public_profile"
+            onClick={e => {
+              console.log(e);
+            }}
+            callback={facebookResponse}
+          />
+          ,
         </>
       )}
     </Banner>

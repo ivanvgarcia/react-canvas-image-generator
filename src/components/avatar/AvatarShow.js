@@ -27,6 +27,7 @@ const AvatarShow = () => {
         <meta property="og:title" content="An avatar created by Ivan" />
         <meta property="og:image" content={`${avatar.url}`} />
         <meta property="og:type" content="article" />
+        <meta name="fragment" content="!"></meta>
       </Helmet>
       <Title>Cocoppa Avatar</Title>
       <picture>

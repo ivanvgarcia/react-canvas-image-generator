@@ -86,7 +86,7 @@ const ConfirmationScreen = ({
                         method: 'share',
                         href: `https://d1riqzz03dhs7s.cloudfront.net/avatar/${savedAvatar}`,
                         hashtag: '#United',
-                        quote: 'Share your avatar'
+                        quote: `Check out the avatar I created https://d1riqzz03dhs7s.cloudfront.net/avatar/${savedAvatar}`
                       });
                     }
                   }}

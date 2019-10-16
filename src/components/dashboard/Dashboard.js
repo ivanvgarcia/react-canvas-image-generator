@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Title, SubTitle } from 'components/commonStyles';
 import { Styles } from 'components/dashboard/styles';
@@ -17,19 +18,27 @@ const Dashboard = () => {
         <Styles.UserInfo>
           <Styles.UserImage src={user.photo} alt="user" />
           <Styles.UserName>{user.name}</Styles.UserName>
-          <a href={`https://twitter.com/${user.screen_name}`}>
-            {t('dashboard.twitter-button')}
-          </a>
+
+          {user.screen_name && (
+            <Styles.SocialButton
+              backgroundColor={'#1fa1f3'}
+              href={`https://twitter.com/${user.screen_name}`}
+            >
+              {t('dashboard.twitter-button')}
+            </Styles.SocialButton>
+          )}
         </Styles.UserInfo>
 
         <SubTitle>{t('dashboard.title-2')}</SubTitle>
         <Styles.FlexContainer>
           {user.avatars.length > 0 ? (
             user.avatars.map(avatar => (
-              <Styles.AvatarImage key={avatar._id}>
-                <img srcSet={avatar.webp} type="image/webp" alt="avatar" />
-                <src src={avatar.url} alt="avatar" />
-              </Styles.AvatarImage>
+              <Link to={`/avatar/${avatar._id}`}>
+                <Styles.AvatarImage key={avatar._id}>
+                  <img srcSet={avatar.webp} type="image/webp" alt="avatar" />
+                  <src src={avatar.url} alt="avatar" />
+                </Styles.AvatarImage>
+              </Link>
             ))
           ) : (
             <h4>You have not created any avatars yet.</h4>

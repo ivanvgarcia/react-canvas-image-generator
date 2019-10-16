@@ -52,3 +52,21 @@ export const twitterSignIn = search => async dispatch => {
     console.error(error);
   }
 };
+
+export const facebookSignIn = accessToken => async dispatch => {
+  try {
+    const res = await avatarApi.post('/auth/facebook', {
+      access_token: accessToken
+    });
+
+    console.log(res);
+    const payload = res.data;
+
+    dispatch({
+      type: LOGIN_SUCCESS,
+      payload
+    });
+  } catch (error) {
+    console.error(error);
+  }
+};

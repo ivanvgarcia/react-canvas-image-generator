@@ -10,7 +10,8 @@
   },
   "dashboard": {
     "title": "マイページ",
-    "twitter-button": "ツイッタープロフィール",
+    "twitter-button": "Twitterプロフィール",
+    "facebook-button": "Facebookプロフィール",
     "title-2": "私のアバター"
   },
   "avatar-list": {
