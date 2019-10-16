@@ -36,7 +36,7 @@ export const Nav = styled.ul`
   border-top-left-radius: 50px;
   border-bottom-left-radius: 50px;
   min-height: 73px;
-  animation: ${slideIn} .3s linear forwards;
+  animation: ${slideIn} 0.3s linear forwards;
 
   div {
     display: flex;
@@ -76,7 +76,8 @@ export const NavItem = styled.li`
 `;
 
 export const Avatar = styled.img`
-  width: 40px;
+  width: 30px;
   margin-right: 10px;
+  margin-bottom: 5px;
   border-radius: 50%;
 `;

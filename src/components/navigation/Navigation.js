@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { logoutUser } from 'actions/auth';
 import { useTranslation } from 'react-i18next';
-
 import {
   Nav,
   StyledNavLink,
@@ -16,6 +16,7 @@ import { ReactComponent as CloseMenuIcon } from 'components/svgs/close.svg';
 
 const Navigation = () => {
   const navRef = useRef();
+  const dispatch = useDispatch();
   const user = useSelector(state => state.auth.user);
   const loading = useSelector(state => state.auth.loading);
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
@@ -23,11 +24,19 @@ const Navigation = () => {
 
   const [open, setOpen] = useState(false);
 
+  const handleLogout = () => {
+    dispatch(logoutUser());
+  };
+
   const authLinks = () => (
     <NavItem>
       <StyledNavLink to="/dashboard">
         <Avatar src={user.photo} alt={user.name} />
         {user.name}
+      </StyledNavLink>
+      <StyledNavLink to="/dashboard" onClick={handleLogout}>
+        <AvatarIcon />
+        Logout
       </StyledNavLink>
     </NavItem>
   );

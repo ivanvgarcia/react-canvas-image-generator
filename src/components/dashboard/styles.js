@@ -29,11 +29,12 @@ const UserInfo = styled.div`
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  margin: 20px;
-  background: white;
+  margin: 20px auto;
+  background: rgba(255, 255, 255, 0.8);
   box-shadow: 0 4px 8px #000;
   padding: 20px 0;
-  border-radius: 20px;
+  border-radius: 5px;
+  max-width: 400px;
 `;
 
 const UserImage = styled.img`
@@ -52,11 +53,11 @@ const UserName = styled.p`
 `;
 
 const AvatarImage = styled.picture`
-  flex: 25%;
+  flex: 15%;
   margin: 5px;
   border-radius: 10px;
   img {
-    width: 100%;
+    max-width: 100px;
   }
 `;
 

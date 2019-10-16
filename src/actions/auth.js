@@ -2,11 +2,10 @@ import {
   //   REGISTER_SUCCESS,
   //   REGISTER_FAIL,
   USER_LOADED,
-  //   AUTH_ERROR,
   LOGIN_SUCCESS,
-  AUTH_ERROR
-  //   LOGIN_FAIL,
-  //   LOGOUT
+  AUTH_ERROR,
+  // LOGIN_FAIL,
+  LOGOUT
 } from './types';
 import avatarApi from 'config/baseUrl';
 
@@ -69,4 +68,10 @@ export const facebookSignIn = accessToken => async dispatch => {
   } catch (error) {
     console.error(error);
   }
+};
+
+export const logoutUser = () => async dispatch => {
+  dispatch({
+    type: LOGOUT
+  });
 };

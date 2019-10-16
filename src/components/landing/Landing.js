@@ -9,18 +9,22 @@ import { twitterSignIn, facebookSignIn } from '../../actions/auth';
 import styled from 'styled-components';
 import avatarApi from '../../config/baseUrl';
 import FullLoader from 'components/loader/FullLoader';
-import FacebookLogin from 'react-facebook-login';
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
+import { ReactComponent as Facebook } from 'components/svgs/facebook.svg';
 
-const TwitterButton = styled.button`
+const SocialButton = styled.button`
   display: flex;
   align-items: center;
   font-size: 1.2rem;
   padding: 5px 20px;
   box-shadow: 0 2px 4px #000;
-  background: #1fa1f3;
+  background: ${props => props.backgroundColor};
   color: white;
   border: none;
+  max-width: 200px;
+  margin: 10px 0;
   cursor: pointer;
+
   img {
     width: 40px;
   }
@@ -83,18 +87,24 @@ const Landing = ({ location: { search } }) => {
           >
             - or -
           </p>
-          <TwitterButton onClick={signIn}>
+          <SocialButton onClick={signIn} backgroundColor="#1fa1f3">
             <img src="images/twitter.png" alt="twitter" />
-            {t('landing.login')}
-          </TwitterButton>
+            Login
+          </SocialButton>
           <FacebookLogin
             appId="396269361288665"
             autoLoad={false}
-            fields="name,email,picture,public_profile"
-            onClick={e => {
-              console.log(e);
-            }}
+            fields="name,email,picture"
             callback={facebookResponse}
+            icon="fa-facebook"
+            render={renderProps => (
+              <SocialButton
+                onClick={renderProps.onClick}
+                backgroundColor="#3b5998"
+              >
+                <Facebook></Facebook> Login
+              </SocialButton>
+            )}
           />
           ,
         </>

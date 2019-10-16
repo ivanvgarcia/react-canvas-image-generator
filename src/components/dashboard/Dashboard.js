@@ -33,10 +33,10 @@ const Dashboard = () => {
         <Styles.FlexContainer>
           {user.avatars.length > 0 ? (
             user.avatars.map(avatar => (
-              <Link to={`/avatar/${avatar._id}`}>
-                <Styles.AvatarImage key={avatar._id}>
+              <Link key={avatar._id} to={`/avatar/${avatar._id}`}>
+                <Styles.AvatarImage>
                   <img srcSet={avatar.webp} type="image/webp" alt="avatar" />
-                  <src src={avatar.url} alt="avatar" />
+                  <source src={avatar.url} alt="avatar" />
                 </Styles.AvatarImage>
               </Link>
             ))
