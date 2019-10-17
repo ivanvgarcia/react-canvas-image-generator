@@ -58,6 +58,9 @@ const Avatar = ({ zIndex, chosenAvatar, selectedAvatar }) => {
         name={`avatar${chosenAvatar._id}`}
         image={image}
         draggable
+        onDragStart={e => {
+          e.target.zIndex(avatars.length);
+        }}
         onDragEnd={e => {
           let reset = history.slice(0, step + 1);
           dispatch(resetHistory(reset));
@@ -77,7 +80,6 @@ const Avatar = ({ zIndex, chosenAvatar, selectedAvatar }) => {
           dispatch(reorderAvatars(items));
           dispatch(setHistory(items));
         }}
-        onDragStart={e => {}}
         x={chosenAvatar.x}
         y={chosenAvatar.y}
         scale={{ x: chosenAvatar.scaleX, y: chosenAvatar.scaleY }}
@@ -85,8 +87,8 @@ const Avatar = ({ zIndex, chosenAvatar, selectedAvatar }) => {
         skew={{ x: chosenAvatar.skewX, y: chosenAvatar.skewY }}
         onTap={handleUserTap}
         onClick={handleUserTap}
-        onTransformEnd={() => {
-          const node = avatarRef.current;
+        onTransformEnd={e => {
+          const node = e.target;
           const newTransformation = {
             x: node.x(),
             y: node.y(),
@@ -116,10 +118,11 @@ const Avatar = ({ zIndex, chosenAvatar, selectedAvatar }) => {
         }}
         onTouchMove={e => {
           if (e.evt.touches.length === 2) {
-            const node = avatarRef.current;
+            const node = e.target;
             const touch1 = e.evt.touches[0];
             const touch2 = e.evt.touches[1];
             const originalDraggable = node.draggable();
+            const items = avatars.slice();
             const item = avatars.find(i => i._id === chosenAvatar._id);
             const index = avatars.indexOf(item);
 
@@ -148,15 +151,15 @@ const Avatar = ({ zIndex, chosenAvatar, selectedAvatar }) => {
               scale = (item.scaleX * dist) / lastDist;
               const roundedScale = Number(Math.round(scale + 'e2') + 'e-2');
 
-              avatars[index] = {
+              items[index] = {
                 ...chosenAvatar,
                 scaleX: roundedScale,
                 scaleY: roundedScale
               };
 
+              dispatch(reorderAvatars(items));
+              dispatch(setHistory(items));
               setLastDist(dist);
-              dispatch(reorderAvatars(avatars));
-              dispatch(setHistory(avatars));
 
               if (node.draggable() !== originalDraggable) {
                 node.draggable(originalDraggable);
@@ -167,7 +170,7 @@ const Avatar = ({ zIndex, chosenAvatar, selectedAvatar }) => {
           }
         }}
         onTouchEnd={e => {
-          const node = avatarRef.current;
+          const node = e.target;
           node.draggable(true);
         }}
         ref={avatarRef}
