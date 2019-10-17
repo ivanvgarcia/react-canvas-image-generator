@@ -24,8 +24,10 @@ const FlexContainer = styled.div`
   align-items: center;
   justify-content: center;
   margin-top: 50px;
+  margin: 50px auto 0;
   height: 100vh;
   overflow-y: auto;
+  max-width: 1000px;
   img {
     width: 100%;
     cursor: pointer;
@@ -34,7 +36,7 @@ const FlexContainer = styled.div`
 
 const AvatarCard = styled.div`
   position: relative;
-  width: 40%;
+  width: 30%;
   cursor: pointer;
   margin: 25px 10px;
 `;

@@ -7,7 +7,6 @@ const Confirmation = styled.div`
   position: relative;
   margin: 0 auto;
   width: 100%;
-  max-width: 640px;
 
   span {
     position: absolute;
@@ -30,11 +29,12 @@ const ConfirmationContent = styled.div`
   justify-content: center;
   position: absolute;
   height: 100%;
-  width: 100%;
+  max-width: 640px;
   top: 0;
   left: 0;
   z-index: 100;
   position: relative;
+  margin: 0 auto;
 `;
 
 const ConfirmationAlert = styled.div`

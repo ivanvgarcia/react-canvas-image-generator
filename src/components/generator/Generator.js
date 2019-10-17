@@ -57,7 +57,7 @@ const Generator = props => {
     }
 
     const canvas = canvasRef.current;
-  
+
     if (canvas) {
       const image = canvas.toDataURL('image/png');
       const id = `user-${Date.now()}`;
@@ -78,7 +78,6 @@ const Generator = props => {
       dispatch(chooseAvatar(createdAvatar));
       dispatch(addChosenAvatar(createdAvatar));
       setJpeg(image);
-      
     }
   };
 

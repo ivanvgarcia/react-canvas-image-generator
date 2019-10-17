@@ -19,10 +19,8 @@ export const Thumbnail = styled.img`
 `;
 
 export const SliderContainer = styled.div`
+  width: 100%;
   max-width: 640px;
   padding: 0 20px;
   background: rgba(0, 0, 0, 0.5);
-
-  @media (min-width: 1000px) {
-  }
 `;
