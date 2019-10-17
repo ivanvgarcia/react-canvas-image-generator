@@ -57,7 +57,7 @@ const Generator = props => {
     }
 
     const canvas = canvasRef.current;
-
+  
     if (canvas) {
       const image = canvas.toDataURL('image/png');
       const id = `user-${Date.now()}`;
@@ -78,6 +78,7 @@ const Generator = props => {
       dispatch(chooseAvatar(createdAvatar));
       dispatch(addChosenAvatar(createdAvatar));
       setJpeg(image);
+      
     }
   };
 
@@ -251,12 +252,14 @@ const Generator = props => {
       {screen.current === 2 && <AvatarList />}
 
       {screen.current === 3 && (
-        <KonvaCanvas
-          avatar={avatar}
-          setKonva={setKonva}
-          selectedAvatar={selectedAvatar}
-          handleSelectedAvatar={handleSelectedAvatar}
-        />
+        <>
+          <KonvaCanvas
+            avatar={avatar}
+            setKonva={setKonva}
+            selectedAvatar={selectedAvatar}
+            handleSelectedAvatar={handleSelectedAvatar}
+          />
+        </>
       )}
 
       {screen.current === 4 && (

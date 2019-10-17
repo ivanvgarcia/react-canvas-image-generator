@@ -10,23 +10,28 @@ import styled from 'styled-components';
 import avatarApi from '../../config/baseUrl';
 import FullLoader from 'components/loader/FullLoader';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
-import { ReactComponent as Facebook } from 'components/svgs/facebook.svg';
+import { ReactComponent as Facebook } from 'components/svgs/facebooklg.svg';
 
 const SocialButton = styled.button`
   display: flex;
   align-items: center;
   font-size: 1.2rem;
-  padding: 5px 20px;
-  box-shadow: 0 2px 4px #000;
+  padding: 10px 20px;
+  box-shadow: 0 2px 5px #000;
   background: ${props => props.backgroundColor};
   color: white;
   border: none;
   max-width: 200px;
+  height: 60px;
   margin: 10px 0;
   cursor: pointer;
 
   img {
     width: 40px;
+  }
+
+  svg {
+    margin-right: 5px;
   }
 `;
 
