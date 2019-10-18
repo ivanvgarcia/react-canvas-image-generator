@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Styles } from 'components/avatar/styles';
 import Loader from 'components/loader/Loader';
-import FullLoader from 'components/loader/FullLoader';
 
 const Avatars = () => {
   const dispatch = useDispatch();
