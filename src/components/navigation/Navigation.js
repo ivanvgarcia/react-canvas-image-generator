@@ -13,6 +13,8 @@ import { ReactComponent as MenuIcon } from 'components/svgs/menu.svg';
 import { ReactComponent as HomeIcon } from 'components/svgs/home.svg';
 import { ReactComponent as AvatarIcon } from 'components/svgs/avatar.svg';
 import { ReactComponent as CloseMenuIcon } from 'components/svgs/close.svg';
+import { ReactComponent as AvatarsIcon } from 'components/svgs/avatars.svg';
+import { ReactComponent as LogoutIcon } from 'components/svgs/logout.svg';
 
 const Navigation = () => {
   const navRef = useRef();
@@ -39,7 +41,7 @@ const Navigation = () => {
 
       <NavItem>
         <StyledNavLink to="/dashboard" onClick={handleLogout}>
-          <AvatarIcon />
+          <LogoutIcon />
           Logout
         </StyledNavLink>
       </NavItem>
@@ -80,7 +82,7 @@ const Navigation = () => {
           </NavItem>
           <NavItem>
             <StyledNavLink to="/avatars">
-              <AvatarIcon />
+              <AvatarsIcon />
               Avatars
             </StyledNavLink>
           </NavItem>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { TwitterShareButton } from 'react-twitter-embed';
 import PropTypes from 'prop-types';
 import { ReactComponent as Facebook } from 'components/svgs/facebook.svg';
-import { Styles } from 'components/confirmationScreen/styles';
+import { Styles } from 'components/confirmationScreen/confirmation.styles';
 
 const ConfirmationScreen = ({
   avatarImg,
