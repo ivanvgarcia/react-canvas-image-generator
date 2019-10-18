@@ -44,8 +44,8 @@ export default createGlobalStyle`
     color: white;
     font-family: 'Satisfy', cursive;
   }
-  #root.konvajs-content {
-    width:100%;
+  #root > div > div > div:nth-child(2) > div > div {
+    margin: 0 auto;
   }
 
   button {

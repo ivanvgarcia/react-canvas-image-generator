@@ -2,11 +2,10 @@ import {
   //   REGISTER_SUCCESS,
   //   REGISTER_FAIL,
   USER_LOADED,
-  //   AUTH_ERROR,
   LOGIN_SUCCESS,
-  AUTH_ERROR
-  //   LOGIN_FAIL,
-  //   LOGOUT
+  AUTH_ERROR,
+  // LOGIN_FAIL,
+  LOGOUT
 } from './types';
 import avatarApi from 'config/baseUrl';
 
@@ -51,4 +50,28 @@ export const twitterSignIn = search => async dispatch => {
   } catch (error) {
     console.error(error);
   }
+};
+
+export const facebookSignIn = accessToken => async dispatch => {
+  try {
+    const res = await avatarApi.post('/auth/facebook', {
+      access_token: accessToken
+    });
+
+    console.log(res);
+    const payload = res.data;
+
+    dispatch({
+      type: LOGIN_SUCCESS,
+      payload
+    });
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const logoutUser = () => async dispatch => {
+  dispatch({
+    type: LOGOUT
+  });
 };

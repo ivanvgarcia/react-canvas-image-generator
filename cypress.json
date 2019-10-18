@@ -1,0 +1,6 @@
+{
+  "baseUrl": "http://localhost:3000",
+  "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 12_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 [FBAN/FBIOS;FBDV/iPhone10,2;FBMD/iPhone;FBSN/iOS;FBSV/12.4;FBSS/3;FBID/phone;FBLC/en_US;FBOP/5;FBCR/Verizon]",
+  "viewportWidth": 320,
+  "viewportHeight": 568
+}

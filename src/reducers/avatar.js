@@ -1,5 +1,6 @@
 import {
   GET_AVATARS,
+  GET_AVATAR,
   CHOOSE_AVATAR,
   ADD_CHOSEN_AVATAR,
   REMOVE_CHOSEN_AVATAR,
@@ -14,6 +15,7 @@ import {
 
 const initialState = {
   avatars: [],
+  avatar: null,
   chosenAvatars: [],
   history: [],
   step: -1,
@@ -28,6 +30,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         avatars: payload
+      };
+    case GET_AVATAR:
+      return {
+        ...state,
+        avatar: payload
       };
     case CHOOSE_AVATAR:
       return {

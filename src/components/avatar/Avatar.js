@@ -16,6 +16,7 @@ const Avatar = ({ zIndex, chosenAvatar, selectedAvatar }) => {
   const dispatch = useDispatch();
   const [image, setImage] = useState(null);
   const [init, setInit] = useState(false);
+  const [lastDist, setLastDist] = useState(0);
 
   useEffect(() => {
     let image = new window.Image();
@@ -36,11 +37,20 @@ const Avatar = ({ zIndex, chosenAvatar, selectedAvatar }) => {
   useEffect(() => {
     if (!init) {
       dispatch(clearHistory());
-
       dispatch(setHistory(avatars));
       setInit(true);
     }
   }, [avatars, dispatch, init]);
+
+  const handleUserTap = () => {
+    const node = avatarRef.current;
+    node.zIndex(zIndex);
+    selectedAvatar(avatarRef.current.attrs.name);
+  };
+
+  const getDistance = (p1, p2) => {
+    return Math.sqrt(Math.pow(p2.x - p1.x, 2) + Math.pow(p2.y - p1.y, 2));
+  };
 
   return (
     image && (
@@ -48,6 +58,9 @@ const Avatar = ({ zIndex, chosenAvatar, selectedAvatar }) => {
         name={`avatar${chosenAvatar._id}`}
         image={image}
         draggable
+        onDragStart={e => {
+          e.target.zIndex(avatars.length);
+        }}
         onDragEnd={e => {
           let reset = history.slice(0, step + 1);
           dispatch(resetHistory(reset));
@@ -67,42 +80,33 @@ const Avatar = ({ zIndex, chosenAvatar, selectedAvatar }) => {
           dispatch(reorderAvatars(items));
           dispatch(setHistory(items));
         }}
-        onDragStart={e => {}}
         x={chosenAvatar.x}
         y={chosenAvatar.y}
         scale={{ x: chosenAvatar.scaleX, y: chosenAvatar.scaleY }}
         rotation={chosenAvatar.rotation}
         skew={{ x: chosenAvatar.skewX, y: chosenAvatar.skewY }}
-        onTap={e => {
-          const node = avatarRef.current;
-          node.zIndex(zIndex);
-          selectedAvatar(avatarRef.current.attrs.name);
-        }}
-        onTransformEnd={() => {
-          const node = avatarRef.current;
-          const x = node.x();
-          const y = node.y();
-          const scaleX = node.scaleX();
-          const scaleY = node.scaleY();
-          const offsetX = node.offsetX();
-          const offsetY = node.offsetY();
-          const rotation = node.rotation();
-          const skewX = node.skewX();
-          const skewY = node.skewY();
+        onTap={handleUserTap}
+        onClick={handleUserTap}
+        onTransformEnd={e => {
+          const node = e.target;
+          const newTransformation = {
+            x: node.x(),
+            y: node.y(),
+            scaleX: node.scaleX(),
+            scaleY: node.scaleY(),
+            offsetX: node.offsetX(),
+            offsetY: node.offsetY(),
+            rotation: node.rotation(),
+            skewX: node.skewX(),
+            skewY: node.skewY()
+          };
+
           const items = avatars.slice();
           const item = items.find(i => i._id === chosenAvatar._id);
           const index = items.indexOf(item);
           const avatar = (items[index] = {
             ...item,
-            x,
-            y,
-            scaleX: scaleX,
-            scaleY: scaleY,
-            offsetX: offsetX,
-            offsetY: offsetY,
-            rotation: rotation,
-            skewX: skewX,
-            skewY: skewY
+            ...newTransformation
           });
 
           if (avatar.scaleX !== avatar.scaleY) {
@@ -111,6 +115,63 @@ const Avatar = ({ zIndex, chosenAvatar, selectedAvatar }) => {
 
           dispatch(reorderAvatars(items));
           dispatch(setHistory(items));
+        }}
+        onTouchMove={e => {
+          if (e.evt.touches.length === 2) {
+            const node = e.target;
+            const touch1 = e.evt.touches[0];
+            const touch2 = e.evt.touches[1];
+            const originalDraggable = node.draggable();
+            const items = avatars.slice();
+            const item = avatars.find(i => i._id === chosenAvatar._id);
+            const index = avatars.indexOf(item);
+
+            if (originalDraggable) {
+              node.draggable(false);
+            }
+
+            const dist = getDistance(
+              {
+                x: touch1.clientX,
+                y: touch1.clientY
+              },
+              {
+                x: touch2.clientX,
+                y: touch2.clientY
+              }
+            );
+
+            if (!lastDist) {
+              setLastDist(dist);
+            }
+
+            let scale;
+
+            if (lastDist) {
+              scale = (item.scaleX * dist) / lastDist;
+              const roundedScale = Number(Math.round(scale + 'e2') + 'e-2');
+
+              items[index] = {
+                ...chosenAvatar,
+                scaleX: roundedScale,
+                scaleY: roundedScale
+              };
+
+              dispatch(reorderAvatars(items));
+              dispatch(setHistory(items));
+              setLastDist(dist);
+
+              if (node.draggable() !== originalDraggable) {
+                node.draggable(originalDraggable);
+              } else {
+                node.draggable(true);
+              }
+            }
+          }
+        }}
+        onTouchEnd={e => {
+          const node = e.target;
+          node.draggable(true);
         }}
         ref={avatarRef}
       />

@@ -1,5 +1,6 @@
 import {
   GET_AVATARS,
+  GET_AVATAR,
   CHOOSE_AVATAR,
   ADD_CHOSEN_AVATAR,
   REMOVE_CHOSEN_AVATAR,
@@ -21,6 +22,24 @@ export const getAvatars = () => async dispatch => {
 
     dispatch({
       type: GET_AVATARS,
+      payload
+    });
+  } catch (error) {
+    dispatch({
+      type: AVATAR_ERROR,
+      payload: error
+    });
+  }
+};
+
+export const getAvatar = id => async dispatch => {
+  try {
+    const res = await avatarApi.get(`/avatar/${id}`);
+    console.log(res);
+
+    const payload = res.data.data;
+    dispatch({
+      type: GET_AVATAR,
       payload
     });
   } catch (error) {

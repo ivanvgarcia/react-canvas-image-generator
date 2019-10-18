@@ -75,7 +75,9 @@ const KonvasCanvas = ({ avatar, setKonva, selectedAvatar }) => {
                       onTap={e => {
                         selectedAvatar(null);
                       }}
-                      onTouchStart={handleTouchMove}
+                      onClick={e => {
+                        selectedAvatar(null);
+                      }}
                       onTouchMove={handleTouchMove}
                     />
 

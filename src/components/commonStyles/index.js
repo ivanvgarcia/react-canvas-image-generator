@@ -24,6 +24,7 @@ export const Title = styled.h1`
   font-size: ${props => props.size || '3rem'};
   text-align: center;
   text-shadow: 1px 2px 2px dodgerblue, 2px 3px 3px #000, 3px 4px 6px blue;
+  flex: 1 0 100%;
 `;
 
 export const SubTitle = styled.h4`

@@ -3,11 +3,14 @@ import styled from 'styled-components';
 const Main = styled.div``;
 
 const CanvasContainer = styled.div`
-  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  width: 100%;
 `;
 
 const CanvasCSS = styled.canvas`
   width: 100%;
+  max-width: 640px;
 `;
 
 const ToolsContainer = styled.div`
@@ -15,6 +18,8 @@ const ToolsContainer = styled.div`
   bottom: 0;
   left: 0;
   width: 100%;
+  display: flex;
+  justify-content: center;
 `;
 
 const Buttons = styled.div`

@@ -3,19 +3,20 @@ import styled from 'styled-components';
 const Dashboard = styled.div`
   margin-top: 80px;
   padding: 0 20px;
-  a {
-    display: inline-block;
-    background: #1fa1f3;
-    color: white;
-    padding: 10px;
-    margin: 15px 0;
-    border-radius: 25px;
-    text-decoration: none;
-    flex: 1 1 100%;
-    margin: 0 70px;
-    text-align: center;
-    margin: 15px;
-  }
+`;
+
+const SocialButton = styled.a`
+  display: inline-block;
+  background: ${props => props.backgroundColor};
+  color: white;
+  padding: 10px;
+  margin: 15px 0;
+  border-radius: 25px;
+  text-decoration: none;
+  flex: 1 1 100%;
+  margin: 0 70px;
+  text-align: center;
+  margin: 15px;
 `;
 
 const FlexContainer = styled.div`
@@ -26,29 +27,37 @@ const UserInfo = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  flex-direction: column;
   justify-content: center;
-  margin: 20px;
+  margin: 20px auto;
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 4px 8px #000;
+  padding: 20px 0;
+  border-radius: 5px;
+  max-width: 400px;
 `;
 
 const UserImage = styled.img`
   margin-right: 10px;
+  border-radius: 50%;
+  max-width: 100px;
+  box-shadow: 0 4px 8px #000;
 `;
 
 const UserName = styled.p`
   font-weight: bold;
   font-size: 1.2rem;
-  color: white;
-  text-shadow: 1px 2px 2px dodgerblue, 2px 3px 3px #000, 3px 4px 6px blue;
-  font-family: 'Satisfy';
+  color: black;
+  font-size: 1.4rem;
+  margin: 10px 0 0;
 `;
 
 const AvatarImage = styled.picture`
-  flex: 25%;
+  flex: 15%;
   margin: 5px;
-  background-image: linear-gradient(115deg, #000, #242424);
   border-radius: 10px;
   img {
-    width: 100%;
+    max-width: 100px;
   }
 `;
 
@@ -58,5 +67,6 @@ export const Styles = {
   AvatarImage,
   UserInfo,
   UserImage,
-  UserName
+  UserName,
+  SocialButton
 };

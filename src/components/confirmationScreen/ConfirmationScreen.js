@@ -2,9 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { TwitterShareButton } from 'react-twitter-embed';
 import PropTypes from 'prop-types';
 import { ReactComponent as Facebook } from 'components/svgs/facebook.svg';
-import { Styles } from 'components/confirmationScreen/styles';
+import { Styles } from 'components/confirmationScreen/confirmation.styles';
 
-const ConfirmationScreen = ({ avatarImg, goNext, goBack, screen }) => {
+const ConfirmationScreen = ({
+  avatarImg,
+  goNext,
+  goBack,
+  screen,
+  savedAvatar
+}) => {
   const [confirm, setConfirm] = useState(false);
 
   const handleConfirm = e => {
@@ -39,63 +45,67 @@ const ConfirmationScreen = ({ avatarImg, goNext, goBack, screen }) => {
 
   return (
     <Styles.Confirmation>
-      <img style={{ width: '100%' }} src={avatarImg} alt="avatar" />
-      <Styles.ConfirmationAlert>
-        {!confirm ? (
-          <>
-            <Styles.ConfirmationText>
-              Are you happy with your creation?
-            </Styles.ConfirmationText>
-            <Styles.ConfirmationButtons>
-              <Styles.ConfirmationButton
-                backgroundColor="green"
-                onClick={handleConfirm}
-              >
-                Yes
-              </Styles.ConfirmationButton>
-              <Styles.ConfirmationButton
-                backgroundColor="red"
-                onClick={handleConfirm}
-              >
-                No
-              </Styles.ConfirmationButton>
-            </Styles.ConfirmationButtons>
-          </>
-        ) : (
-          <>
-            <Styles.ConfirmationText>
-              Your Avatar is Completed!
-            </Styles.ConfirmationText>
+      <span></span>
+      <Styles.ConfirmationContent>
+        <img style={{ width: '100%' }} src={avatarImg} alt="avatar" />
 
-            <Styles.ShareButtons>
-              <Styles.FaceBookShareButton
-                onClick={() => {
-                  // eslint-disable-next-line no-undef
-                  if (FB) {
+        <Styles.ConfirmationAlert>
+          {!confirm ? (
+            <>
+              <Styles.ConfirmationText>
+                Are you happy with your creation?
+              </Styles.ConfirmationText>
+              <Styles.ConfirmationButtons>
+                <Styles.ConfirmationButton
+                  backgroundColor="green"
+                  onClick={handleConfirm}
+                >
+                  Yes
+                </Styles.ConfirmationButton>
+                <Styles.ConfirmationButton
+                  backgroundColor="red"
+                  onClick={handleConfirm}
+                >
+                  No
+                </Styles.ConfirmationButton>
+              </Styles.ConfirmationButtons>
+            </>
+          ) : (
+            <>
+              <Styles.ConfirmationText>
+                Your Avatar is Completed!
+              </Styles.ConfirmationText>
+
+              <Styles.ShareButtons>
+                <Styles.FaceBookShareButton
+                  onClick={() => {
                     // eslint-disable-next-line no-undef
-                    FB.ui({
-                      method: 'share',
-                      href: 'https://d1riqzz03dhs7s.cloudfront.net/',
-                      hashtag: '#United',
-                      quote: 'Share your avatar'
-                    });
-                  }
-                }}
-              >
-                <Facebook></Facebook> Share
-              </Styles.FaceBookShareButton>
-              <TwitterShareButton
-                url={'Image URL'}
-                options={{
-                  text: `${'Avatar'}`,
-                  via: 'United',
-                  size: 'large'
-                }}
-              />
-            </Styles.ShareButtons>
-          </>
-        )}
-      </Styles.ConfirmationAlert>
+                    if (FB) {
+                      // eslint-disable-next-line no-undef
+                      FB.ui({
+                        method: 'share',
+                        href: `https://d1riqzz03dhs7s.cloudfront.net/avatar/${savedAvatar}`,
+                        hashtag: '#United',
+                        quote: `Check out the avatar I created https://d1riqzz03dhs7s.cloudfront.net/avatar/${savedAvatar}`
+                      });
+                    }
+                  }}
+                >
+                  <Facebook></Facebook> Share
+                </Styles.FaceBookShareButton>
+                <TwitterShareButton
+                  url={'Image URL'}
+                  options={{
+                    text: `${'Avatar'}`,
+                    via: 'United',
+                    size: 'large'
+                  }}
+                />
+              </Styles.ShareButtons>
+            </>
+          )}
+        </Styles.ConfirmationAlert>
+      </Styles.ConfirmationContent>
     </Styles.Confirmation>
   );
 };

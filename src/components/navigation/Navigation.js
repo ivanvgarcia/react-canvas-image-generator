@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { logoutUser } from 'actions/auth';
 import { useTranslation } from 'react-i18next';
-
 import {
   Nav,
   StyledNavLink,
@@ -13,9 +13,12 @@ import { ReactComponent as MenuIcon } from 'components/svgs/menu.svg';
 import { ReactComponent as HomeIcon } from 'components/svgs/home.svg';
 import { ReactComponent as AvatarIcon } from 'components/svgs/avatar.svg';
 import { ReactComponent as CloseMenuIcon } from 'components/svgs/close.svg';
+import { ReactComponent as AvatarsIcon } from 'components/svgs/avatars.svg';
+import { ReactComponent as LogoutIcon } from 'components/svgs/logout.svg';
 
 const Navigation = () => {
   const navRef = useRef();
+  const dispatch = useDispatch();
   const user = useSelector(state => state.auth.user);
   const loading = useSelector(state => state.auth.loading);
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
@@ -23,13 +26,26 @@ const Navigation = () => {
 
   const [open, setOpen] = useState(false);
 
+  const handleLogout = () => {
+    dispatch(logoutUser());
+  };
+
   const authLinks = () => (
-    <NavItem>
-      <StyledNavLink to="/dashboard">
-        <Avatar src={user.profile_image_url_https} alt={user.name} />
-        {user.name}
-      </StyledNavLink>
-    </NavItem>
+    <>
+      <NavItem>
+        <StyledNavLink to="/dashboard">
+          <Avatar src={user.photo} alt={user.name} />
+          {user.name}
+        </StyledNavLink>
+      </NavItem>
+
+      <NavItem>
+        <StyledNavLink to="/dashboard" onClick={handleLogout}>
+          <LogoutIcon />
+          Logout
+        </StyledNavLink>
+      </NavItem>
+    </>
   );
 
   const handleClickOutside = event => {
@@ -62,6 +78,12 @@ const Navigation = () => {
             <StyledNavLink to="/avatar-generator">
               <AvatarIcon />
               {t('nav.generator')}
+            </StyledNavLink>
+          </NavItem>
+          <NavItem>
+            <StyledNavLink to="/avatars">
+              <AvatarsIcon />
+              Avatars
             </StyledNavLink>
           </NavItem>
           {!loading && <>{isAuthenticated && authLinks()}</>}

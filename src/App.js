@@ -8,12 +8,14 @@ import { checkSession } from 'actions/auth';
 import ScrollToTop from 'components/ScrollToTop';
 import Landing from 'components/landing/Landing';
 import Generator from 'components/generator/Generator';
+import AvatarShow from 'components/avatar/AvatarShow';
 import Dashboard from 'components/dashboard/Dashboard';
 import Navigation from 'components/navigation/Navigation';
 import PrivateRoute from 'components/routing/PrivateRoute';
 import GlobalStyle from 'components/commonStyles/globalStyles';
 import { MainContainer } from 'components/commonStyles';
 import FullLoader from 'components/loader/FullLoader.js';
+import Avatars from 'components/avatar/Avatars';
 
 function App() {
   useEffect(() => {
@@ -31,6 +33,8 @@ function App() {
                 <Navigation />
                 <Switch>
                   <Route exact path="/" component={Landing} />
+                  <Route exact path="/avatars" component={Avatars} />
+                  <Route exact path="/avatar/:id" component={AvatarShow} />
                   <Route exact path="/avatar-generator" component={Generator} />
                   <PrivateRoute exact path="/dashboard" component={Dashboard} />
                 </Switch>

@@ -5,23 +5,33 @@ import { Styles } from 'components/avatar/styles';
 import { Helmet } from 'react-helmet';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { twitterSignIn } from '../../actions/auth';
+import { twitterSignIn, facebookSignIn } from '../../actions/auth';
 import styled from 'styled-components';
 import avatarApi from '../../config/baseUrl';
 import FullLoader from 'components/loader/FullLoader';
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
+import { ReactComponent as Facebook } from 'components/svgs/facebooklg.svg';
 
-const TwitterButton = styled.button`
+const SocialButton = styled.button`
   display: flex;
   align-items: center;
   font-size: 1.2rem;
-  padding: 5px 20px;
-  box-shadow: 0 2px 4px #000;
-  background: #1fa1f3;
+  padding: 10px 20px;
+  box-shadow: 0 2px 5px #000;
+  background: ${props => props.backgroundColor};
   color: white;
   border: none;
+  max-width: 200px;
+  height: 60px;
+  margin: 10px 0;
   cursor: pointer;
+
   img {
     width: 40px;
+  }
+
+  svg {
+    margin-right: 5px;
   }
 `;
 
@@ -43,6 +53,10 @@ const Landing = ({ location: { search } }) => {
       search.length > 0 && dispatch(twitterSignIn(search));
     }
   }, [dispatch, isAuthenticated, loading, search]);
+
+  const facebookResponse = response => {
+    dispatch(facebookSignIn(response.accessToken));
+  };
 
   if (url) {
     return (window.location.href = url);
@@ -78,10 +92,26 @@ const Landing = ({ location: { search } }) => {
           >
             - or -
           </p>
-          <TwitterButton onClick={signIn}>
+          <SocialButton onClick={signIn} backgroundColor="#1fa1f3">
             <img src="images/twitter.png" alt="twitter" />
-            {t('landing.login')}
-          </TwitterButton>
+            Login
+          </SocialButton>
+          <FacebookLogin
+            appId="396269361288665"
+            autoLoad={false}
+            fields="name,email,picture"
+            callback={facebookResponse}
+            icon="fa-facebook"
+            render={renderProps => (
+              <SocialButton
+                onClick={renderProps.onClick}
+                backgroundColor="#3b5998"
+              >
+                <Facebook></Facebook> Login
+              </SocialButton>
+            )}
+          />
+          ,
         </>
       )}
     </Banner>

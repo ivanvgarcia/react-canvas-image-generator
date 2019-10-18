@@ -6,7 +6,7 @@ export const Icon = styled.img`
     cursor: pointer;
   }
   @media (max-width: 500px) {
-    width: 50px;
+    width: 40px;
   }
 `;
 
@@ -19,12 +19,8 @@ export const Thumbnail = styled.img`
 `;
 
 export const SliderContainer = styled.div`
-  max-width: 100%;
+  width: 100%;
+  max-width: 640px;
+  padding: 0 20px;
   background: rgba(0, 0, 0, 0.5);
-
-  @media (min-width: 1000px) {
-    max-width: 500px;
-    margin: 0 auto;
-    padding: 0 30px;
-  }
 `;
