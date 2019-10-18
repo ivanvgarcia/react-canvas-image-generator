@@ -24,13 +24,22 @@ const FlexContainer = styled.div`
   align-items: center;
   justify-content: center;
   margin-top: 50px;
-  margin: 50px auto 0;
+  margin: 50px auto 20px;
   height: 100vh;
   overflow-y: auto;
   max-width: 1000px;
+  background: ${props => props.backgroundColor || 'none'};
+  border-radius: 15px;
   img {
     width: 100%;
     cursor: pointer;
+  }
+  a {
+    width: 20%;
+    transition: 0.2s ease-out;
+  }
+  a:hover {
+    transform: scale(1.1);
   }
 `;
 

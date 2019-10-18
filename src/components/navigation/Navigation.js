@@ -29,16 +29,21 @@ const Navigation = () => {
   };
 
   const authLinks = () => (
-    <NavItem>
-      <StyledNavLink to="/dashboard">
-        <Avatar src={user.photo} alt={user.name} />
-        {user.name}
-      </StyledNavLink>
-      <StyledNavLink to="/dashboard" onClick={handleLogout}>
-        <AvatarIcon />
-        Logout
-      </StyledNavLink>
-    </NavItem>
+    <>
+      <NavItem>
+        <StyledNavLink to="/dashboard">
+          <Avatar src={user.photo} alt={user.name} />
+          {user.name}
+        </StyledNavLink>
+      </NavItem>
+
+      <NavItem>
+        <StyledNavLink to="/dashboard" onClick={handleLogout}>
+          <AvatarIcon />
+          Logout
+        </StyledNavLink>
+      </NavItem>
+    </>
   );
 
   const handleClickOutside = event => {
@@ -71,6 +76,12 @@ const Navigation = () => {
             <StyledNavLink to="/avatar-generator">
               <AvatarIcon />
               {t('nav.generator')}
+            </StyledNavLink>
+          </NavItem>
+          <NavItem>
+            <StyledNavLink to="/avatars">
+              <AvatarIcon />
+              Avatars
             </StyledNavLink>
           </NavItem>
           {!loading && <>{isAuthenticated && authLinks()}</>}

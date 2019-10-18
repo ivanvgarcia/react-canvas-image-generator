@@ -15,6 +15,7 @@ import PrivateRoute from 'components/routing/PrivateRoute';
 import GlobalStyle from 'components/commonStyles/globalStyles';
 import { MainContainer } from 'components/commonStyles';
 import FullLoader from 'components/loader/FullLoader.js';
+import Avatars from 'components/avatar/Avatars';
 
 function App() {
   useEffect(() => {
@@ -32,8 +33,9 @@ function App() {
                 <Navigation />
                 <Switch>
                   <Route exact path="/" component={Landing} />
-                  <Route exact path="/avatar-generator" component={Generator} />
+                  <Route exact path="/avatars" component={Avatars} />
                   <Route exact path="/avatar/:id" component={AvatarShow} />
+                  <Route exact path="/avatar-generator" component={Generator} />
                   <PrivateRoute exact path="/dashboard" component={Dashboard} />
                 </Switch>
               </MainContainer>
